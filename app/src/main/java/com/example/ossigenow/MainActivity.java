@@ -11,9 +11,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import android.util.Base64;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     // Passaggio dati tra activity
@@ -58,7 +63,29 @@ public class MainActivity extends AppCompatActivity {
 
         // Se vengono passati dati da un'altra activity li recupero e li aggiungo all'arraylist
         newUtente = (Person) getIntent().getSerializableExtra(RegisterActivity.PERSON_PATH); // Recupero l'oggetto
-        if(newUtente!=null) utentiRegistrati.add(newUtente);
+        if (newUtente!=null) utentiRegistrati.add(newUtente);
+
+        // Se i dati sono corretti, passa all'activity home
+        accedi.setOnClickListener(v -> {
+            if (checkInput()) {
+                Person user = checkUser();
+
+                if (user != null) {
+                    result = new Intent(MainActivity.this, HomeActivity.class);
+                    result.putExtra(PERSON_PATH, user);
+                    startActivity(result);
+                    finish();
+                } else errorMessage();
+            }
+        });
+
+        // Creo l'intento di passare da MainActivity a RegisterActivity
+        registrati.setOnClickListener(v -> {
+            result = new Intent(MainActivity.this, RegisterActivity.class);
+            result.putExtra(USERS_PATH, utentiRegistrati);
+            startActivity(result);
+            finish();
+        });
     }
 
     @Override
@@ -130,5 +157,48 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return utenteLoggato;
+    }
+
+    private boolean checkInput() {
+        int errors = 0;
+
+        // Controllo che i campi non siano vuoti
+        if (nomeUtente.getText() == null || nomeUtente.getText().length() == 0) {
+            errors++;
+            nomeUtente.setError("Inserire il Nome Utente");
+        } else
+            nomeUtente.setError(null);
+        if (password.getText() == null || password.getText().length() == 0) {
+            errors++;
+            password.setError("Inserire la Password");
+        } else
+            password.setError(null);
+
+        return errors == 0;
+    }
+
+    private Person checkUser() {
+        Person user = null;
+
+        for (Person u: utentiRegistrati) {
+            if(((nomeUtente.getText().toString().compareTo(u.getNome())) == 0) &&
+                    ((password.getText().toString().compareTo(u.getPassword())) == 0)) {
+                user = u;
+            }
+        }
+
+        return user;
+    }
+
+    private void errorMessage() {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_error_credentials,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 50);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }
