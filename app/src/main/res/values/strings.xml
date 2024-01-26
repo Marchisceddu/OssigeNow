@@ -13,13 +13,16 @@
     <string name="nomeUtenteHint">es: OrsoBruno02</string>
     <string name="password">Password:</string>
     <string name="passwordHint">es: Password123_</string>
+    <string name="credentialError">Nome Utente e/o Password errati</string>
 
     <!--    RegistrazioneActivity    -->
-    <string name="titoloRegister">Registrati:</string>
+    <string name="titoloRegister">Registrati</string>
     <string name="nome">Nome:</string>
     <string name="nomeHint">es: Ahmed</string>
     <string name="cognome">Cognome:</string>
     <string name="cognomeHint">es: Bensaid</string>
     <string name="data">Data di nascita:</string>
     <string name="dataHint">es: 01/01/2000</string>
+    <string name="registerSuccess">Registrazione avvenuta con successo</string>
+    <string name="registerError">Account già esistente</string>
 </resources>
