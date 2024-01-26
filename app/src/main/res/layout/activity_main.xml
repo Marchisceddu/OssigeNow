@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/background"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nomeUtente"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:inputType="textPersonName"
+                    android:textSize="28sp"
+                    android:textColorHint="@color/gray"
+                    android:id="@+id/nomeUtente"
+                    android:hint="@string/nomeUtenteHint"
+                    android:paddingLeft="10dp"
+                    android:background="@drawable/edittext_box_background"
+                    />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/password"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:inputType="textPassword"
+                    android:textSize="28sp"
+                    android:textColorHint="@color/gray"
+                    android:id="@+id/password"
+                    android:hint="@string/passwordHint"
+                    android:paddingLeft="10dp"
+                    android:background="@drawable/edittext_box_background"
+                    />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/accedi"
+                    android:backgroundTint="@color/black"
+                    android:text="@string/accedi"
+                    android:textSize="38sp"
+                    android:paddingStart="42dp"
+                    android:paddingEnd="42dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_gravity="center"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        >
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/domandaRegistrati"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/registrati"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black"
+            android:text="@string/registrati"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

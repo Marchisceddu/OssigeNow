@@ -1,0 +1,25 @@
+<resources>
+    <!--    Generali    -->
+    <string name="app_name">OssigeNow</string>
+    <string name="conferma">Conferma</string>
+    <string name="annulla">Annulla</string>
+    <string name="pulisci">Pulisci</string>
+
+    <!--    MainActivity    -->
+    <string name="accedi">Accedi</string>
+    <string name="registrati">Registrati</string>
+    <string name="domandaRegistrati">Non sei ancora registrato?</string>
+    <string name="nomeUtente">Nome Utente:</string>
+    <string name="nomeUtenteHint">es: OrsoBruno02</string>
+    <string name="password">Password:</string>
+    <string name="passwordHint">es: Password123_</string>
+
+    <!--    RegistrazioneActivity    -->
+    <string name="titoloRegister">Registrati:</string>
+    <string name="nome">Nome:</string>
+    <string name="nomeHint">es: Ahmed</string>
+    <string name="cognome">Cognome:</string>
+    <string name="cognomeHint">es: Bensaid</string>
+    <string name="data">Data di nascita:</string>
+    <string name="dataHint">es: 01/01/2000</string>
+</resources>
