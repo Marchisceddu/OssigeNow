@@ -24,33 +24,31 @@
         >
 
         <Space
-            android:layout_width="30dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="0.05"
             />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="1"
+            android:layout_weight="0.75"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="38sp"
-                android:fontFamily="@font/capriola"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:src="@drawable/logo"
                 />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="1"
+            android:layout_weight="0.20"
             >
 
             <ImageButton
@@ -61,6 +59,7 @@
                 android:src="@drawable/back"
                 android:background="@android:color/transparent"
                 android:scaleType="centerInside"
+                android:layout_gravity="center"
                 />
 
         </LinearLayout>
@@ -77,7 +76,7 @@
     <LinearLayout
         android:layout_below="@id/space2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/scrollView"
         android:background="@drawable/register_background"
         >
@@ -104,7 +103,6 @@
                     android:textColor="@color/black"
                     android:textSize="36sp"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <Space
@@ -118,7 +116,6 @@
                     android:text="@string/nomeUtente"
                     android:textColor="@color/black"
                     android:textSize="28sp"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <EditText
@@ -131,7 +128,6 @@
                     android:hint="@string/nomeUtenteHint"
                     android:paddingLeft="10dp"
                     android:background="@drawable/edittext_box_background"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <TextView
@@ -140,7 +136,6 @@
                     android:text="@string/nome"
                     android:textColor="@color/black"
                     android:textSize="28sp"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <EditText
@@ -153,7 +148,6 @@
                     android:hint="@string/nomeHint"
                     android:paddingLeft="10dp"
                     android:background="@drawable/edittext_box_background"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <TextView
@@ -162,7 +156,6 @@
                     android:text="@string/cognome"
                     android:textColor="@color/black"
                     android:textSize="28sp"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <EditText
@@ -175,7 +168,6 @@
                     android:hint="@string/cognomeHint"
                     android:paddingLeft="10dp"
                     android:background="@drawable/edittext_box_background"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <TextView
@@ -184,7 +176,6 @@
                     android:text="@string/data"
                     android:textColor="@color/black"
                     android:textSize="28sp"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <EditText
@@ -197,7 +188,6 @@
                     android:paddingLeft="10dp"
                     android:textColorHint="@color/gray"
                     android:textSize="25sp"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <TextView
@@ -206,7 +196,6 @@
                     android:text="@string/password"
                     android:textColor="@color/black"
                     android:textSize="28sp"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <EditText
@@ -219,7 +208,6 @@
                     android:hint="@string/passwordHint"
                     android:paddingLeft="10dp"
                     android:background="@drawable/edittext_box_background"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <Space
@@ -236,7 +224,6 @@
                     android:id="@+id/conferma"
                     android:text="@string/registrati"
                     android:background="@drawable/std_button"
-                    android:fontFamily="@font/capriola"
                     />
 
                 <Space

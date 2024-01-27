@@ -5,7 +5,11 @@ color black
 color edittext_border_color_selector
 color gray
 color green_trasparent
+color logo_color1
+color logo_color2
+color logo_color_ball
 color red_trasparent
+color std_button_background_not_activated
 color std_button_background_not_pressed
 color std_button_background_pressed
 color std_button_inverted_background_not_pressed
@@ -19,12 +23,14 @@ drawable ic_launcher_foreground
 drawable icon_error
 drawable icon_success
 drawable login_background
+drawable logo
 drawable register_background
 drawable std_button
 drawable std_button_inverted
 drawable toast_error
 drawable toast_success
 font capriola
+font nunito
 font tekobold
 font tekolight
 font tekomedium
@@ -55,6 +61,7 @@ layout toast_error_account_already_exists
 layout toast_error_credentials
 layout toast_register_confirmed
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string accedi
 string annulla

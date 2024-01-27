@@ -1419,6 +1419,9 @@ color gray
 color green_trasparent
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color logo_color1
+color logo_color2
+color logo_color_ball
 color m3_appbar_overlay_color
 color m3_assist_chip_icon_tint_color
 color m3_assist_chip_stroke_color
@@ -2087,6 +2090,7 @@ color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
+color std_button_background_not_activated
 color std_button_background_not_pressed
 color std_button_background_pressed
 color std_button_inverted_background_not_pressed
@@ -3010,6 +3014,7 @@ drawable ic_search_black_24
 drawable icon_error
 drawable icon_success
 drawable login_background
+drawable logo
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle
@@ -3090,6 +3095,7 @@ drawable toast_success
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 font capriola
+font nunito
 font tekobold
 font tekolight
 font tekomedium
@@ -3804,6 +3810,7 @@ layout toast_error_account_already_exists
 layout toast_error_credentials
 layout toast_register_confirmed
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description

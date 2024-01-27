@@ -5,7 +5,11 @@
     <color name="edittext_border_color_selector">#255B68</color>
     <color name="gray">#858585</color>
     <color name="green_trasparent">#E64CAF50</color>
+    <color name="logo_color1">#FFFFFF</color>
+    <color name="logo_color2">#000000</color>
+    <color name="logo_color_ball">#FFFFFF</color>
     <color name="red_trasparent">#E6BD261B</color>
+    <color name="std_button_background_not_activated">#787878</color>
     <color name="std_button_background_not_pressed">#255B68</color>
     <color name="std_button_background_pressed">#387381</color>
     <color name="std_button_inverted_background_not_pressed">#FFFFFF</color>
