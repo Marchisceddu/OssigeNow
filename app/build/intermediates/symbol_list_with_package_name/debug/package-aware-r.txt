@@ -1351,6 +1351,7 @@ color accent_material_light
 color androidx_core_ripple_material_light
 color androidx_core_secondary_text_default_material_light
 color background
+color background2
 color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
@@ -1419,9 +1420,8 @@ color gray
 color green_trasparent
 color highlighted_text_material_dark
 color highlighted_text_material_light
-color logo_color1
-color logo_color2
-color logo_color_ball
+color ic_launcher_background
+color logo_color
 color m3_appbar_overlay_color
 color m3_assist_chip_icon_tint_color
 color m3_assist_chip_stroke_color
@@ -2073,6 +2073,8 @@ color mtrl_textinput_disabled_color
 color mtrl_textinput_filled_box_default_background_color
 color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
+color navbar_icon
+color navbar_icon_selected
 color notification_action_color_filter
 color notification_icon_bg_color
 color primary_dark_material_dark
@@ -2103,7 +2105,9 @@ color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color tooltip_background_dark
 color tooltip_background_light
+color trasparent
 color white
+color white2
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -2979,9 +2983,19 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable accept
+drawable add_icon
 drawable avd_hide_password
 drawable avd_show_password
 drawable back
+drawable background_bottom_page
+drawable background_gruppo
+drawable background_logo
+drawable background_main_1bordo
+drawable background_main_2bordi
+drawable background_nav_left
+drawable background_nav_rigth
+drawable booking
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -2990,6 +3004,10 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable button_crea_gruppo
+drawable button_pressed_animation
+drawable calendar
+drawable decline
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -2997,6 +3015,8 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable edittext_border_color_selector
 drawable edittext_box_background
+drawable eye
+drawable home
 drawable ic_arrow_back_black_24
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
@@ -3013,6 +3033,7 @@ drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
 drawable icon_error
 drawable icon_success
+drawable invite
 drawable login_background
 drawable logo
 drawable m3_avd_hide_password
@@ -3073,6 +3094,7 @@ drawable mtrl_switch_thumb_unchecked_pressed
 drawable mtrl_switch_track
 drawable mtrl_switch_track_decoration
 drawable mtrl_tabs_default_indicator
+drawable navbar_icon_selector
 drawable navigation_empty_icon
 drawable notification_action_background
 drawable notification_bg
@@ -3094,6 +3116,7 @@ drawable toast_error
 drawable toast_success
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable user
 font capriola
 font nunito
 font tekobold
@@ -3117,6 +3140,7 @@ id TOP_END
 id TOP_START
 id accedi
 id accelerate
+id accept
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
 id accessibility_custom_action_1
@@ -3173,6 +3197,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id aggiungiGruppo
 id alertTitle
 id aligned
 id all
@@ -3195,13 +3220,16 @@ id beginOnFirstDraw
 id beginning
 id bestChoice
 id blocking
+id booking
 id bottom
+id bottomLayout
 id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
 id buttonPanel
 id cache_measures
+id calendar
 id callMeasure
 id cancel_button
 id carryVelocity
@@ -3210,6 +3238,7 @@ id centerCrop
 id centerInside
 id center_horizontal
 id center_vertical
+id cfu_esame
 id chain
 id chain2
 id chains
@@ -3230,6 +3259,8 @@ id conferma
 id confirm_button
 id constraint
 id container
+id conteiner_gruppi
+id conteiner_inviti
 id content
 id contentPanel
 id contiguous
@@ -3246,6 +3277,7 @@ id data
 id date_picker_actions
 id decelerate
 id decelerateAndComplete
+id decline
 id decor_content_parent
 id default_activity_button
 id deltaRelative
@@ -3312,6 +3344,7 @@ id graph_wrap
 id group_divider
 id grouping
 id groups
+id gruppo
 id header_title
 id hideable
 id home
@@ -3330,6 +3363,8 @@ id indeterminate
 id indietro
 id info
 id invisible
+id invite
+id invito
 id inward
 id italic
 id item_touch_helper_previous_elevation
@@ -3345,6 +3380,7 @@ id line3
 id linear
 id listMode
 id list_item
+id logoLayout
 id m3_side_sheet
 id marquee
 id masked
@@ -3405,6 +3441,12 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id navBooking
+id navCalendar
+id navHome
+id navInvite
+id navProfile
+id navbar
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3417,8 +3459,12 @@ id neverCompleteToEnd
 id neverCompleteToStart
 id noScroll
 id noState
+id no_gruppi
+id no_inviti
 id nome
 id nomeUtente
+id nome_esame
+id nome_gruppo
 id none
 id normal
 id north
@@ -3451,6 +3497,7 @@ id parent
 id parentPanel
 id parentRelative
 id parent_matrix
+id partecipanti
 id password
 id password_toggle
 id path
@@ -3461,12 +3508,12 @@ id pin
 id position
 id postLayout
 id pressed
+id profile
 id progress_circular
 id progress_horizontal
 id radio
 id ratio
 id rectangles
-id registerLayout
 id registrati
 id report_drawn
 id reverseSawtooth
@@ -3514,8 +3561,6 @@ id snackbar_text
 id snap
 id snapMargins
 id south
-id space0
-id space2
 id spacer
 id special_effects_controller_view_tag
 id spline
@@ -3577,7 +3622,6 @@ id toast_image
 id toast_layout_root
 id toast_text
 id toggle
-id toolbar
 id top
 id topPanel
 id touch_outside
@@ -3595,6 +3639,7 @@ id unlabeled
 id up
 id useLogo
 id vertical_only
+id view
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3858,6 +3903,7 @@ string clear_text_end_icon_content_description
 string cognome
 string cognomeHint
 string conferma
+string crea_gruppo
 string credentialError
 string data
 string dataHint
@@ -3970,6 +4016,8 @@ string mtrl_switch_track_decoration_path
 string mtrl_switch_track_path
 string mtrl_timepicker_cancel
 string mtrl_timepicker_confirm
+string no_gruppi
+string no_inviti
 string nome
 string nomeHint
 string nomeUtente
@@ -3992,6 +4040,9 @@ string searchview_navigation_content_description
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string status_bar_notification_info_overflow
+string titoloAccesso
+string titoloGruppi
+string titoloInviti
 string titoloRegister
 style AboutDialog
 style AlertDialog_AppCompat

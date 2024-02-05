@@ -6,6 +6,7 @@
     <string name="pulisci">Pulisci</string>
 
     <!--    MainActivity    -->
+    <string name="titoloAccesso">Accesso</string>
     <string name="accedi">Accedi</string>
     <string name="registrati">Registrati</string>
     <string name="domandaRegistrati">Non sei ancora registrato?</string>
@@ -25,4 +26,14 @@
     <string name="dataHint">es: 01/01/2000</string>
     <string name="registerSuccess">Registrazione avvenuta con successo</string>
     <string name="registerError">Account già esistente</string>
+
+    <!--    HomeActivity - Home    -->
+    <string name="titoloGruppi">I tuoi gruppi:</string>
+    <string name="no_gruppi">Non sei ancora iscritto a nessun gruppo</string>
+    <string name="crea_gruppo">Crea Gruppo</string>
+
+    <!--    HomeActivity - Inviti    -->
+    <string name="titoloInviti">I tuoi inviti:</string>
+    <string name="no_inviti">Non hai ricevuto nessun invito</string>
+
 </resources>

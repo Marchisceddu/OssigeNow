@@ -1,38 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <color name="black">#000000</color>-->
-<!--    <color name="white">#FFFFFFFF</color>-->
-<!--    <color name="gray">#858585</color>-->
-<!--    <color name="background">#1a434d</color>-->
-
-<!--    <color name="edittext_border_color_selector">#1a434d</color>-->
-
-<!--&lt;!&ndash;    <color name="std_button_background_not_pressed">#165319</color>&ndash;&gt;-->
-<!--&lt;!&ndash;    <color name="std_button_background_pressed">#247827</color>&ndash;&gt;-->
-<!--    <color name="std_button_background_not_pressed">#1a434d</color>-->
-<!--    <color name="std_button_background_pressed">#247827</color>-->
-<!--    <color name="std_button_inverted_background_not_pressed">#FFFFFF</color>-->
-<!--    <color name="std_button_inverted_background_pressed">#247827</color>-->
-
     <!--    Colori logo    >-->
-    <color name="logo_color1">#FFFFFF</color>
-    <color name="logo_color2">#000000</color>
-    <color name="logo_color_ball">#FFFFFF</color>
+    <color name="logo_color">#FFFFFF</color>
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white2">#F0F0F0</color>
     <color name="gray">#858585</color>
+    <color name="trasparent">#00FFFFFF</color>
     <color name="red_trasparent">#E6BD261B</color>
     <color name="green_trasparent">#E64CAF50</color>
-    <color name="background">#255B68</color>
 
-    <color name="edittext_border_color_selector">#255B68</color>
+    <color name="background">#197542</color>
+    <color name="background2">#FFFFFF</color>
 
-    <!--    <color name="std_button_background_not_pressed">#165319</color>-->
-    <!--    <color name="std_button_background_pressed">#247827</color>-->
-    <color name="std_button_background_not_pressed">#255B68</color>
-    <color name="std_button_background_pressed">#387381</color>
+    <color name="edittext_border_color_selector">#197542</color>
+
+    <color name="std_button_background_not_pressed">#197542</color>
+    <color name="std_button_background_pressed">#248E53</color>
     <color name="std_button_background_not_activated">#787878</color>
     <color name="std_button_inverted_background_not_pressed">#FFFFFF</color>
     <color name="std_button_inverted_background_pressed">#EFEFEF</color>
+
+    <color name="navbar_icon">#FFFFFF</color>
+    <color name="navbar_icon_selected">#197542</color>
 </resources>

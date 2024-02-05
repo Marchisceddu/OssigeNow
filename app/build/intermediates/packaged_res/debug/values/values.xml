@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#255B68</color>
+    <color name="background">#197542</color>
+    <color name="background2">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="edittext_border_color_selector">#255B68</color>
+    <color name="edittext_border_color_selector">#197542</color>
     <color name="gray">#858585</color>
     <color name="green_trasparent">#E64CAF50</color>
-    <color name="logo_color1">#FFFFFF</color>
-    <color name="logo_color2">#000000</color>
-    <color name="logo_color_ball">#FFFFFF</color>
+    <color name="ic_launcher_background">#197542</color>
+    <color name="logo_color">#FFFFFF</color>
+    <color name="navbar_icon">#FFFFFF</color>
+    <color name="navbar_icon_selected">#197542</color>
     <color name="red_trasparent">#E6BD261B</color>
     <color name="std_button_background_not_activated">#787878</color>
-    <color name="std_button_background_not_pressed">#255B68</color>
-    <color name="std_button_background_pressed">#387381</color>
+    <color name="std_button_background_not_pressed">#197542</color>
+    <color name="std_button_background_pressed">#248E53</color>
     <color name="std_button_inverted_background_not_pressed">#FFFFFF</color>
     <color name="std_button_inverted_background_pressed">#EFEFEF</color>
+    <color name="trasparent">#00FFFFFF</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white2">#F0F0F0</color>
     <string name="accedi">Accedi</string>
     <string name="annulla">Annulla</string>
     <string name="app_name">OssigeNow</string>
     <string name="cognome">Cognome:</string>
     <string name="cognomeHint">es: Bensaid</string>
     <string name="conferma">Conferma</string>
+    <string name="crea_gruppo">Crea Gruppo</string>
     <string name="credentialError">Nome Utente e/o Password errati</string>
     <string name="data">Data di nascita:</string>
     <string name="dataHint">es: 01/01/2000</string>
     <string name="domandaRegistrati">Non sei ancora registrato?</string>
+    <string name="no_gruppi">Non sei ancora iscritto a nessun gruppo</string>
+    <string name="no_inviti">Non hai ricevuto nessun invito</string>
     <string name="nome">Nome:</string>
     <string name="nomeHint">es: Ahmed</string>
     <string name="nomeUtente">Nome Utente:</string>
@@ -35,6 +42,9 @@
     <string name="registerError">Account già esistente</string>
     <string name="registerSuccess">Registrazione avvenuta con successo</string>
     <string name="registrati">Registrati</string>
+    <string name="titoloAccesso">Accesso</string>
+    <string name="titoloGruppi">I tuoi gruppi:</string>
+    <string name="titoloInviti">I tuoi inviti:</string>
     <string name="titoloRegister">Registrati</string>
     <style name="AboutDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:textColor">#C8191A</item>
