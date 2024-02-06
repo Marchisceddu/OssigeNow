@@ -28,6 +28,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.OssigeNow" >
         <activity
+            android:name="com.example.ossigenow.GroupActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.ossigenow.NewGroupActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.ossigenow.HomeActivity"
             android:exported="false" />
         <activity

@@ -141,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
         Person utenteLoggato = null;
 
         // Recupera l'utente dalle SharedPreferences
-        SharedPreferences sharedPreferencesUtente = getSharedPreferences("Utente", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferencesUtente = getSharedPreferences("User", Context.MODE_PRIVATE);
 
         // Recupera la rappresentazione di byte come stringa dalle SharedPreferences
-        String datiUtente = sharedPreferencesUtente.getString("Utente", "");
+        String datiUtente = sharedPreferencesUtente.getString("User", "");
 
         // Converte la stringa in un array di byte
         byte[] utenteBytes = Base64.decode(datiUtente, Base64.DEFAULT);

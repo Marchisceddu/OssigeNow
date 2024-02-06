@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginRight="30dp"
+    android:layout_marginLeft="30dp"
+    android:id="@+id/invite"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titoloInviti"
+        android:textSize="28sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <!-- Contenitore inviti -->
+    <LinearLayout
+        android:id="@+id/conteiner_inviti"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/no_inviti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_inviti" />
+
+        <!-- Singolo invito -->
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/invito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/background_gruppo"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nome_esame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nome Gruppo"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <TextView
+                    android:id="@+id/cfu_esame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NomeUtente ti ha invitato!"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    />
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/decline"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="@color/trasparent"
+                android:src="@drawable/decline" />
+
+
+
+            <ImageButton
+                android:id="@+id/accept"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="@color/trasparent"
+                android:src="@drawable/accept" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

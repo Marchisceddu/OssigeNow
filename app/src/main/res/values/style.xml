@@ -29,4 +29,9 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="SpinnerTextStyle">
+        <item name="android:textSize">25sp</item>
+        <item name="android:fontFamily">@font/capriola</item>
+    </style>
+
 </resources>
