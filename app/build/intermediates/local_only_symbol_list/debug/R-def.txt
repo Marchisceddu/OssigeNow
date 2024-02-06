@@ -13,6 +13,7 @@ color logout_button_not_pressed
 color logout_button_pressed
 color navbar_icon
 color navbar_icon_selected
+color red
 color red_trasparent
 color std_button_background_not_activated
 color std_button_background_not_pressed
@@ -66,6 +67,7 @@ font tekoregular
 font tekosemibold
 id accedi
 id accept
+id annulla
 id booking
 id boooh
 id bottomLayout
@@ -73,6 +75,7 @@ id calendar
 id cfu_esame
 id chevron_left
 id cognome
+id completa_avviso
 id conferma
 id container
 id conteiner_gruppi
@@ -131,6 +134,7 @@ layout activity_new_group
 layout activity_register
 layout booking
 layout calendar
+layout dialogo_conferma
 layout home
 layout invite
 layout profile
@@ -140,6 +144,7 @@ layout toast_register_confirmed
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
+string ATTENZIONE
 string accedi
 string annulla
 string app_name

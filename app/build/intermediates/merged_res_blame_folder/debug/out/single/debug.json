@@ -256,6 +256,10 @@
         "source": "/Users/marcopilia/.gradle/daemon/8.0/com.example.ossigenow.app-main-33:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
     },
     {
+        "merged": "com.example.ossigenow.app-merged_res-31:/layout_dialogo_conferma.xml.flat",
+        "source": "com.example.ossigenow.app-main-33:/layout/dialogo_conferma.xml"
+    },
+    {
         "merged": "/Users/marcopilia/.gradle/daemon/8.0/com.example.ossigenow.app-merged_res-31:/mipmap-hdpi_ic_launcher.webp.flat",
         "source": "/Users/marcopilia/.gradle/daemon/8.0/com.example.ossigenow.app-main-33:/mipmap-hdpi/ic_launcher.webp"
     },
@@ -294,10 +298,6 @@
     {
         "merged": "/Users/marcopilia/.gradle/daemon/8.0/com.example.ossigenow.app-merged_res-31:/layout_home.xml.flat",
         "source": "/Users/marcopilia/.gradle/daemon/8.0/com.example.ossigenow.app-main-33:/layout/home.xml"
-    },
-    {
-        "merged": "com.example.ossigenow.app-merged_res-31:/layout_home.xml.flat",
-        "source": "com.example.ossigenow.app-main-33:/layout/home.xml"
     },
     {
         "merged": "/Users/marcopilia/.gradle/daemon/8.0/com.example.ossigenow.app-merged_res-31:/drawable_logout.xml.flat",
