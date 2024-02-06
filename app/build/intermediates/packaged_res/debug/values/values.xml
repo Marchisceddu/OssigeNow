@@ -15,10 +15,11 @@
     <color name="green_trasparent">#E64CAF50</color>
     <color name="ic_launcher_background">#197542</color>
     <color name="logo_color">#FFFFFF</color>
-    <color name="logout_button_not_pressed">#E6BD261B</color>
-    <color name="logout_button_pressed">#E6CC4036</color>
+    <color name="logout_button_not_pressed">#BD261B</color>
+    <color name="logout_button_pressed">#CC4036</color>
     <color name="navbar_icon">#FFFFFF</color>
     <color name="navbar_icon_selected">#197542</color>
+    <color name="red">#BD261B</color>
     <color name="red_trasparent">#E6BD261B</color>
     <color name="std_button_background_not_activated">#787878</color>
     <color name="std_button_background_not_pressed">#197542</color>
@@ -28,6 +29,7 @@
     <color name="trasparent">#00FFFFFF</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white2">#F0F0F0</color>
+    <string name="ATTENZIONE">ATTENZIONE</string>
     <string name="accedi">Accedi</string>
     <string name="annulla">Annulla</string>
     <string name="app_name">OssigeNow</string>

@@ -2088,6 +2088,7 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
+color red
 color red_trasparent
 color ripple_material_dark
 color ripple_material_light
@@ -3209,6 +3210,7 @@ id allStates
 id always
 id animateToEnd
 id animateToStart
+id annulla
 id antiClockwise
 id anticipate
 id arc
@@ -3259,6 +3261,7 @@ id clockwise
 id closest
 id cognome
 id collapseActionView
+id completa_avviso
 id compress
 id conferma
 id confirm_button
@@ -3817,6 +3820,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout dialogo_conferma
 layout home
 layout invite
 layout m3_alert_dialog
@@ -3888,6 +3892,7 @@ mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
+string ATTENZIONE
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description

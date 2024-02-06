@@ -4,6 +4,7 @@
     <string name="conferma">Conferma</string>
     <string name="annulla">Annulla</string>
     <string name="pulisci">Pulisci</string>
+    <string name="ATTENZIONE">ATTENZIONE</string>
 
     <!--    MainActivity    -->
     <string name="titoloAccesso">Accesso</string>

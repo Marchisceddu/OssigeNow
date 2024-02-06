@@ -2,6 +2,7 @@ package com.example.ossigenow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     private int home, invite, calendar, booking, profile;
     private LinearLayout containerLayout;
     private LayoutInflater layoutInflater;
-    private LinearLayout creaGruppo;
+    private LinearLayout creaGruppo, logout;
 
     // Intento per cambiare activity
     private Intent result;
@@ -105,6 +106,48 @@ public class HomeActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    private void chiudiSessione() {
+        // Elimina l'utente dalle SharedPreferences
+        SharedPreferences sharedPreferencesUtente = getSharedPreferences("User", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editorUtente = sharedPreferencesUtente.edit();
+
+        editorUtente.clear();
+        editorUtente.apply();
+    }
+
+    private void chiediConfermaLogout(){
+        LayoutInflater inflater =  (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View alert_view = inflater.inflate(R.layout.dialogo_conferma, null);
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(alert_view);
+
+        String messaggio = "Sei sicuro di voler terminare la sessione?\n\n";
+        TextView alert_dialog = alert_view.findViewById(R.id.completa_avviso);
+        alert_dialog.setText(messaggio);
+
+        Button conferma = alert_view.findViewById(R.id.conferma);
+        Button annulla = alert_view.findViewById(R.id.annulla);
+
+        dialog.getWindow().setBackgroundDrawableResource(R.color.trasparent);
+
+        conferma.setOnClickListener(v -> {
+            dialog.dismiss();
+            isLogout = true;
+            chiudiSessione();
+            result = new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(result);
+            finish();
+        });
+
+        annulla.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
     private void ripristinaSessione() {
         // Recupera i dati dell'activity precedente
         user = (Person) getIntent().getSerializableExtra(MainActivity.PERSON_PATH);
@@ -132,6 +175,12 @@ public class HomeActivity extends AppCompatActivity {
                 result = new Intent(HomeActivity.this, NewGroupActivity.class);
                 result.putExtra(MainActivity.PERSON_PATH, user);
                 startActivity(result);
+            });
+        } else if (layout == R.layout.profile) {
+            logout = findViewById(R.id.logout);
+
+            logout.setOnClickListener(v -> {
+                chiediConfermaLogout();
             });
         }
     }

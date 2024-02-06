@@ -85,7 +85,6 @@
                 android:src="@drawable/decline" />
 
 
-
             <ImageButton
                 android:id="@+id/accept"
                 android:layout_width="0dp"
