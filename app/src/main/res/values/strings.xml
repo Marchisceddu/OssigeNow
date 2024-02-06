@@ -36,4 +36,29 @@
     <string name="titoloInviti">I tuoi inviti:</string>
     <string name="no_inviti">Non hai ricevuto nessun invito</string>
 
+    <!--    HomeActivity - Booking    -->
+    <string name="titoloPrenotazioni">Partite da prenotare:</string>
+    <string name="no_prenotazioni">Non hai nessuna partita da prenotare</string>
+    <string name="titoloPrenotazioni2">Partite prenotate:</string>
+    <string name="no_prenotazioni2">Non hai nessuna partita prenotata</string>
+
+    <!--    HomeActivity - profile    -->
+    <string name="logout">logout</string>
+
+    <!--    NewGroupActivity    -->
+    <string name="titoloNewEvent">Nuovo Gruppo</string>
+    <string name="nomeGruppo">Nome gruppo</string>
+    <string name="es_nome_gruppo">I black guys</string>
+    <string name="frequenza_partite">Frequenza delle partite</string>
+    <string name="numero_partecipanti">Numero partecipanti</string>
+    <string name="creaGruppo">Crea gruppo</string>
+
+    <string-array name="menu_tendina">
+        <item>Settimanale</item>
+        <item>Bi-settimanale</item>
+        <item>Mensile</item>
+        <item>Bimestrale</item>
+        <item>Trimestrale</item>
+    </string-array>
+
 </resources>

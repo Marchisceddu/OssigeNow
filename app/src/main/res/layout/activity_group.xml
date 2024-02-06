@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GroupActivity"
+    android:background="@color/background"
+    android:id="@+id/groupLayout">
+
+
+    <Space
+        android:id="@+id/space0"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_below="@id/space0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="38sp"
+                android:fontFamily="@font/capriola"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            >
+
+            <ImageButton
+                android:id="@+id/indietro"
+                android:contentDescription="indietro"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/back"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/space2"
+        />
+
+    <LinearLayout
+        android:layout_below="@id/space2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:background="@drawable/login_background"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:paddingTop="30dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/titoloNewEvent"
+                    android:textColor="@color/black"
+                    android:textSize="36sp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/capriola"
+                    />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/prova"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/capriola"
+                    />
+
+
+
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

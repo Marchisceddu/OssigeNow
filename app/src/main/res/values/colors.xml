@@ -19,8 +19,12 @@
     <color name="std_button_background_not_pressed">#197542</color>
     <color name="std_button_background_pressed">#248E53</color>
     <color name="std_button_background_not_activated">#787878</color>
+
     <color name="std_button_inverted_background_not_pressed">#FFFFFF</color>
     <color name="std_button_inverted_background_pressed">#EFEFEF</color>
+
+    <color name="logout_button_not_pressed">#E6BD261B</color>
+    <color name="logout_button_pressed">#E6CC4036</color>
 
     <color name="navbar_icon">#FFFFFF</color>
     <color name="navbar_icon_selected">#197542</color>

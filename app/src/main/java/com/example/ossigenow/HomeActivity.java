@@ -7,7 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -29,7 +32,10 @@ public class HomeActivity extends AppCompatActivity {
 
     // Elementi UI
     private ImageView navHome, navInvite, navCalendar, navBooking, navProfile;
-    private LinearLayout home, invite, calendar, booking, profile;
+    private int home, invite, calendar, booking, profile;
+    private LinearLayout containerLayout;
+    private LayoutInflater layoutInflater;
+    private LinearLayout creaGruppo;
 
     // Intento per cambiare activity
     private Intent result;
@@ -46,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
         inizializzaUI();
 
         // Gestisce la navbar
-        navbar(new LinearLayout[]{home, invite, calendar, booking, profile}, new ImageView[]{navHome, navInvite, navCalendar, navBooking, navProfile});
+        navbar(new int[]{home, invite, calendar, booking, profile}, new ImageView[]{navHome, navInvite, navCalendar, navBooking, navProfile});
     }
 
     @Override
@@ -110,11 +116,24 @@ public class HomeActivity extends AppCompatActivity {
         navCalendar = findViewById(R.id.navCalendar);
         navBooking = findViewById(R.id.navBooking);
         navProfile = findViewById(R.id.navProfile);
-        home = findViewById(R.id.home);
-        invite = findViewById(R.id.invite);
-        calendar = findViewById(R.id.calendar);
-        booking = findViewById(R.id.booking);
-        profile = findViewById(R.id.profile);
+        home = R.layout.home;
+        invite = R.layout.invite;
+        calendar = R.layout.calendar;
+        booking = R.layout.booking;
+        profile = R.layout.profile;
+    }
+
+    private void confListener(int layout) {
+        if (layout == R.layout.home) {
+            creaGruppo = findViewById(R.id.creaGruppo);
+
+            creaGruppo.setOnClickListener(v -> {
+                System.out.println("Crea gruppo");
+                result = new Intent(HomeActivity.this, NewGroupActivity.class);
+                result.putExtra(MainActivity.PERSON_PATH, user);
+                startActivity(result);
+            });
+        }
     }
 
     // Metodi per gestire la navbar
@@ -134,13 +153,20 @@ public class HomeActivity extends AppCompatActivity {
 
         itemView[position].setSelected(selected);
     }
-    private void navbar(LinearLayout[] layouts, ImageView[] navItems) {
-        setNavItem(navItems, 0, true); // di default è selezionata la schemata home
+    private void navbar(int[] layouts, ImageView[] navItems) {
+        // Inizializza il layout
+        containerLayout = findViewById(R.id.container);
+        layoutInflater = LayoutInflater.from(this);
+
+        // Di default è selezionata la schemata home
+        setNavItem(navItems, 0, true);
+        containerLayout.addView(layoutInflater.inflate(home, containerLayout, false));
+        confListener(home);
 
         // Imposta il listener per ogni elemento di navigazione
         for (int i = 0; i < layouts.length; i++) {
             int index = i;
-            LinearLayout selectedLayout = layouts[i];
+            int selectedLayout = layouts[i];
             ImageView navItem = navItems[i];
 
             navItem.setOnClickListener(v -> {
@@ -151,12 +177,16 @@ public class HomeActivity extends AppCompatActivity {
                 // Imposta l'elemento di navigazione corrente come selezionato
                 setNavItem(navItems, index,true);
 
-                // Imposta tutti i layout associati come invisibili
-                for (LinearLayout layout : layouts) {
-                    layout.setVisibility(View.GONE);
-                }
-                // Imposta il layout associato all'elemento di navigazione corrente come visibile
-                selectedLayout.setVisibility(View.VISIBLE);
+                // Imposta il layout corrente
+                containerLayout.removeAllViews(); // Rimuove il layout attuale, se presente
+                containerLayout.addView(layoutInflater.inflate(selectedLayout, containerLayout, false));
+                confListener(selectedLayout);
+
+                // Se il layout è profile imposta gravity center
+                if (selectedLayout == R.layout.profile)
+                    containerLayout.setGravity(Gravity.CENTER);
+                else
+                    containerLayout.setGravity(Gravity.START);
             });
         }
     }

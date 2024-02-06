@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="menu_tendina">
+        <item>Settimanale</item>
+        <item>Bi-settimanale</item>
+        <item>Mensile</item>
+        <item>Bimestrale</item>
+        <item>Trimestrale</item>
+    </string-array>
     <color name="background">#197542</color>
     <color name="background2">#FFFFFF</color>
     <color name="black">#000000</color>
@@ -8,6 +15,8 @@
     <color name="green_trasparent">#E64CAF50</color>
     <color name="ic_launcher_background">#197542</color>
     <color name="logo_color">#FFFFFF</color>
+    <color name="logout_button_not_pressed">#E6BD261B</color>
+    <color name="logout_button_pressed">#E6CC4036</color>
     <color name="navbar_icon">#FFFFFF</color>
     <color name="navbar_icon_selected">#197542</color>
     <color name="red_trasparent">#E6BD261B</color>
@@ -25,17 +34,25 @@
     <string name="cognome">Cognome:</string>
     <string name="cognomeHint">es: Bensaid</string>
     <string name="conferma">Conferma</string>
+    <string name="creaGruppo">Crea gruppo</string>
     <string name="crea_gruppo">Crea Gruppo</string>
     <string name="credentialError">Nome Utente e/o Password errati</string>
     <string name="data">Data di nascita:</string>
     <string name="dataHint">es: 01/01/2000</string>
     <string name="domandaRegistrati">Non sei ancora registrato?</string>
+    <string name="es_nome_gruppo">I black guys</string>
+    <string name="frequenza_partite">Frequenza delle partite</string>
+    <string name="logout">logout</string>
     <string name="no_gruppi">Non sei ancora iscritto a nessun gruppo</string>
     <string name="no_inviti">Non hai ricevuto nessun invito</string>
+    <string name="no_prenotazioni">Non hai nessuna partita da prenotare</string>
+    <string name="no_prenotazioni2">Non hai nessuna partita prenotata</string>
     <string name="nome">Nome:</string>
+    <string name="nomeGruppo">Nome gruppo</string>
     <string name="nomeHint">es: Ahmed</string>
     <string name="nomeUtente">Nome Utente:</string>
     <string name="nomeUtenteHint">es: OrsoBruno02</string>
+    <string name="numero_partecipanti">Numero partecipanti</string>
     <string name="password">Password:</string>
     <string name="passwordHint">es: Password123_</string>
     <string name="pulisci">Pulisci</string>
@@ -45,6 +62,9 @@
     <string name="titoloAccesso">Accesso</string>
     <string name="titoloGruppi">I tuoi gruppi:</string>
     <string name="titoloInviti">I tuoi inviti:</string>
+    <string name="titoloNewEvent">Nuovo Gruppo</string>
+    <string name="titoloPrenotazioni">Partite da prenotare:</string>
+    <string name="titoloPrenotazioni2">Partite prenotate:</string>
     <string name="titoloRegister">Registrati</string>
     <style name="AboutDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:textColor">#C8191A</item>
@@ -73,6 +93,10 @@
         <item name="android:backgroundTint">@color/black</item>
 
 
+    </style>
+    <style name="SpinnerTextStyle">
+        <item name="android:textSize">25sp</item>
+        <item name="android:fontFamily">@font/capriola</item>
     </style>
     <style name="Theme.OssigeNow" parent="Base.Theme.OssigeNow"/>
 </resources>
