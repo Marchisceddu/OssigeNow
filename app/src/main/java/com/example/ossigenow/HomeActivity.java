@@ -12,6 +12,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     // Utente loggato
     private Person user = null;
+    private ArrayList<Group> groups = new ArrayList<>();
     private boolean isLogout = false;
 
     // Elementi UI
@@ -37,6 +40,9 @@ public class HomeActivity extends AppCompatActivity {
     private LinearLayout containerLayout;
     private LayoutInflater layoutInflater;
     private LinearLayout creaGruppo, logout;
+    private TextView nomeUtente, nome, cognome, dataNascita;
+    private CalendarView calendarView;
+    private CustomCalendarView customCalendarView;
 
     // Intento per cambiare activity
     private Intent result;
@@ -149,8 +155,38 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void ripristinaSessione() {
-        // Recupera i dati dell'activity precedente
+        // Recupera i dati dell'utente loggato
         user = (Person) getIntent().getSerializableExtra(MainActivity.PERSON_PATH);
+
+        if (user == null) {
+            // Recupera l'utente dalle SharedPreferences
+            SharedPreferences sharedPreferencesUtente = getSharedPreferences("User", Context.MODE_PRIVATE);
+
+            String datiUtente = sharedPreferencesUtente.getString("User", "");
+
+            if (!datiUtente.isEmpty()) {
+                byte[] datiUtenteBytes = Base64.decode(datiUtente, Base64.DEFAULT);
+                try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiUtenteBytes))) {
+                    user = (Person) objectInputStream.readObject();
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        // Recupera i gruppi dell'utente loggato
+        SharedPreferences sharedPreferencesGruppi = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
+
+        String datiGruppi = sharedPreferencesGruppi.getString(user.getNomeUtente(), "");
+
+        if (!datiGruppi.isEmpty()) {
+            byte[] datiGruppiBytes = Base64.decode(datiGruppi, Base64.DEFAULT);
+            try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiGruppiBytes))) {
+                groups = ((ArrayList<Group>) objectInputStream.readObject());
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void inizializzaUI() {
@@ -168,6 +204,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private void confListener(int layout) {
         if (layout == R.layout.home) {
+            printGruppi();
+
             creaGruppo = findViewById(R.id.creaGruppo);
 
             creaGruppo.setOnClickListener(v -> {
@@ -176,8 +214,25 @@ public class HomeActivity extends AppCompatActivity {
                 result.putExtra(MainActivity.PERSON_PATH, user);
                 startActivity(result);
             });
+        } else if (layout == R.layout.invite) {
+            // codice per la pagina degli inviti
+        } else if (layout == R.layout.calendar) {
+            calendarView = findViewById(R.id.calendarView);
+
+            Calendario.createCalendar(this, calendarView);
+        } else if (layout == R.layout.booking) {
+            // codice per la pagina delle prenotazioni
         } else if (layout == R.layout.profile) {
             logout = findViewById(R.id.logout);
+            nomeUtente = findViewById(R.id.nome_utente);
+            nome = findViewById(R.id.nome);
+            cognome = findViewById(R.id.cognome);
+            dataNascita = findViewById(R.id.data_nascita);
+
+            nomeUtente.setText(user.getNomeUtente());
+            nome.setText(user.getNome());
+            cognome.setText(user.getCognome());
+            dataNascita.setText(user.getDataNascita());
 
             logout.setOnClickListener(v -> {
                 chiediConfermaLogout();
@@ -232,10 +287,51 @@ public class HomeActivity extends AppCompatActivity {
                 confListener(selectedLayout);
 
                 // Se il layout è profile imposta gravity center
-                if (selectedLayout == R.layout.profile)
+                if (selectedLayout == R.layout.profile || selectedLayout == R.layout.calendar)
                     containerLayout.setGravity(Gravity.CENTER);
                 else
                     containerLayout.setGravity(Gravity.START);
+            });
+        }
+    }
+
+    private void printGruppi() {
+        LayoutInflater inflater =  (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LinearLayout thisView = findViewById(R.id.conteiner_gruppi);
+
+        if (!groups.isEmpty()) {
+            TextView no_esami = findViewById(R.id.no_gruppi);
+            no_esami.setVisibility(View.GONE);
+        }
+
+        for (Group g : groups) {
+            View view = inflater.inflate(R.layout.gruppo, null);
+            TextView nome, partecipanti;
+            ImageButton mostra;
+
+            nome = view.findViewById(R.id.nome_gruppo);
+            partecipanti = view.findViewById(R.id.partecipanti);
+            mostra = view.findViewById(R.id.view);
+
+            nome.setText(g.getNomeGruppo());
+            String partecipantiText = "partecipanti :" + g.getNumPartecipanti() + " / 10";
+            partecipanti.setText(partecipantiText);
+
+            int marginInDp = 20; // Puoi specificare il valore direttamente
+            int marginInPixels = (int) (marginInDp * getResources().getDisplayMetrics().density);
+
+            // Impostare i margini per creare uno spazio tra le viste
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            layoutParams.setMargins(0, 0, 0, marginInPixels);
+            view.setLayoutParams(layoutParams);
+
+            thisView.addView(view);
+
+            mostra.setOnClickListener(v -> {
+                // codice per portare alla pagina del gruppo
             });
         }
     }

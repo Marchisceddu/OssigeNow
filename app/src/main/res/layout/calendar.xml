@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,5 +10,63 @@
     android:id="@+id/calendar"
     >
 
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:dateTextAppearance="@style/CalenderViewDateCustomText"
+        android:theme="@style/CalenderViewCustom"
+        android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+<!--    <com.kizitonwose.calendar.view.CalendarView-->
+<!--        android:id="@+id/calendarView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:cv_dayViewResource="@layout/calendar_day_layout" />-->
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+    />
+
+    <LinearLayout
+        android:id="@+id/creaGruppo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:background="@drawable/button_crea_gruppo"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:stateListAnimator="@drawable/button_pressed_animation"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aggiungi Impegno"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/add_icon"
+            android:layout_marginStart="18dp"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

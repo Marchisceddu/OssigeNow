@@ -32,57 +32,6 @@
             android:layout_height="wrap_content"
             android:text="@string/no_gruppi" />
 
-        <!-- Singolo gruppo -->
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/gruppo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/background_gruppo"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/nome_gruppo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nome Gruppo"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp" />
-
-                <TextView
-                    android:id="@+id/partecipanti"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="partecipanti : 4 / 10"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/view"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:background="@color/trasparent"
-                android:src="@drawable/eye" />
-
-        </LinearLayout>
-
     </LinearLayout>
 
     <!-- Bottone crea gruppo -->

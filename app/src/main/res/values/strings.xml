@@ -44,7 +44,9 @@
     <string name="no_prenotazioni2">Non hai nessuna partita prenotata</string>
 
     <!--    HomeActivity - profile    -->
-    <string name="logout">logout</string>
+    <string name="titoloProfilo">Profilo</string>
+    <string name="logout">Disconnetti</string>
+
 
     <!--    NewGroupActivity    -->
     <string name="titoloNewEvent">Nuovo Gruppo</string>

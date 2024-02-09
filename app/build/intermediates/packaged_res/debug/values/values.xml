@@ -44,7 +44,7 @@
     <string name="domandaRegistrati">Non sei ancora registrato?</string>
     <string name="es_nome_gruppo">I black guys</string>
     <string name="frequenza_partite">Frequenza delle partite</string>
-    <string name="logout">logout</string>
+    <string name="logout">Disconnetti</string>
     <string name="no_gruppi">Non sei ancora iscritto a nessun gruppo</string>
     <string name="no_inviti">Non hai ricevuto nessun invito</string>
     <string name="no_prenotazioni">Non hai nessuna partita da prenotare</string>
@@ -67,6 +67,7 @@
     <string name="titoloNewEvent">Nuovo Gruppo</string>
     <string name="titoloPrenotazioni">Partite da prenotare:</string>
     <string name="titoloPrenotazioni2">Partite prenotate:</string>
+    <string name="titoloProfilo">Profilo</string>
     <string name="titoloRegister">Registrati</string>
     <style name="AboutDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:textColor">#C8191A</item>
@@ -77,8 +78,24 @@
         
         
     </style>
+    <style name="CalendarTextAppearance">
+        <item name="android:textColor">@color/red</item>
+    </style>
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorAccent">@android:color/holo_blue_dark</item>
+        <item name="colorPrimary">@android:color/darker_gray</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/background</item>
+    </style>
     <style name="CustomDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/black</item>
+        <item name="colorAccent">@color/background</item>
         <item name="android:calendarTextColor">@color/black</item>
         <item name="android:buttonBarPositiveButtonStyle">@style/DatePickerButtonStylePositive</item>
         <item name="android:buttonBarNegativeButtonStyle">@style/DatePickerButtonStyleNegative</item>
@@ -91,8 +108,8 @@
         <item name="android:layout_marginRight">20dp</item>
     </style>
     <style name="DatePickerButtonStylePositive" parent="ThemeOverlay.MaterialComponents.Dialog">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/background</item>
 
 
     </style>

@@ -3010,8 +3010,14 @@ drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_crea_gruppo
 drawable button_logout
+drawable button_no_active
 drawable button_pressed_animation
 drawable calendar
+drawable campo1
+drawable campo2
+drawable campo3
+drawable campo4
+drawable circle_background
 drawable decline
 drawable design_fab_background
 drawable design_ic_visibility
@@ -3038,6 +3044,7 @@ drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
 drawable icon_error
 drawable icon_success
+drawable image_background
 drawable invite
 drawable login_background
 drawable logo
@@ -3114,6 +3121,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable open
 drawable register_background
 drawable std_button
 drawable std_button_inverted
@@ -3237,8 +3245,11 @@ id bounceStart
 id buttonPanel
 id cache_measures
 id calendar
+id calendarView
 id callMeasure
+id campo
 id cancel_button
+id cardView
 id carryVelocity
 id center
 id centerCrop
@@ -3267,6 +3278,7 @@ id conferma
 id confirm_button
 id constraint
 id container
+id container_campi
 id conteiner_gruppi
 id conteiner_inviti
 id conteiner_prenotazioni
@@ -3345,8 +3357,10 @@ id fixed
 id flip
 id floating
 id forever
+id foto_campo
 id fragment_container_view_tag
 id frequenzaPartite
+id frequenza_layout
 id frost
 id fullscreen_header
 id ghost_view
@@ -3481,6 +3495,7 @@ id no_prenotazioni
 id nome
 id nomeGruppo
 id nomeUtente
+id nome_campo
 id nome_esame
 id nome_gruppo
 id nome_gruppodaPrenotare
@@ -3529,6 +3544,7 @@ id pin
 id position
 id postLayout
 id prenota
+id prenota_layout
 id pressed
 id profile
 id progress_circular
@@ -3550,6 +3566,7 @@ id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
 id scale
+id scegli_campo
 id screen
 id scroll
 id scrollIndicatorDown
@@ -3797,6 +3814,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_booking
 layout activity_group
 layout activity_home
 layout activity_main
@@ -3821,6 +3839,7 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialogo_conferma
+layout gruppo
 layout home
 layout invite
 layout m3_alert_dialog
@@ -4089,6 +4108,7 @@ string titoloInviti
 string titoloNewEvent
 string titoloPrenotazioni
 string titoloPrenotazioni2
+string titoloProfilo
 string titoloRegister
 style AboutDialog
 style AlertDialog_AppCompat
@@ -4379,6 +4399,10 @@ style Base_Widget_MaterialComponents_Snackbar
 style Base_Widget_MaterialComponents_TextInputEditText
 style Base_Widget_MaterialComponents_TextInputLayout
 style Base_Widget_MaterialComponents_TextView
+style CalendarTextAppearance
+style CalenderViewCustom
+style CalenderViewDateCustomText
+style CalenderViewWeekCustomText
 style CardView
 style CardView_Dark
 style CardView_Light

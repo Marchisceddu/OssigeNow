@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ArrayList<Person> utentiRegistrati = new ArrayList();
 
     // Elementi UI
-    private Button registrati, pulisci;
+    private Button registrati;
     private EditText nomeUtente, nome, cognome, data, password;
     private ImageButton back;
 
@@ -67,13 +67,6 @@ public class RegisterActivity extends AppCompatActivity {
         // Mostra il DatePickerFragment in caso di click
         data.setOnClickListener(v -> showDialog());
 
-        // Torna indietro all'activity precedente
-        back.setOnClickListener(v -> {
-            result = new Intent(RegisterActivity.this, MainActivity.class);
-            startActivity(result);
-            finish();
-        });
-
         // Conferma i dati inseriti e passa alla schermata home
         registrati.setOnClickListener(v -> {
             if (checkInput()) { // Se gli input sono validi
@@ -88,6 +81,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        // Torna indietro all'activity precedente
+        back.setOnClickListener(v -> {
+            result = new Intent(RegisterActivity.this, MainActivity.class);
+            startActivity(result);
+            finish();
+        });
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {

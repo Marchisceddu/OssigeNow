@@ -3,6 +3,7 @@ package com.example.ossigenow;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -40,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Imposta la lingua in italiano
+        Locale.setDefault(new Locale("it"));
+        Configuration config = getResources().getConfiguration();
+        config.locale = new Locale("it");
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
         // Inizializza gli elementi UI
         accedi = findViewById(R.id.accedi);
@@ -181,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         Person user = null;
 
         for (Person u: utentiRegistrati) {
-            if(((nomeUtente.getText().toString().compareTo(u.getNome())) == 0) &&
+            if(((nomeUtente.getText().toString().compareTo(u.getNomeUtente())) == 0) &&
                     ((password.getText().toString().compareTo(u.getPassword())) == 0)) {
                 user = u;
             }

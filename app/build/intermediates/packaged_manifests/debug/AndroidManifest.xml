@@ -28,6 +28,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.OssigeNow" >
         <activity
+            android:name="com.example.ossigenow.BookingActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.ossigenow.GroupActivity"
             android:exported="false" />
         <activity

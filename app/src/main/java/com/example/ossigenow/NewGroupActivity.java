@@ -48,7 +48,7 @@ public class NewGroupActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
 
-        String datiArrayString = sharedPreferences.getString("chiave", "");
+        String datiArrayString = sharedPreferences.getString(utenteLoggato.getNomeUtente(), "");
 
         if (!datiArrayString.isEmpty()) {
             byte[] datiArrayBytes = Base64.decode(datiArrayString, Base64.DEFAULT);
@@ -127,7 +127,7 @@ public class NewGroupActivity extends AppCompatActivity {
 
             // Salvare la stringa Base64 nelle SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("chiave", datiArrayString);
+            editor.putString(utenteLoggato.getNomeUtente(), datiArrayString);
             editor.apply();
 
         } catch (IOException e) {
