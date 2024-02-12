@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.ossigenow.app-mergeDebugResources-29:/values-v23/values-v23.xml",
+            "outputFile": "com.example.ossigenow.app-mergeDebugResources-30:/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "/Users/marcopilia/.gradle/caches/transforms-3/05282c1f0a97c352c32a939bc2096859/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",

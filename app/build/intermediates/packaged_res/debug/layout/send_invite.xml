@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/background_gruppo"
+    android:padding="30dp"
+    android:gravity="center"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invia invito"
+        android:textSize="20sp"
+        android:textColor="@color/background"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nomeUtente"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:textSize="23sp"
+        android:textColorHint="@color/gray"
+        android:id="@+id/nomeUtente"
+        android:hint="@string/nomeUtenteHint"
+        android:paddingLeft="10dp"
+        android:background="@drawable/edittext_box_background"
+        android:padding="5dp"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        />
+
+    <Button
+        app:backgroundTint="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Invia"
+        android:textSize="13sp"
+        android:background="@drawable/std_button"
+        android:id="@+id/invia"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/annulla"
+        android:textSize="13sp"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/white"
+        android:id="@+id/annulla"
+        />
+</LinearLayout>

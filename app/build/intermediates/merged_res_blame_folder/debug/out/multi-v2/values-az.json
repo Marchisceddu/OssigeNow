@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.ossigenow.app-mergeDebugResources-29:/values-az/values-az.xml",
+            "outputFile": "com.example.ossigenow.app-mergeDebugResources-30:/values-az/values-az.xml",
             "map": [
                 {
                     "source": "/Users/marcopilia/.gradle/caches/transforms-3/28a7af075d5af218c19b63a2f54b1523/transformed/core-1.9.0/res/values-az/values-az.xml",

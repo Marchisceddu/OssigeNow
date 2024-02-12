@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.ossigenow.app-mergeDebugResources-29:/values-ka/values-ka.xml",
+            "outputFile": "com.example.ossigenow.app-mergeDebugResources-30:/values-ka/values-ka.xml",
             "map": [
                 {
                     "source": "/Users/marcopilia/.gradle/caches/transforms-3/af575453595166fed38ef613cf3573b3/transformed/appcompat-1.6.1/res/values-ka/values-ka.xml",

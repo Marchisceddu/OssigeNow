@@ -1,13 +1,19 @@
 package com.example.ossigenow;
 
-import android.widget.CalendarView;
+import android.graphics.Color;
 import android.widget.Toast;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Calendario {
     private static CalendarView calendarView;
@@ -18,12 +24,25 @@ public class Calendario {
 
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         calendar.add(Calendar.YEAR, 1);
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                String msg = "Selected date Day: " + i2 + " Month : " + (i1 + 1) + " Year " + i;
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-            }
+
+        // Imposta l'icona degli impegni
+        VectorDrawableCompat drawable = VectorDrawableCompat.create(context.getResources(), R.drawable.add_icon, null);
+        drawable.setTint(ContextCompat.getColor(context, R.color.red));
+
+        // Aggiunge deglio impegni in 2 giorni di febbraio 2024
+        List<EventDay> eventDays = new ArrayList<>();
+        for (int i = 1; i < 3; i++) {
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.set(2024, Calendar.FEBRUARY, i);
+
+            eventDays.add(new EventDay(calendar1, drawable));
+        }
+        calendarView.setEvents(eventDays);
+
+        // Listener per aggiungere un impegno
+        calendarView.setOnDayClickListener(eventDay -> {
+            eventDays.add(new EventDay(eventDay.getCalendar(), drawable));
+            calendarView.setEvents(eventDays);
         });
     }
 }

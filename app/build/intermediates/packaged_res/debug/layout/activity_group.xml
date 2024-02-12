@@ -1,144 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/groupLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GroupActivity"
     android:background="@color/background"
-    android:id="@+id/groupLayout">
+    android:orientation="vertical"
+    tools:context=".GroupActivity">
 
-
-    <Space
-        android:id="@+id/space0"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        />
-
+    <!-- Logo -->
     <LinearLayout
-        android:id="@+id/toolbar"
-        android:layout_below="@id/space0"
+        android:id="@+id/logoLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <Space
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            />
+        android:layout_height="90dp"
+        android:background="@color/background2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="1"
-            >
+            android:background="@drawable/background_logo">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="38sp"
-                android:fontFamily="@font/capriola"
-                />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.10" />
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.10"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            >
+                <ImageButton
+                    android:id="@+id/indietro"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="indietro"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/back" />
 
-            <ImageButton
-                android:id="@+id/indietro"
-                android:contentDescription="indietro"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/back"
-                android:background="@android:color/transparent"
-                android:scaleType="centerInside"
-                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.75"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/toolbar"
-        android:id="@+id/space2"
-        />
-
-    <LinearLayout
-        android:layout_below="@id/space2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/scrollView"
-        android:background="@drawable/login_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/background_main_1bordo"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoLayout"
         >
 
-        <ScrollView
+        <TextView
+            android:id="@+id/group_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/capriola"
+            android:textColor="@color/black"
+            android:textSize="36sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+        <Space
+            android:id="@+id/space1"
+            android:layout_width="0dp"
+            android:layout_height="20sp"
+            app:layout_constraintTop_toBottomOf="@id/group_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <LinearLayout
+            android:id="@+id/participants_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space1"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="Partecipanti"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/number_user"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView_block_user"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/participants_container"
             >
 
             <LinearLayout
+                android:id="@+id/block_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
                 android:paddingTop="30dp"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/titoloNewEvent"
-                    android:textColor="@color/black"
-                    android:textSize="36sp"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/capriola"
-                    />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/prova"
-                    android:textColor="@color/black"
-                    android:textSize="28sp"
-                    android:fontFamily="@font/capriola"
-                    />
-
-
-
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    />
-
-            </LinearLayout>
+                />
 
         </ScrollView>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/invite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_crea_gruppo"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="10dp"
+            android:stateListAnimator="@drawable/button_pressed_animation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scrollView_block_user"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            >
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Invia invito"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                />
 
-</RelativeLayout>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/invite"
+                android:tint="@android:color/white"
+                tools:ignore="UseAppTint"
+                />
+
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/space2"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            app:layout_constraintTop_toBottomOf="@id/invite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <LinearLayout
+            android:id="@+id/controlloImpegni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_crea_gruppo"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="10dp"
+            android:stateListAnimator="@drawable/button_pressed_animation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space2"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Impegni"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/calendar"
+                tools:ignore="UseAppTint"
+                />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
