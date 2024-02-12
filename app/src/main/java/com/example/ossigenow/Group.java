@@ -67,4 +67,8 @@ public class Group implements Serializable{
             System.out.println("Il gruppo è già al completo, non è possibile aggiungere ulteriori partecipanti.");
         }
     }
+
+    public int numberParticipant(){
+        return partecipanti.size();
+    }
 }

@@ -1,15 +1,21 @@
 package com.example.ossigenow;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,7 +30,15 @@ public class NewGroupActivity extends AppCompatActivity {
     private Intent result; // Intento per cambiare activity
 
     private Button creaGruppo;
-    private EditText nomeGruppo, numPartecipanti;
+
+    private ImageButton back;
+    private EditText nomeGruppo;
+
+    private RadioButton radioButton10, radioButton12, radioButton14;
+
+    private RadioGroup radioGroup;
+
+    private int numPartecipanti = -1;
 
     private Spinner frequenzaPartite;
 
@@ -34,21 +48,31 @@ public class NewGroupActivity extends AppCompatActivity {
 
     public ArrayList<Group> existing_group = new ArrayList<>();
 
+    private EditText error;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_group);
 
         nomeGruppo = findViewById(R.id.nomeGruppo);
-        numPartecipanti = findViewById(R.id.numPartecipanti);
         frequenzaPartite = findViewById(R.id.frequenzaPartite);
         creaGruppo = findViewById(R.id.creaGruppo);
+        back = findViewById(R.id.indietro);
+        error = findViewById(R.id.error);
+        error.setInputType(InputType.TYPE_NULL);
 
-        utenteLoggato = (Person) getIntent().getSerializableExtra(MainActivity.PERSON_PATH);
+
+        radioGroup = findViewById(R.id.radioGroup);
+        radioButton10 = findViewById(R.id.radioButton10);
+        radioButton12 = findViewById(R.id.radioButton12);
+        radioButton14 = findViewById(R.id.radioButton14);
+
+        utenteLoggato = (Person) getIntent().getSerializableExtra(HomeActivity.PERSON_PATH);
 
         SharedPreferences sharedPreferences = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
 
-        String datiArrayString = sharedPreferences.getString(utenteLoggato.getNomeUtente(), "");
+        String datiArrayString = sharedPreferences.getString("chiave", "");
 
         if (!datiArrayString.isEmpty()) {
             byte[] datiArrayBytes = Base64.decode(datiArrayString, Base64.DEFAULT);
@@ -59,11 +83,26 @@ public class NewGroupActivity extends AppCompatActivity {
             }
         }
 
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // Imposta il valore selezionato quando cambia la selezione
+                if (checkedId == R.id.radioButton10) {
+                    numPartecipanti = 10;
+                } else if (checkedId == R.id.radioButton12) {
+                    numPartecipanti = 12;
+                } else if (checkedId == R.id.radioButton14) {
+                    numPartecipanti = 14;
+                }
+            }
+        });
+
+
         creaGruppo.setOnClickListener(v -> {
             if (!checkInput()) {
-                int nPartecipanti = Integer.parseInt(numPartecipanti.getText().toString());
                 result = new Intent(NewGroupActivity.this, GroupActivity.class);
-                group = new Group(nomeGruppo.getText().toString(), frequenzaPartite.getSelectedItem().toString(), nPartecipanti, utenteLoggato);
+                group = new Group(nomeGruppo.getText().toString(), frequenzaPartite.getSelectedItem().toString(), numPartecipanti, utenteLoggato);
                 existing_group.add(group);
                 saveGroupsToSharedPreferences(existing_group);
                 result.putExtra(NEW_GROUP_PATH, group);
@@ -71,6 +110,22 @@ public class NewGroupActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        back.setOnClickListener(v -> {
+            result = new Intent(NewGroupActivity.this, HomeActivity.class);
+            startActivity(result);
+            finish();
+        });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                result = new Intent(NewGroupActivity.this, HomeActivity.class);
+                startActivity(result);
+                finish();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     private boolean checkInput() {
@@ -82,35 +137,37 @@ public class NewGroupActivity extends AppCompatActivity {
             nomeGruppo.setError("Inserire il nome del gruppo");
         } else {
             if (existing_group != null){
+                boolean b = false;
                 int n = 0;
-                for(Group g : existing_group){
-                    if(g.getNomeGruppo().equals(nomeGruppo.getText().toString())){
-                        n++;
+                int n2;
+                String nuovoNomeGruppo = nomeGruppo.getText().toString();
+                while (!b) {
+                    b = true;
+                    n2 = n;
+                    for (Group g : existing_group) {
+                        if (g.getNomeGruppo().equals(nuovoNomeGruppo)) {
+                            n++;
+                        }
+                    }
+                    if (n != n2) {
+                        b = false;
+                        nuovoNomeGruppo = nomeGruppo.getText().toString() + "" + n;
+
                     }
                 }
-                if (n > 0){
-                    String nuovoNomeGruppo = nomeGruppo.getText().toString() + "" + n;
-                    nomeGruppo.setText(nuovoNomeGruppo);
-                }
+                nomeGruppo.setText(nuovoNomeGruppo);
             }
             nomeGruppo.setError(null);
         }
 
-        if (numPartecipanti.getText() == null || numPartecipanti.getText().length() == 0) {
+        if (numPartecipanti == -1) {
             errors = true;
-            numPartecipanti.setError("Inserire il numero di partecipanti");
+            error.setError("Selezionare il numero di partecipanti");
+
         }
         else {
+            error.setError(null);
 
-            int nPartecipanti = Integer.parseInt(numPartecipanti.getText().toString());
-
-            if (nPartecipanti != 10 && nPartecipanti != 12) {
-                errors = true;
-                numPartecipanti.setError("Il numero di partecipanti deve essere 10 o 12");
-            }
-            else {
-                numPartecipanti.setError(null);
-            }
         }
         return errors;
     }
@@ -127,7 +184,7 @@ public class NewGroupActivity extends AppCompatActivity {
 
             // Salvare la stringa Base64 nelle SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(utenteLoggato.getNomeUtente(), datiArrayString);
+            editor.putString("chiave", datiArrayString);
             editor.apply();
 
         } catch (IOException e) {

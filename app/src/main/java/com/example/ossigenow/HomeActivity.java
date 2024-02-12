@@ -12,7 +12,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
+import com.applandeo.materialcalendarview.CalendarView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,8 +30,11 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
     // Utente loggato
+    public final static String PERSON_PATH = "com.example.ossigenow.person";
+    public final static String GROUP_PATH = "com.example.ossigenow.groups";
     private Person user = null;
     private ArrayList<Group> groups = new ArrayList<>();
+    private ArrayList<Invito> inviti = new ArrayList<>();
     private boolean isLogout = false;
 
     // Elementi UI
@@ -40,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
     private LinearLayout containerLayout;
     private LayoutInflater layoutInflater;
     private LinearLayout creaGruppo, logout;
+    private ImageView view;
     private TextView nomeUtente, nome, cognome, dataNascita;
     private CalendarView calendarView;
     private CustomCalendarView customCalendarView;
@@ -177,12 +181,39 @@ public class HomeActivity extends AppCompatActivity {
         // Recupera i gruppi dell'utente loggato
         SharedPreferences sharedPreferencesGruppi = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
 
-        String datiGruppi = sharedPreferencesGruppi.getString(user.getNomeUtente(), "");
+        String datiGruppi = sharedPreferencesGruppi.getString("chiave", "");
 
         if (!datiGruppi.isEmpty()) {
             byte[] datiGruppiBytes = Base64.decode(datiGruppi, Base64.DEFAULT);
             try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiGruppiBytes))) {
-                groups = ((ArrayList<Group>) objectInputStream.readObject());
+                groups = (ArrayList<Group>) objectInputStream.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Controlla se l'utente è presente nel gruppo altrimenti lo elimina
+        if (groups != null) {
+            groups.removeIf(g -> {
+                for (Person p : g.getPartecipanti()) {
+                    if (p.getNomeUtente().equals(user.getNomeUtente())) {
+                        return false; // Non rimuovere il gruppo se l'utente è presente
+                    }
+                }
+                return true; // Rimuovi il gruppo se l'utente non è presente
+            });
+        }
+
+        // Recupera gli inviti dell'utente loggato
+        String path = "inviti" + user.getNomeUtente();
+        SharedPreferences sharedPreferencesInviti = getSharedPreferences(path, Context.MODE_PRIVATE);
+
+        String datiInviti = sharedPreferencesInviti.getString("chiave", "");
+
+        if (!datiInviti.isEmpty()) {
+            byte[] datiInvitiBytes = Base64.decode(datiInviti, Base64.DEFAULT);
+            try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiInvitiBytes))) {
+                inviti = (ArrayList<Invito>) objectInputStream.readObject();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -209,13 +240,12 @@ public class HomeActivity extends AppCompatActivity {
             creaGruppo = findViewById(R.id.creaGruppo);
 
             creaGruppo.setOnClickListener(v -> {
-                System.out.println("Crea gruppo");
                 result = new Intent(HomeActivity.this, NewGroupActivity.class);
-                result.putExtra(MainActivity.PERSON_PATH, user);
+                result.putExtra(HomeActivity.PERSON_PATH, user);
                 startActivity(result);
             });
         } else if (layout == R.layout.invite) {
-            // codice per la pagina degli inviti
+            printInviti();
         } else if (layout == R.layout.calendar) {
             calendarView = findViewById(R.id.calendarView);
 
@@ -300,8 +330,8 @@ public class HomeActivity extends AppCompatActivity {
         LinearLayout thisView = findViewById(R.id.conteiner_gruppi);
 
         if (!groups.isEmpty()) {
-            TextView no_esami = findViewById(R.id.no_gruppi);
-            no_esami.setVisibility(View.GONE);
+            TextView no = findViewById(R.id.no_gruppi);
+            no.setVisibility(View.GONE);
         }
 
         for (Group g : groups) {
@@ -314,7 +344,7 @@ public class HomeActivity extends AppCompatActivity {
             mostra = view.findViewById(R.id.view);
 
             nome.setText(g.getNomeGruppo());
-            String partecipantiText = "partecipanti :" + g.getNumPartecipanti() + " / 10";
+            String partecipantiText = "partecipanti :" + g.numberParticipant() + " / " + g.getNumPartecipanti();
             partecipanti.setText(partecipantiText);
 
             int marginInDp = 20; // Puoi specificare il valore direttamente
@@ -331,7 +361,56 @@ public class HomeActivity extends AppCompatActivity {
             thisView.addView(view);
 
             mostra.setOnClickListener(v -> {
-                // codice per portare alla pagina del gruppo
+                result = new Intent(HomeActivity.this, GroupActivity.class);
+                result.putExtra(GROUP_PATH, g);
+                result.putExtra(PERSON_PATH, user);
+                startActivity(result);
+            });
+        }
+    }
+
+    private void printInviti() {
+        LayoutInflater inflater =  (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LinearLayout thisView = findViewById(R.id.conteiner_inviti);
+
+        if (!inviti.isEmpty()) {
+            TextView no = findViewById(R.id.no_inviti);
+            no.setVisibility(View.GONE);
+        }
+
+        for (Invito i : inviti) {
+            View view = inflater.inflate(R.layout.invito, null);
+            TextView nome_gruppo, utente_invitante;
+            ImageButton accetta, rifiuta;
+
+            nome_gruppo = view.findViewById(R.id.nome_gruppo);
+            utente_invitante = view.findViewById(R.id.nome_inviante);
+            accetta = view.findViewById(R.id.accept);
+            rifiuta = view.findViewById(R.id.decline);
+
+            nome_gruppo.setText(i.getGroup().getNomeGruppo());
+            String messaggio_invitante = i.getUtenteInvitante() + " ti ha invitato";
+            utente_invitante.setText(messaggio_invitante);
+
+            int marginInDp = 20; // Puoi specificare il valore direttamente
+            int marginInPixels = (int) (marginInDp * getResources().getDisplayMetrics().density);
+
+            // Impostare i margini per creare uno spazio tra le viste
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            layoutParams.setMargins(0, 0, 0, marginInPixels);
+            view.setLayoutParams(layoutParams);
+
+            thisView.addView(view);
+
+            accetta.setOnClickListener(v -> {
+
+            });
+
+            rifiuta.setOnClickListener(v -> {
+
             });
         }
     }

@@ -19,20 +19,57 @@
         android:layout_marginBottom="10dp"
         />
 
-    <!-- Contenitore gruppi -->
-    <LinearLayout
-        android:id="@+id/conteiner_gruppi"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        >
 
-        <TextView
-            android:id="@+id/no_gruppi"
+        <!-- Contenitore gruppi -->
+        <ScrollView
+            android:id="@+id/scrollView_conteiner_gruppi"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/no_gruppi" />
+            android:layout_height="420dp"
+            android:orientation="vertical"
+            >
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/conteiner_gruppi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/no_gruppi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_gruppi"
+                    />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="top"
+            android:background="@drawable/shadow"
+            android:rotation="180"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shadow"
+            />
+
+    </FrameLayout>
 
     <!-- Bottone crea gruppo -->
     <LinearLayout
@@ -46,6 +83,7 @@
         android:paddingBottom="10dp"
         android:paddingRight="30dp"
         android:paddingLeft="30dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:elevation="4dp"
         android:foreground="?android:attr/selectableItemBackground"

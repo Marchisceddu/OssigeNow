@@ -1,215 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/background"
     android:id="@+id/new_eventLayout"
     tools:context=".NewGroupActivity"
 
     >
 
-    <Space
-        android:id="@+id/space0"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        />
-
+    <!--    Logo      -->
     <LinearLayout
-        android:id="@+id/toolbar"
-        android:layout_below="@id/space0"
+        android:id="@+id/logoLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
+        android:background="@color/background2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         >
 
-        <Space
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            />
-
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="38sp"
-                android:fontFamily="@font/capriola"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            >
-
-            <ImageButton
-                android:id="@+id/indietro"
-                android:contentDescription="indietro"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/back"
-                android:background="@android:color/transparent"
-                android:scaleType="centerInside"
-                />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/toolbar"
-        android:id="@+id/space2"
-        />
-
-    <LinearLayout
-        android:layout_below="@id/space2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:background="@drawable/login_background"
-        >
-
-        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/background_logo"
             >
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.10"
+                />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:paddingTop="30dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="0.10"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/titoloNewEvent"
-                    android:textColor="@color/black"
-                    android:textSize="36sp"
+                <ImageButton
+                    android:id="@+id/indietro"
+                    android:contentDescription="indietro"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/back"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerInside"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/capriola"
-                    />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nomeGruppo"
-                    android:textColor="@color/black"
-                    android:textSize="28sp"
-                    android:fontFamily="@font/capriola"
-                    />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:inputType="textPersonName"
-                    android:textSize="25sp"
-                    android:textColorHint="@color/gray"
-                    android:id="@+id/nomeGruppo"
-                    android:hint="@string/es_nome_gruppo"
-                    android:paddingLeft="10dp"
-                    android:background="@drawable/edittext_box_background"
-                    android:fontFamily="@font/capriola"
-                    />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/frequenza_partite"
-                    android:textColor="@color/black"
-                    android:textSize="28sp"
-                    android:fontFamily="@font/capriola"/>
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:id="@+id/frequenzaPartite"
-                    android:entries="@array/menu_tendina"
-                    style="@style/SpinnerTextStyle"
-                    android:background="@drawable/edittext_box_background"/>
-
-
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/numero_partecipanti"
-                    android:textColor="@color/black"
-                    android:textSize="28sp"
-                    android:fontFamily="@font/capriola"
-                    />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:inputType="number"
-                    android:textSize="25sp"
-                    android:textColorHint="@color/gray"
-                    android:id="@+id/numPartecipanti"
-                    android:hint="10"
-                    android:paddingLeft="10dp"
-                    android:background="@drawable/edittext_box_background"
-                    android:fontFamily="@font/capriola"
-                    />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    />
-
-                <Button
-                    app:backgroundTint="@null"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textSize="28sp"
-                    android:id="@+id/creaGruppo"
-                    android:text="@string/creaGruppo"
-                    android:background="@drawable/std_button"
-                    android:fontFamily="@font/capriola"
-                    />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
                     />
 
             </LinearLayout>
 
-        </ScrollView>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@android:color/transparent"
+                android:layout_weight="0.75"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:id="@+id/scrollView"
+        android:background="@drawable/background_main_1bordo"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:paddingTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/logoLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/titoloNewEvent"
+                android:textColor="@color/black"
+                android:textSize="36sp"
+                android:layout_gravity="center"
+                />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nomeGruppo"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:inputType="textPersonName"
+                android:textSize="23sp"
+                android:textColorHint="@color/gray"
+                android:id="@+id/nomeGruppo"
+                android:hint="@string/es_nome_gruppo"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_box_background"
+                />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/frequenza_partite"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:id="@+id/frequenzaPartite"
+                android:entries="@array/menu_tendina"
+                android:background="@drawable/edittext_box_background"
+                />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/numero_partecipanti"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <RadioButton
+                    android:id="@+id/radioButton10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="10" />
+
+                <RadioButton
+                    android:id="@+id/radioButton12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="12" />
+
+                <RadioButton
+                    android:id="@+id/radioButton14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="14" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/error"
+                    android:background="@color/white"/>
+            </RadioGroup>
+
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                />
+
+            <Button
+                app:backgroundTint="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="28sp"
+                android:id="@+id/creaGruppo"
+                android:text="@string/creaGruppo"
+                android:background="@drawable/std_button"
+                />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 

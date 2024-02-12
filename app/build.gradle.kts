@@ -32,6 +32,10 @@ android {
 }
 
 dependencies {
+//    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.0.4")
+//    implementation ("com.kizitonwose.calendar:view:2.0.0")
+//    implementation ("com.kizitonwose.calendar:compose:2.0.0")
+    implementation ("com.applandeo:material-calendar-view:1.9.0-rc03")
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
