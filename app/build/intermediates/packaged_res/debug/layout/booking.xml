@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginRight="30dp"
     android:layout_marginLeft="30dp"
@@ -11,83 +11,73 @@
     >
 
     <TextView
+        android:id="@+id/title_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:text="@string/titoloPrenotazioni"
         android:textColor="@color/black"
-        android:textSize="28sp" />
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-    <!-- Contenitore inviti -->
-    <LinearLayout
-        android:id="@+id/conteiner_prenotazioni"
-        android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:orientation="vertical">
+    <!-- Contenitore prenotazioni -->
+    <FrameLayout
+        android:id="@+id/View_conteiner_prenotazioni"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/title_textview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
 
-        <TextView
-            android:id="@+id/no_prenotazioni"
+        <ScrollView
+            android:id="@+id/scrollView_conteiner_prenotazioni"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/no_prenotazioni" />
-
-        <!-- Singolo invito -->
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/daPrenotare"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/background_gruppo"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp">
+            android:layout_height="match_parent"
+            >
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/conteiner_prenotazioni"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:paddingTop="20dp"
+                android:orientation="vertical"
+                >
 
                 <TextView
-                    android:id="@+id/nome_gruppodaPrenotare"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nome Gruppo"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    />
-
-                <Space
+                    android:id="@+id/no_prenotazioni"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp" />
-
-                <TextView
-                    android:id="@+id/boooh"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="frequenza partite: settimanale"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    />
+                    android:text="@string/no_prenotazioni" />
 
             </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/prenota"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:background="@color/trasparent"
-                android:src="@drawable/open"
-                android:tint="@color/background"
-                tools:ignore="UseAppTint"
-                />
+        </ScrollView>
 
-        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="top"
+            android:background="@drawable/shadow"
+            android:rotation="180"
+            />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shadow"
+            />
 
-</LinearLayout>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

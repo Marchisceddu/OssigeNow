@@ -9,6 +9,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Base64;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -102,10 +107,11 @@ public class NewGroupActivity extends AppCompatActivity {
         creaGruppo.setOnClickListener(v -> {
             if (!checkInput()) {
                 result = new Intent(NewGroupActivity.this, GroupActivity.class);
-                group = new Group(nomeGruppo.getText().toString(), frequenzaPartite.getSelectedItem().toString(), numPartecipanti, utenteLoggato);
+                group = new Group(nomeGruppo.getText().toString(), utenteLoggato, frequenzaPartite.getSelectedItem().toString(), numPartecipanti, utenteLoggato);
                 existing_group.add(group);
                 saveGroupsToSharedPreferences(existing_group);
                 result.putExtra(NEW_GROUP_PATH, group);
+                confirmMessage();
                 startActivity(result);
                 finish();
             }
@@ -190,5 +196,19 @@ public class NewGroupActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void confirmMessage(){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_succes,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        TextView scritta = layout.findViewById(R.id.toast_text);
+        scritta.setText("Gruppo creato con successo");
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 50);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }

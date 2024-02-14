@@ -1448,6 +1448,7 @@ int color error_color_material_light 0x7f060061
 int color foreground_material_dark 0x7f060062
 int color foreground_material_light 0x7f060063
 int color gray 0x7f060064
+int color greenLight 0x7f06031e
 int color green_trasparent 0x7f060065
 int color highlighted_text_material_dark 0x7f060066
 int color highlighted_text_material_light 0x7f060067
@@ -3039,6 +3040,7 @@ int drawable background_main_1bordo 0x7f080080
 int drawable background_main_2bordi 0x7f080081
 int drawable background_nav_left 0x7f080082
 int drawable background_nav_rigth 0x7f080083
+int drawable background_selected 0x7f080110
 int drawable background_transparent 0x7f080084
 int drawable booking 0x7f080085
 int drawable btn_checkbox_checked_mtrl 0x7f080086
@@ -3200,6 +3202,8 @@ int id SHOW_PROGRESS 0x7f0a000a
 int id SYM 0x7f0a000b
 int id TOP_END 0x7f0a000c
 int id TOP_START 0x7f0a000d
+int id View_conteiner_gruppi 0x7f0a0262
+int id View_conteiner_prenotazioni 0x7f0a0265
 int id abbreviationsBar 0x7f0a000e
 int id accedi 0x7f0a000f
 int id accelerate 0x7f0a0010
@@ -3285,7 +3289,6 @@ int id bestChoice 0x7f0a005f
 int id block_user 0x7f0a0060
 int id blocking 0x7f0a0061
 int id booking 0x7f0a0062
-int id boooh 0x7f0a0063
 int id bottom 0x7f0a0064
 int id bottomLayout 0x7f0a0065
 int id bounce 0x7f0a0066
@@ -3303,6 +3306,7 @@ int id calendarViewPager 0x7f0a0071
 int id callMeasure 0x7f0a0072
 int id campo 0x7f0a0073
 int id cancel_button 0x7f0a0074
+int id caratteristiche 0x7f0a0268
 int id cardView 0x7f0a0075
 int id carryVelocity 0x7f0a0076
 int id center 0x7f0a0077
@@ -3354,6 +3358,7 @@ int id cut 0x7f0a00a5
 int id daPrenotare 0x7f0a00a6
 int id data 0x7f0a00a7
 int id data_nascita 0x7f0a00a8
+int id data_ora_campo 0x7f0a0269
 int id date_picker_actions 0x7f0a00a9
 int id dayIcon 0x7f0a00aa
 int id dayLabel 0x7f0a00ab
@@ -3420,6 +3425,7 @@ int id forever 0x7f0a00e7
 int id forwardButton 0x7f0a00e8
 int id foto_campo 0x7f0a00e9
 int id fragment_container_view_tag 0x7f0a00ea
+int id frequenza 0x7f0a0267
 int id frequenzaPartite 0x7f0a00eb
 int id frequenza_layout 0x7f0a00ec
 int id friday 0x7f0a00ed
@@ -3561,6 +3567,7 @@ int id neverCompleteToStart 0x7f0a0174
 int id new_eventLayout 0x7f0a0175
 int id noScroll 0x7f0a0176
 int id noState 0x7f0a0177
+int id no_campi 0x7f0a026a
 int id no_gruppi 0x7f0a0178
 int id no_inviti 0x7f0a0179
 int id no_prenotazioni 0x7f0a017a
@@ -3650,12 +3657,16 @@ int id sawtooth 0x7f0a01cd
 int id scale 0x7f0a01ce
 int id scegli_campo 0x7f0a01cf
 int id screen 0x7f0a01d0
+int id scrittaCaratteristiche 0x7f0a026b
+int id scrittaData 0x7f0a026c
 int id scroll 0x7f0a01d1
 int id scrollIndicatorDown 0x7f0a01d2
 int id scrollIndicatorUp 0x7f0a01d3
 int id scrollView 0x7f0a01d4
 int id scrollView_block_user 0x7f0a01d5
 int id scrollView_conteiner_gruppi 0x7f0a025f
+int id scrollView_conteiner_inviti 0x7f0a0264
+int id scrollView_conteiner_prenotazioni 0x7f0a0266
 int id scrollable 0x7f0a01d6
 int id search_badge 0x7f0a01d7
 int id search_bar 0x7f0a01d8
@@ -3749,6 +3760,8 @@ int id time 0x7f0a022f
 int id title 0x7f0a0230
 int id titleDividerNoCustom 0x7f0a0231
 int id title_template 0x7f0a0232
+int id title_textview 0x7f0a0263
+int id titoloGruppi 0x7f0a0261
 int id toast_image 0x7f0a0233
 int id toast_layout_root 0x7f0a0234
 int id toast_text 0x7f0a0235
@@ -3919,6 +3932,7 @@ int layout calendar_view 0x7f0d0024
 int layout calendar_view_day 0x7f0d0025
 int layout calendar_view_grid 0x7f0d0026
 int layout calendar_view_picker_day 0x7f0d0027
+int layout campo 0x7f0d0084
 int layout custom_dialog 0x7f0d0028
 int layout date_picker_dialog 0x7f0d0029
 int layout design_bottom_navigation_item 0x7f0d002a
@@ -3998,6 +4012,7 @@ int layout notification_template_custom_big 0x7f0d0072
 int layout notification_template_icon_group 0x7f0d0073
 int layout notification_template_part_chronometer 0x7f0d0074
 int layout notification_template_part_time 0x7f0d0075
+int layout prenotazione 0x7f0d0083
 int layout profile 0x7f0d0076
 int layout see_user 0x7f0d0077
 int layout select_dialog_item_material 0x7f0d0078
@@ -4005,9 +4020,8 @@ int layout select_dialog_multichoice_material 0x7f0d0079
 int layout select_dialog_singlechoice_material 0x7f0d007a
 int layout send_invite 0x7f0d007b
 int layout support_simple_spinner_dropdown_item 0x7f0d007c
-int layout toast_error_account_already_exists 0x7f0d007d
-int layout toast_error_credentials 0x7f0d007e
-int layout toast_register_confirmed 0x7f0d007f
+int layout toast_error 0x7f0d0081
+int layout toast_succes 0x7f0d0082
 int mipmap ic_launcher 0x7f0f0000
 int mipmap ic_launcher_foreground 0x7f0f0001
 int mipmap ic_launcher_round 0x7f0f0002

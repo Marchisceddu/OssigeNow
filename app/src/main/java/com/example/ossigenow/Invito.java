@@ -1,6 +1,8 @@
 package com.example.ossigenow;
 
-public class Invito {
+import java.io.Serializable;
+
+public class Invito implements Serializable {
     private Group group;
     private String utenteInvitato;
     private String utenteInvitante;

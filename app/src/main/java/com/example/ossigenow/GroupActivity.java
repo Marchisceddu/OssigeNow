@@ -14,14 +14,17 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -40,6 +43,7 @@ public class GroupActivity extends AppCompatActivity {
     private ArrayList<Person> utentiRegistrati = new ArrayList<>();
     private Person utenteLoggato = new Person();
     public ArrayList<Group> existing_group = new ArrayList<>();
+    private ArrayList<Invito> inviti = new ArrayList<>();
 
     // Elementi UI
     private TextView prova;
@@ -81,7 +85,7 @@ public class GroupActivity extends AppCompatActivity {
         }
 
         group_name.setText(group.getNomeGruppo());
-        number_user.setText(group.numberParticipant()+"/"+group.getNumPartecipanti());
+        number_user.setText(group.getNumberParticipanti()+"/"+group.getPartecipantiRichiesti());
 
 
         LayoutInflater inflater =  (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -122,10 +126,23 @@ public class GroupActivity extends AppCompatActivity {
                     // Ottieni un Editor per modificare le SharedPreferences
                     SharedPreferences.Editor editor = sharedPreferences2.edit();
 
+                    // Recupero gli inviti dell'utente per appendere il nuovo
+                    String datiInviti = sharedPreferences2.getString("chiave", "");
+
+                    if (!datiInviti.isEmpty()) {
+                        byte[] datiInvitiBytes = Base64.decode(datiInviti, Base64.DEFAULT);
+                        try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiInvitiBytes))) {
+                            inviti = (ArrayList<Invito>) objectInputStream.readObject();
+                        } catch (IOException | ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    inviti.add(invito);
+
                     // Converti l'utente attuale in un array di byte utilizzando la serializzazione
                     ByteArrayOutputStream byteArrayOutputStreamUtente = new ByteArrayOutputStream();
                     try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStreamUtente)) {
-                        objectOutputStream.writeObject(invito);
+                        objectOutputStream.writeObject(inviti);
                         String datiInvito = Base64.encodeToString(byteArrayOutputStreamUtente.toByteArray(), Base64.DEFAULT);
 
                         // Salva la rappresentazione di byte come stringa nelle SharedPreferences
@@ -134,6 +151,7 @@ public class GroupActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    confirmMessage();
                     dialog.dismiss();
                 }
             });
@@ -176,7 +194,7 @@ public class GroupActivity extends AppCompatActivity {
             nomeUtente.setError("Inserire il Nome Utente");
         } else if (nomeUtente.getText().toString().compareTo(utenteLoggato.getNomeUtente())==0) {
             errors++;
-            nomeUtente.setError("Non puoi inviare un invito a te stesso");
+            errorMessage("Non puoi inviare un invito a te stesso");
         }
         else {
             Boolean n = false;
@@ -188,7 +206,7 @@ public class GroupActivity extends AppCompatActivity {
             }
             if (n) {
                 errors++;
-                nomeUtente.setError("Utente già presente nel gruppo");
+                errorMessage("Utente già presente nel gruppo");
             }
             else {
                 for (Person u : utentiRegistrati) {
@@ -198,19 +216,20 @@ public class GroupActivity extends AppCompatActivity {
                 }
                 if (!n) {
                     errors++;
-                    nomeUtente.setError("Nome Utente non esistente");
+                    errorMessage("Nome Utente non esistente");
                 } else {
-                    SharedPreferences sharedPreferences = getSharedPreferences(nomeUtente.getText().toString(), Context.MODE_PRIVATE);
-
-                    // Recupera il valore associato alla chiave "group_name"
-                    String existing_invite = sharedPreferences.getString(group_name.getText().toString(), "");
-
-                    if (!existing_invite.equals("")) {
-                        errors++;
-                        nomeUtente.setError("E già stato inviato un invito a questo utente");
-                    } else {
-                        nomeUtente.setError(null);
-                    }
+                    // da cambiare con la nuova shared
+//                    SharedPreferences sharedPreferences = getSharedPreferences(nomeUtente.getText().toString(), Context.MODE_PRIVATE);
+//
+//                    // Recupera il valore associato alla chiave "group_name"
+//                    String existing_invite = sharedPreferences.getString(group_name.getText().toString(), "");
+//
+//                    if (!existing_invite.equals("")) {
+//                        errors++;
+//                        errorMessage("E già stato inviato un invito a questo utente");
+//                    } else {
+//                        nomeUtente.setError(null);
+//                    }
                 }
             }
         }
@@ -241,5 +260,33 @@ public class GroupActivity extends AppCompatActivity {
 
         if (utentiRegistrati == null) utentiRegistrati = new ArrayList<>();
         return utentiRegistrati;
+    }
+
+    private void confirmMessage(){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_succes,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        TextView scritta = layout.findViewById(R.id.toast_text);
+        scritta.setText("Invito inviato con successo");
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 50);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    private void errorMessage(String s) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_error,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        TextView scritta = layout.findViewById(R.id.toast_text);
+        scritta.setText(s);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 50);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }
