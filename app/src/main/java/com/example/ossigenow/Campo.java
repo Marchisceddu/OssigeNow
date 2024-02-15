@@ -1,17 +1,18 @@
 package com.example.ossigenow;
 
 import android.graphics.drawable.Drawable;
+import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Campo implements Serializable{
+public class Campo implements Serializable {
     private String nomeCampo, caratteristiche;
-    private Drawable img;
+    private int img;
     private ArrayList<Calendar> prenotazioni = new ArrayList<>();
 
-    public Campo(String nomeCampo, String caratteristiche, Drawable img) {
+    public Campo(String nomeCampo, String caratteristiche, int img) {
         this.nomeCampo = nomeCampo;
         this.caratteristiche = caratteristiche;
         this.img = img;
@@ -33,11 +34,11 @@ public class Campo implements Serializable{
         this.caratteristiche = caratteristiche;
     }
 
-    public Drawable getImg() {
+    public int getImg() {
         return img;
     }
 
-    public void setImg(Drawable img) {
+    public void setImg(int img) {
         this.img = img;
     }
 

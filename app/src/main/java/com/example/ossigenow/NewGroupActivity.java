@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Base64;
@@ -88,7 +91,7 @@ public class NewGroupActivity extends AppCompatActivity {
             }
         }
 
-
+        ColorStateList colorStateList = new ColorStateList(new int[][]{new int[]{android.R.attr.state_enabled}}, new int[]{this.getColor(R.color.background)});
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -99,6 +102,14 @@ public class NewGroupActivity extends AppCompatActivity {
                     numPartecipanti = 12;
                 } else if (checkedId == R.id.radioButton14) {
                     numPartecipanti = 14;
+                }
+
+                for (int i = 0; i < 3; i++) {
+                    RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
+                    radioButton.setButtonTintList(colorStateList); // set the color tint list
+                    if (radioButton.getId() != checkedId) { // if the button is not the selected one
+                        radioButton.setButtonTintList(null); // reset the color to default
+                    }
                 }
             }
         });

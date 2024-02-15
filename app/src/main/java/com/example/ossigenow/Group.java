@@ -80,4 +80,12 @@ public class Group implements Serializable{
     public Person getAdmin() {
         return admin;
     }
+
+    public void removePartecipante_by_UsernName(String userName){
+        for (Person p : partecipanti){
+            if(p.getNomeUtente().equals(userName)){
+                this.removePartecipante(p);
+            }
+        }
+    }
 }

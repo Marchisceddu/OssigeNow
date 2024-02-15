@@ -79,25 +79,179 @@
         app:layout_constraintTop_toBottomOf="@id/logoLayout"
         >
 
-        <TextView
-            android:id="@+id/group_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/capriola"
-            android:textColor="@color/black"
-            android:textSize="36sp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
+            >
+
+            <TextView
+                android:id="@+id/group_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/exit_group"
+                android:layout_marginTop="20dp"
+                />
+
+            <Button
+                android:id="@+id/exit_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/group_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:backgroundTint="@color/red"
+                android:layout_marginEnd="30dp"
+                android:text="Esci"
+                />
+
+            <Button
+                android:id="@+id/delete_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/group_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:backgroundTint="@color/red"
+                android:layout_marginEnd="30dp"
+                android:text="Elimina"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="0dp"
+            android:layout_height="20sp"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             />
+
+        <LinearLayout
+            android:id="@+id/cadenza_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Frequenza partite:  "
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:id="@+id/cadenza"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/space0"
+            android:layout_width="0dp"
+            android:layout_height="20sp"
+            app:layout_constraintTop_toBottomOf="@id/cadenza_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <LinearLayout
+            android:id="@+id/data_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space0"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Prossima partita:  "
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:id="@+id/prossima_partita"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/space2"
+            android:layout_width="0dp"
+            android:layout_height="20sp"
+            app:layout_constraintTop_toBottomOf="@id/data_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <LinearLayout
+            android:id="@+id/campo_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space2"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Campo:  "
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:id="@+id/campo"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+        </LinearLayout>
 
         <Space
             android:id="@+id/space1"
             android:layout_width="0dp"
             android:layout_height="20sp"
-            app:layout_constraintTop_toBottomOf="@id/group_name"
+            app:layout_constraintTop_toBottomOf="@id/campo_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />
@@ -130,33 +284,63 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 />
 
         </LinearLayout>
 
-        <ScrollView
-            android:id="@+id/scrollView_block_user"
+        <FrameLayout
+            android:id="@+id/View_conteiner_partecipanti"
             android:layout_width="0dp"
-            android:layout_height="350dp"
+            android:layout_height="0dp"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/participants_container"
+            app:layout_constraintBottom_toTopOf="@+id/invite"
             >
 
-            <LinearLayout
-                android:id="@+id/block_user"
+            <ScrollView
+                android:id="@+id/scrollView_block_user"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:paddingTop="30dp"
+                android:layout_height="match_parent"
+                >
+
+                <LinearLayout
+                    android:id="@+id/block_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    />
+
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                android:layout_gravity="top"
+                android:background="@drawable/shadow"
+                android:rotation="180"
                 />
 
-        </ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/shadow"
+                />
+
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/invite"
@@ -174,9 +358,9 @@
             android:paddingBottom="10dp"
             android:stateListAnimator="@drawable/button_pressed_animation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scrollView_block_user"
+            app:layout_constraintBottom_toTopOf="@id/controlloImpegni"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             >
 
             <TextView
@@ -199,15 +383,6 @@
 
         </LinearLayout>
 
-        <Space
-            android:id="@+id/space2"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            app:layout_constraintTop_toBottomOf="@id/invite"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-
         <LinearLayout
             android:id="@+id/controlloImpegni"
             android:layout_width="wrap_content"
@@ -224,8 +399,9 @@
             android:paddingBottom="10dp"
             android:stateListAnimator="@drawable/button_pressed_animation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/space2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="20dp"
             >
 
             <TextView

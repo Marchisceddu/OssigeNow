@@ -1,8 +1,9 @@
 package com.example.ossigenow;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Commit {
+public class Commit implements Serializable {
     private Calendar data;
     private String nome;
     private String descrizione;

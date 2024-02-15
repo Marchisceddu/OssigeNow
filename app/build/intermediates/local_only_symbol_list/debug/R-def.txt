@@ -35,6 +35,7 @@ drawable background_main_2bordi
 drawable background_nav_left
 drawable background_nav_rigth
 drawable background_selected
+drawable background_spinner
 drawable booking
 drawable button_crea_gruppo
 drawable button_logout
@@ -47,6 +48,7 @@ drawable campo3
 drawable campo4
 drawable circle_background
 drawable decline
+drawable delete_user
 drawable edittext_border_color_selector
 drawable edittext_box_background
 drawable eye
@@ -59,17 +61,22 @@ drawable icon_success
 drawable icon_user
 drawable image_background
 drawable invite
+drawable letter_actual_user
 drawable login_background
 drawable logo
 drawable logout
 drawable navbar_icon_selector
 drawable open
+drawable radio_btn_regular
+drawable radio_btn_selected
 drawable register_background
+drawable rounded_spinner_background
 drawable shadow
 drawable std_button
 drawable std_button_inverted
 drawable toast_error
 drawable toast_success
+drawable togglebtn
 drawable user
 font capriola
 font nunito
@@ -79,6 +86,7 @@ font tekomedium
 font tekoregular
 font tekosemibold
 id View_conteiner_gruppi
+id View_conteiner_partecipanti
 id View_conteiner_prenotazioni
 id accedi
 id accept
@@ -86,9 +94,12 @@ id annulla
 id block_user
 id booking
 id bottomLayout
+id cadenza
+id cadenza_layout
 id calendar
 id calendarView
 id campo
+id campo_layout
 id caratteristiche
 id cardView
 id chevron_left
@@ -104,10 +115,14 @@ id controlloImpegni
 id creaGruppo
 id daPrenotare
 id data
+id data_layout
 id data_nascita
 id data_ora_campo
 id decline
+id delete_group
+id delete_user
 id error
+id exit_group
 id foto_campo
 id frequenza
 id frequenzaPartite
@@ -115,6 +130,7 @@ id frequenza_layout
 id groupLayout
 id group_name
 id gruppo
+id header
 id home
 id icon_user
 id indietro
@@ -151,6 +167,7 @@ id password
 id prenota
 id prenota_layout
 id profile
+id prossima_partita
 id radioButton10
 id radioButton12
 id radioButton14
@@ -165,6 +182,8 @@ id scrollView_conteiner_gruppi
 id scrollView_conteiner_inviti
 id scrollView_conteiner_prenotazioni
 id see_user
+id space
+id space0
 id space1
 id space2
 id title_textview
@@ -190,6 +209,7 @@ layout invito
 layout prenotazione
 layout profile
 layout see_user
+layout see_user_admin
 layout send_invite
 layout toast_error
 layout toast_succes

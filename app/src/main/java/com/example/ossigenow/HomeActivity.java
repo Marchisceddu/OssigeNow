@@ -403,7 +403,7 @@ public class HomeActivity extends AppCompatActivity {
             mostra = view.findViewById(R.id.view);
 
             nome.setText(g.getNomeGruppo());
-            String partecipantiText = "partecipanti :" + g.getNumberParticipanti() + " / " + g.getPartecipantiRichiesti();
+            String partecipantiText = g.getNumberParticipanti() + " / " + g.getPartecipantiRichiesti();
             partecipanti.setText(partecipantiText);
 
             int marginInDp = 20; // Puoi specificare il valore direttamente
@@ -448,7 +448,7 @@ public class HomeActivity extends AppCompatActivity {
             rifiuta = view.findViewById(R.id.decline);
 
             nome_gruppo.setText(i.getGroup().getNomeGruppo());
-            String messaggio_invitante = i.getUtenteInvitante() + " ti ha invitato";
+            String messaggio_invitante = i.getUtenteInvitante();
             utente_invitante.setText(messaggio_invitante);
 
             int marginInDp = 20; // Puoi specificare il valore direttamente
@@ -465,12 +465,16 @@ public class HomeActivity extends AppCompatActivity {
             thisView.addView(view);
 
             accetta.setOnClickListener(v -> {
-                // Aggiungi l'utente al gruppo
-                i.getGroup().addPartecipante(user);
-                groups.add(i.getGroup());
-                saveGroups(i.getGroup());
-
-                confirmInvito();
+                if (i.getGroup().getNumberParticipanti() < i.getGroup().getPartecipantiRichiesti()) {
+                    // Aggiungi l'utente al gruppo
+                    i.getGroup().addPartecipante(user);
+                    groups.add(i.getGroup());
+                    saveGroups(i.getGroup());
+                    confirmMsg("Invito accettato con successo");
+                }
+                else {
+                    failMsg("Il gruppo è già al completo, non è possibile accettare l'invito");
+                }
 
                 inviti.remove(i);
                 saveInviti(inviti);
@@ -532,13 +536,27 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    private void confirmInvito(){
+    private void confirmMsg(String messaggio){
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_succes,
                 (ViewGroup) findViewById(R.id.toast_layout_root));
 
         TextView text = layout.findViewById(R.id.toast_text);
-        String messaggio = "Invito accettato con successo";
+        text.setText(messaggio);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 50);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    private void failMsg(String messaggio){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_error,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        TextView text = layout.findViewById(R.id.toast_text);
         text.setText(messaggio);
 
         Toast toast = new Toast(getApplicationContext());

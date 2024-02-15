@@ -3042,6 +3042,7 @@ drawable background_main_2bordi
 drawable background_nav_left
 drawable background_nav_rigth
 drawable background_selected
+drawable background_spinner
 drawable background_transparent
 drawable booking
 drawable btn_checkbox_checked_mtrl
@@ -3065,6 +3066,7 @@ drawable circle_background
 drawable day_item_background
 drawable day_picker_item_background
 drawable decline
+drawable delete_user
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -3096,6 +3098,7 @@ drawable icon_success
 drawable icon_user
 drawable image_background
 drawable invite
+drawable letter_actual_user
 drawable login_background
 drawable logo
 drawable logout
@@ -3172,13 +3175,17 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable open
+drawable radio_btn_regular
+drawable radio_btn_selected
 drawable register_background
+drawable rounded_spinner_background
 drawable shadow
 drawable std_button
 drawable std_button_inverted
 drawable test_level_drawable
 drawable toast_error
 drawable toast_success
+drawable togglebtn
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable user
@@ -3204,6 +3211,7 @@ id SYM
 id TOP_END
 id TOP_START
 id View_conteiner_gruppi
+id View_conteiner_partecipanti
 id View_conteiner_prenotazioni
 id abbreviationsBar
 id accedi
@@ -3298,6 +3306,8 @@ id bounceEnd
 id bounceStart
 id buttonPanel
 id cache_measures
+id cadenza
+id cadenza_layout
 id calendar
 id calendarContainer
 id calendarGridView
@@ -3306,6 +3316,7 @@ id calendarView
 id calendarViewPager
 id callMeasure
 id campo
+id campo_layout
 id cancel_button
 id caratteristiche
 id cardView
@@ -3358,6 +3369,7 @@ id customPanel
 id cut
 id daPrenotare
 id data
+id data_layout
 id data_nascita
 id data_ora_campo
 id date_picker_actions
@@ -3368,6 +3380,8 @@ id decelerateAndComplete
 id decline
 id decor_content_parent
 id default_activity_button
+id delete_group
+id delete_user
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -3407,6 +3421,7 @@ id enterAlways
 id enterAlwaysCollapsed
 id error
 id exitUntilCollapsed
+id exit_group
 id expand_activities_button
 id expanded_menu
 id fade
@@ -3444,6 +3459,7 @@ id group_name
 id grouping
 id groups
 id gruppo
+id header
 id header_title
 id hideable
 id home
@@ -3633,6 +3649,7 @@ id previousButton
 id profile
 id progress_circular
 id progress_horizontal
+id prossima_partita
 id radio
 id radioButton10
 id radioButton12
@@ -3698,6 +3715,8 @@ id snackbar_text
 id snap
 id snapMargins
 id south
+id space
+id space0
 id space1
 id space2
 id spacer
@@ -4016,6 +4035,7 @@ layout notification_template_part_time
 layout prenotazione
 layout profile
 layout see_user
+layout see_user_admin
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material

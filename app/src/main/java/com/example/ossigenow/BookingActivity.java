@@ -6,29 +6,40 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class BookingActivity extends AppCompatActivity {
     // Passaggio dati tra activity
+    private  final static String PRENOTAZIONE_PATH = "PRENOTAZIONE";
     private Intent result;
 
     // Salvataggio dati
     private Group gruppo;
     private Person user;
     private ArrayList<Commit> impegni = new ArrayList<>();
+    private Partita partitaScelta;
 
     // Elementi UI
     private ImageButton back;
+    private Button prenota;
 
     // Elenco di campi disponibili
     private ArrayList<Campo> campi = new ArrayList<>();
@@ -44,12 +55,13 @@ public class BookingActivity extends AppCompatActivity {
 
         // Inizializza gli elementi UI
         back = findViewById(R.id.indietro);
+        prenota = findViewById(R.id.prenota);
 
         // Inizializza l'elenco di campi disponibili
-        campi.add(new Campo("Campo 1", "erba sintetica", ContextCompat.getDrawable(this, R.drawable.campo1)));
-        campi.add(new Campo("Campo 2", "erba naturale", ContextCompat.getDrawable(this, R.drawable.campo2)));
-            campi.add(new Campo("Campo 3", "erba sintetica", ContextCompat.getDrawable(this, R.drawable.campo3)));
-        campi.add(new Campo("Campo 4", "erba naturale", ContextCompat.getDrawable(this, R.drawable.campo4)));
+        campi.add(new Campo("Campo 1", "erba sintetica", R.drawable.campo1));
+        campi.add(new Campo("Campo 2", "erba naturale", R.drawable.campo2));
+            campi.add(new Campo("Campo 3", "erba sintetica", R.drawable.campo3));
+        campi.add(new Campo("Campo 4", "erba naturale", R.drawable.campo4));
 
         ArrayList<String> fakeDate = new ArrayList<>();
         fakeDate.add("2021-06-01 14:00");
@@ -64,6 +76,17 @@ public class BookingActivity extends AppCompatActivity {
         fakeDate.add("2021-06-01 23:00");
 
         printFakeCampi(fakeDate);
+
+        prenota.setOnClickListener(v -> {
+            gruppo.setProssima_partita(partitaScelta);
+            saveGroups(gruppo);
+
+            // confirm message
+
+            result = new Intent(BookingActivity.this, HomeActivity.class);
+            startActivity(result);
+            finish();
+        });
 
         // Torna indietro all'activity precedente
         back.setOnClickListener(v -> {
@@ -99,6 +122,7 @@ public class BookingActivity extends AppCompatActivity {
             TextView nome, data_ora_campo, caratteristiche, scrittaData, scrittaCaratteristiche;
             LinearLayout click;
             int randC = (int) (Math.random() * campi.size());
+            int pos = i;
 
             campoViews.add(view);
 
@@ -110,9 +134,9 @@ public class BookingActivity extends AppCompatActivity {
             scrittaCaratteristiche = view.findViewById(R.id.scrittaCaratteristiche);
             click = view.findViewById(R.id.campo);
 
-            foto.setImageDrawable(campi.get(randC).getImg());
+            foto.setImageDrawable(ContextCompat.getDrawable(this, campi.get(randC).getImg()));
             nome.setText(campi.get(randC).getNomeCampo());
-            data_ora_campo.setText(fakeDate.get(i));
+            data_ora_campo.setText(fakeDate.get(pos));
             caratteristiche.setText(campi.get(randC).getCaratteristiche());
 
             int marginInDp = 20; // Puoi specificare il valore direttamente
@@ -146,6 +170,7 @@ public class BookingActivity extends AppCompatActivity {
                     scrittaData2.setTextColor(ContextCompat.getColor(this, R.color.black));
                     scrittaCaratteristiche2.setTextColor(ContextCompat.getColor(this, R.color.black));
                 }
+
                 // Cambia il background dell'elemento cliccato
                 v.setBackground(ContextCompat.getDrawable(this, R.drawable.background_selected));
                 nome.setTextColor(ContextCompat.getColor(this, R.color.white));
@@ -153,7 +178,60 @@ public class BookingActivity extends AppCompatActivity {
                 caratteristiche.setTextColor(ContextCompat.getColor(this, R.color.white));
                 scrittaData.setTextColor(ContextCompat.getColor(this, R.color.white));
                 scrittaCaratteristiche.setTextColor(ContextCompat.getColor(this, R.color.white));
+
+                // Imposta il pulsante come cliccabile
+                prenota.setClickable(true);
+                prenota.setBackground(ContextCompat.getDrawable(this, R.drawable.std_button));
+
+                // Imposta il campo selezionato
+                Calendar dataSelezionata = Calendar.getInstance();
+                dataSelezionata.set(Calendar.YEAR, Integer.parseInt(fakeDate.get(pos).substring(0, 4)));
+                dataSelezionata.set(Calendar.MONTH, Integer.parseInt(fakeDate.get(pos).substring(5, 7)));
+                dataSelezionata.set(Calendar.DAY_OF_MONTH, Integer.parseInt(fakeDate.get(pos).substring(8, 10)));
+                dataSelezionata.set(Calendar.HOUR_OF_DAY, Integer.parseInt(fakeDate.get(pos).substring(11, 13)));
+                dataSelezionata.set(Calendar.MINUTE, Integer.parseInt(fakeDate.get(pos).substring(14, 16)));
+                partitaScelta = new Partita(dataSelezionata, campi.get(randC));
             });
+        }
+    }
+
+    private void saveGroups(Group group) {
+        ArrayList<Group> existing_group = new ArrayList<>();
+        SharedPreferences sharedPreferencesGruppi = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
+
+        // Recupera tutti i gruppi
+        String datiGruppi = sharedPreferencesGruppi.getString("chiave", "");
+
+        if (!datiGruppi.isEmpty()) {
+            byte[] datiGruppiBytes = Base64.decode(datiGruppi, Base64.DEFAULT);
+            try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiGruppiBytes))) {
+                existing_group = (ArrayList<Group>) objectInputStream.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Cerca il gruppo e lo sostituisce
+        for (Group g : existing_group) {
+            if (g.getNomeGruppo().equals(group.getNomeGruppo())) {
+                existing_group.remove(g);
+                existing_group.add(group);
+                break;
+            }
+        }
+
+        // Salva i gruppi
+        SharedPreferences.Editor editorGruppi = sharedPreferencesGruppi.edit();
+        ByteArrayOutputStream byteArrayOutputStreamGruppi = new ByteArrayOutputStream();
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStreamGruppi)) {
+            objectOutputStream.writeObject(existing_group);
+            String datiGruppiString = Base64.encodeToString(byteArrayOutputStreamGruppi.toByteArray(), Base64.DEFAULT);
+
+            // Salva la rappresentazione di byte come stringa nelle SharedPreferences
+            editorGruppi.putString("chiave", datiGruppiString);
+            editorGruppi.apply();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

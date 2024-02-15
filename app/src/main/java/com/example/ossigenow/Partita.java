@@ -5,12 +5,10 @@ import java.util.Calendar;
 
 public class Partita implements Serializable{
     private Calendar data;
-    private String ora;
-    private String campo;
+    private Campo campo;
 
-    public Partita(Calendar data, String ora, String campo) {
+    public Partita(Calendar data, Campo campo) {
         this.data = data;
-        this.ora = ora;
         this.campo = campo;
     }
 
@@ -22,19 +20,11 @@ public class Partita implements Serializable{
         this.data = data;
     }
 
-    public String getOra() {
-        return ora;
-    }
-
-    public void setOra(String ora) {
-        this.ora = ora;
-    }
-
-    public String getCampo() {
+    public Campo getCampo() {
         return campo;
     }
 
-    public void setCampo(String campo) {
+    public void setCampo(Campo campo) {
         this.campo = campo;
     }
 }
