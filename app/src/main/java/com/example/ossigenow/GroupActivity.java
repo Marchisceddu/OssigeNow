@@ -110,12 +110,13 @@ public class GroupActivity extends AppCompatActivity {
         group_name.setText(group.getNomeGruppo());
         number_user.setText(group.getNumberParticipanti()+" / "+group.getPartecipantiRichiesti());
         cadenza.setText(group.getFrequenzaPartite());
-        campo.setText(group.getProssima_partita().getCampo().getNomeCampo());
         if (group.getProssima_partita() != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             prossima_partita.setText(sdf.format(group.getProssima_partita().getData().getTime()));
+            campo.setText(group.getProssima_partita().getCampo().getNomeCampo());
         } else{
             prossima_partita.setText("Data da definire");
+            campo.setText("Campo da definire");
         }
 
 
@@ -126,13 +127,17 @@ public class GroupActivity extends AppCompatActivity {
             if (!utenteLoggato.getNomeUtente().equals(group.getAdmin().getNomeUtente())) {
                 View view = inflater.inflate(R.layout.see_user, null);
 
+                TextView is_admin = view.findViewById(R.id.admin);
                 TextView user_name = view.findViewById(R.id.name_user);
                 TextView letter_user = view.findViewById(R.id.letter_user);
+
+                if (p.getNomeUtente().equals(group.getAdmin().getNomeUtente())) {
+                    is_admin.setVisibility(View.VISIBLE);
+                }
 
                 if(p.getNomeUtente().equals(utenteLoggato.getNomeUtente())){
                     letter_user.setBackgroundResource(R.drawable.letter_actual_user);
                 }
-
 
                 user_name.setText(p.getNomeUtente());
                 letter_user.setText(p.getNomeUtente().substring(0, 1).toUpperCase());
@@ -144,8 +149,11 @@ public class GroupActivity extends AppCompatActivity {
                 if (p.getNomeUtente().equals(group.getAdmin().getNomeUtente())) {
                     View view = inflater.inflate(R.layout.see_user, null);
 
+                    TextView is_admin = view.findViewById(R.id.admin);
                     TextView user_name = view.findViewById(R.id.name_user);
                     TextView letter_user = view.findViewById(R.id.letter_user);
+
+                    is_admin.setVisibility(View.VISIBLE);
 
                     if(p.getNomeUtente().equals(utenteLoggato.getNomeUtente())){
                         letter_user.setBackgroundResource(R.drawable.letter_actual_user);
@@ -230,6 +238,7 @@ public class GroupActivity extends AppCompatActivity {
                 dialog.dismiss();
                 number_user.setText(group.getNumberParticipanti()+" / "+group.getPartecipantiRichiesti());
                 result = new Intent(GroupActivity.this, HomeActivity.class);
+                result.putExtra(HomeActivity.SCREEN_PATH, "home");
                 startActivity(result);
             });
 
@@ -262,6 +271,7 @@ public class GroupActivity extends AppCompatActivity {
                 deleteInvite();
                 dialog.dismiss();
                 result = new Intent(GroupActivity.this, HomeActivity.class);
+                result.putExtra(HomeActivity.SCREEN_PATH, "home");
                 startActivity(result);
                 finish();
             });
@@ -347,6 +357,7 @@ public class GroupActivity extends AppCompatActivity {
 
         back.setOnClickListener(v -> {
             result = new Intent(GroupActivity.this, HomeActivity.class);
+            result.putExtra(HomeActivity.SCREEN_PATH, "home");
             startActivity(result);
             finish();
         });
@@ -354,6 +365,7 @@ public class GroupActivity extends AppCompatActivity {
             @Override
             public void handleOnBackPressed() {
                 result = new Intent(GroupActivity.this, HomeActivity.class);
+                result.putExtra(HomeActivity.SCREEN_PATH, "home");
                 startActivity(result);
                 finish();
             }

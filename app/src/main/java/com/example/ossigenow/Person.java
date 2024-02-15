@@ -62,4 +62,8 @@ public class Person implements Serializable {
     public ArrayList<Commit> getCommits() {
         return commits;
     }
+
+    public void addCommit(Commit commit) {
+        commits.add(commit);
+    }
 }

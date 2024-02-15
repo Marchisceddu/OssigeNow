@@ -34,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     // Utente loggato
     public final static String PERSON_PATH = "com.example.ossigenow.person";
     public final static String GROUP_PATH = "com.example.ossigenow.groups";
+    public final static String SCREEN_PATH = "SCREEN";
     private Person user = null;
     private ArrayList<Group> groups = new ArrayList<>();
     private ArrayList<Invito> inviti = new ArrayList<>();
@@ -294,9 +295,35 @@ public class HomeActivity extends AppCompatActivity {
         layoutInflater = LayoutInflater.from(this);
 
         // Di default è selezionata la schemata home
-        setNavItem(navItems, 0, true);
-        containerLayout.addView(layoutInflater.inflate(home, containerLayout, false));
-        confListener(home);
+        String schermata = getIntent().getStringExtra(SCREEN_PATH) == null ? "home" : (String) getIntent().getStringExtra(SCREEN_PATH);
+        int view = home, pos = 0;
+
+        switch (schermata) {
+            case "home":
+                view = home;
+                pos = 0;
+                break;
+            case "invite":
+                view = invite;
+                pos = 1;
+                break;
+            case "calendar":
+                view = calendar;
+                pos = 2;
+                break;
+            case "booking":
+                view = booking;
+                pos = 3;
+                break;
+            case "profile":
+                view = profile;
+                pos = 4;
+                break;
+        }
+
+        setNavItem(navItems, pos, true);
+        containerLayout.addView(layoutInflater.inflate(view, containerLayout, false));
+        confListener(view);
 
         // Imposta il listener per ogni elemento di navigazione
         for (int i = 0; i < layouts.length; i++) {

@@ -130,6 +130,7 @@ public class NewGroupActivity extends AppCompatActivity {
 
         back.setOnClickListener(v -> {
             result = new Intent(NewGroupActivity.this, HomeActivity.class);
+            result.putExtra(HomeActivity.SCREEN_PATH, "home");
             startActivity(result);
             finish();
         });
@@ -138,6 +139,7 @@ public class NewGroupActivity extends AppCompatActivity {
             @Override
             public void handleOnBackPressed() {
                 result = new Intent(NewGroupActivity.this, HomeActivity.class);
+                result.putExtra(HomeActivity.SCREEN_PATH, "home");
                 startActivity(result);
                 finish();
             }

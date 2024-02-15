@@ -3272,6 +3272,7 @@ int id action_text 0x7f0a0048
 int id actions 0x7f0a0049
 int id activity_chooser_view_content 0x7f0a004a
 int id add 0x7f0a004b
+int id admin 0x7f0a0276
 int id alertTitle 0x7f0a004c
 int id aligned 0x7f0a004d
 int id all 0x7f0a004e

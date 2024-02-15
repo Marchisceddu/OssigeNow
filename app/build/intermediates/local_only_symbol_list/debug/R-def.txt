@@ -90,6 +90,7 @@ id View_conteiner_partecipanti
 id View_conteiner_prenotazioni
 id accedi
 id accept
+id admin
 id annulla
 id block_user
 id booking
