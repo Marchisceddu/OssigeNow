@@ -16,7 +16,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/icon_user">
-
             <TextView
                 android:id="@+id/letter_user"
                 android:layout_width="wrap_content"
@@ -28,14 +27,24 @@
             <TextView
                 android:id="@+id/name_user"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:gravity="center_vertical"
                 android:textSize="18dp" />
 
-
+            <TextView
+                android:id="@+id/admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="ADMIN"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/green_trasparent"
+                android:visibility="invisible"/>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <Space

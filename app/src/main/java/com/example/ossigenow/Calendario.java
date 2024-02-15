@@ -36,6 +36,8 @@ public class Calendario {
             calendar1.set(2024, Calendar.FEBRUARY, i);
 
             eventDays.add(new EventDay(calendar1, drawable));
+
+            System.out.println(eventDays.get(i-1).getCalendar().getTime());
         }
         calendarView.setEvents(eventDays);
 

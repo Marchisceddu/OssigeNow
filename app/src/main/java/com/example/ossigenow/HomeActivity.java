@@ -11,6 +11,7 @@ import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import com.applandeo.materialcalendarview.CalendarView;
 import android.widget.ImageButton;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     // Utente loggato
     public final static String PERSON_PATH = "com.example.ossigenow.person";
     public final static String GROUP_PATH = "com.example.ossigenow.groups";
+    public final static String SCREEN_PATH = "SCREEN";
     private Person user = null;
     private ArrayList<Group> groups = new ArrayList<>();
     private ArrayList<Invito> inviti = new ArrayList<>();
@@ -193,7 +196,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         // Controlla se l'utente è presente nel gruppo altrimenti lo elimina
-        if (groups != null) {
+        if (!groups.isEmpty()) {
             groups.removeIf(g -> {
                 for (Person p : g.getPartecipanti()) {
                     if (p.getNomeUtente().equals(user.getNomeUtente())) {
@@ -248,10 +251,9 @@ public class HomeActivity extends AppCompatActivity {
             printInviti();
         } else if (layout == R.layout.calendar) {
             calendarView = findViewById(R.id.calendarView);
-
             Calendario.createCalendar(this, calendarView);
         } else if (layout == R.layout.booking) {
-            // codice per la pagina delle prenotazioni
+            printPrenotazioni();
         } else if (layout == R.layout.profile) {
             logout = findViewById(R.id.logout);
             nomeUtente = findViewById(R.id.nome_utente);
@@ -293,9 +295,35 @@ public class HomeActivity extends AppCompatActivity {
         layoutInflater = LayoutInflater.from(this);
 
         // Di default è selezionata la schemata home
-        setNavItem(navItems, 0, true);
-        containerLayout.addView(layoutInflater.inflate(home, containerLayout, false));
-        confListener(home);
+        String schermata = getIntent().getStringExtra(SCREEN_PATH) == null ? "home" : (String) getIntent().getStringExtra(SCREEN_PATH);
+        int view = home, pos = 0;
+
+        switch (schermata) {
+            case "home":
+                view = home;
+                pos = 0;
+                break;
+            case "invite":
+                view = invite;
+                pos = 1;
+                break;
+            case "calendar":
+                view = calendar;
+                pos = 2;
+                break;
+            case "booking":
+                view = booking;
+                pos = 3;
+                break;
+            case "profile":
+                view = profile;
+                pos = 4;
+                break;
+        }
+
+        setNavItem(navItems, pos, true);
+        containerLayout.addView(layoutInflater.inflate(view, containerLayout, false));
+        confListener(view);
 
         // Imposta il listener per ogni elemento di navigazione
         for (int i = 0; i < layouts.length; i++) {
@@ -325,6 +353,64 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    private void saveGroups(Group group) {
+        ArrayList<Group> existing_group = new ArrayList<>();
+        SharedPreferences sharedPreferencesGruppi = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
+
+        // Recupera tutti i gruppi
+        String datiGruppi = sharedPreferencesGruppi.getString("chiave", "");
+
+        if (!datiGruppi.isEmpty()) {
+            byte[] datiGruppiBytes = Base64.decode(datiGruppi, Base64.DEFAULT);
+            try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiGruppiBytes))) {
+                existing_group = (ArrayList<Group>) objectInputStream.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Cerca il gruppo e lo sostituisce
+        for (Group g : existing_group) {
+            if (g.getNomeGruppo().equals(group.getNomeGruppo())) {
+                existing_group.remove(g);
+                existing_group.add(group);
+                break;
+            }
+        }
+
+        // Salva i gruppi
+        SharedPreferences.Editor editorGruppi = sharedPreferencesGruppi.edit();
+        ByteArrayOutputStream byteArrayOutputStreamGruppi = new ByteArrayOutputStream();
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStreamGruppi)) {
+            objectOutputStream.writeObject(existing_group);
+            String datiGruppiString = Base64.encodeToString(byteArrayOutputStreamGruppi.toByteArray(), Base64.DEFAULT);
+
+            // Salva la rappresentazione di byte come stringa nelle SharedPreferences
+            editorGruppi.putString("chiave", datiGruppiString);
+            editorGruppi.apply();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void saveInviti(ArrayList<Invito> inviti) {
+        SharedPreferences sharedPreferencesInviti = getSharedPreferences("inviti" + user.getNomeUtente(), Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editorInviti = sharedPreferencesInviti.edit();
+
+        // Converti gli inviti in un array di byte utilizzando la serializzazione
+        ByteArrayOutputStream byteArrayOutputStreamInviti = new ByteArrayOutputStream();
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStreamInviti)) {
+            objectOutputStream.writeObject(inviti);
+            String datiInviti = Base64.encodeToString(byteArrayOutputStreamInviti.toByteArray(), Base64.DEFAULT);
+
+            // Salva la rappresentazione di byte come stringa nelle SharedPreferences
+            editorInviti.putString("chiave", datiInviti);
+            editorInviti.apply();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void printGruppi() {
         LayoutInflater inflater =  (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout thisView = findViewById(R.id.conteiner_gruppi);
@@ -344,7 +430,7 @@ public class HomeActivity extends AppCompatActivity {
             mostra = view.findViewById(R.id.view);
 
             nome.setText(g.getNomeGruppo());
-            String partecipantiText = "partecipanti :" + g.numberParticipant() + " / " + g.getNumPartecipanti();
+            String partecipantiText = g.getNumberParticipanti() + " / " + g.getPartecipantiRichiesti();
             partecipanti.setText(partecipantiText);
 
             int marginInDp = 20; // Puoi specificare il valore direttamente
@@ -389,7 +475,7 @@ public class HomeActivity extends AppCompatActivity {
             rifiuta = view.findViewById(R.id.decline);
 
             nome_gruppo.setText(i.getGroup().getNomeGruppo());
-            String messaggio_invitante = i.getUtenteInvitante() + " ti ha invitato";
+            String messaggio_invitante = i.getUtenteInvitante();
             utente_invitante.setText(messaggio_invitante);
 
             int marginInDp = 20; // Puoi specificare il valore direttamente
@@ -406,12 +492,104 @@ public class HomeActivity extends AppCompatActivity {
             thisView.addView(view);
 
             accetta.setOnClickListener(v -> {
+                if (i.getGroup().getNumberParticipanti() < i.getGroup().getPartecipantiRichiesti()) {
+                    // Aggiungi l'utente al gruppo
+                    i.getGroup().addPartecipante(user);
+                    groups.add(i.getGroup());
+                    saveGroups(i.getGroup());
+                    confirmMsg("Invito accettato con successo");
+                }
+                else {
+                    failMsg("Il gruppo è già al completo, non è possibile accettare l'invito");
+                }
 
+                inviti.remove(i);
+                saveInviti(inviti);
+                thisView.removeView(view);
             });
 
             rifiuta.setOnClickListener(v -> {
-
+                inviti.remove(i);
+                saveInviti(inviti);
+                thisView.removeView(view);
             });
         }
+    }
+
+    private void printPrenotazioni() {
+        LayoutInflater inflater =  (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LinearLayout thisView = findViewById(R.id.conteiner_prenotazioni);
+        TextView no = findViewById(R.id.no_prenotazioni);
+
+        for (Group g : groups) {
+            if (g.getAdmin().getNomeUtente().equals(user.getNomeUtente())
+                    && g.getProssima_partita() == null
+                    ) {
+//                && g.getNumberParticipanti() == g.getPartecipantiRichiesti()
+
+                if (no.getVisibility() == View.VISIBLE) no.setVisibility(View.GONE);
+
+                View view = inflater.inflate(R.layout.prenotazione, null);
+                TextView nome_gruppo, frequenza;
+                ImageButton prenota;
+
+                nome_gruppo = view.findViewById(R.id.nome_gruppodaPrenotare);
+                frequenza = view.findViewById(R.id.frequenza);
+                prenota = view.findViewById(R.id.prenota);
+
+                nome_gruppo.setText(g.getNomeGruppo());
+                frequenza.setText(g.getFrequenzaPartite());
+
+                int marginInDp = 20; // Puoi specificare il valore direttamente
+                int marginInPixels = (int) (marginInDp * getResources().getDisplayMetrics().density);
+
+                // Impostare i margini per creare uno spazio tra le viste
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                layoutParams.setMargins(0, 0, 0, marginInPixels);
+                view.setLayoutParams(layoutParams);
+
+                thisView.addView(view);
+
+                prenota.setOnClickListener(v -> {
+                    result = new Intent(HomeActivity.this, BookingActivity.class);
+                    result.putExtra(GROUP_PATH, g);
+                    result.putExtra(PERSON_PATH, user);
+                    startActivity(result);
+                });
+            }
+        }
+    }
+
+    private void confirmMsg(String messaggio){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_succes,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        TextView text = layout.findViewById(R.id.toast_text);
+        text.setText(messaggio);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 50);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    private void failMsg(String messaggio){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_error,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        TextView text = layout.findViewById(R.id.toast_text);
+        text.setText(messaggio);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 50);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }

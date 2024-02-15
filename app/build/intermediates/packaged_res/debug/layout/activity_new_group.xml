@@ -145,6 +145,8 @@
                 android:id="@+id/frequenzaPartite"
                 android:entries="@array/menu_tendina"
                 android:background="@drawable/edittext_box_background"
+                android:popupBackground="@drawable/background_spinner"
+                android:dropDownSelector="@color/background"
                 />
 
             <Space
@@ -171,14 +173,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="10" />
+                    android:text="10"
+                    />
 
                 <RadioButton
                     android:id="@+id/radioButton12"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="12" />
+                    android:text="12"
+                    />
 
                 <RadioButton
                     android:id="@+id/radioButton14"
@@ -191,10 +195,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/error"
-                    android:background="@color/white"/>
+                    android:background="@color/white"
+                    />
+
             </RadioGroup>
-
-
 
             <Space
                 android:layout_width="match_parent"

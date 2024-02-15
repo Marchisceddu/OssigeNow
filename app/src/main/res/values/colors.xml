@@ -10,6 +10,7 @@
     <color name="trasparent">#00FFFFFF</color>
     <color name="red">#BD261B</color>
     <color name="red_trasparent">#E6BD261B</color>
+    <color name="greenLight">#D3FFCB</color>
     <color name="green_trasparent">#E64CAF50</color>
 
     <color name="background">#197542</color>

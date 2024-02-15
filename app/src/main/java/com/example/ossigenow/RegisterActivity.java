@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -185,8 +186,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void confirmMessage(){
         LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_register_confirmed,
+        View layout = inflater.inflate(R.layout.toast_succes,
                 (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        TextView text = layout.findViewById(R.id.toast_text);
+        text.setText(R.string.registerSuccess);
 
         Toast toast = new Toast(getApplicationContext());
         toast.setGravity(Gravity.BOTTOM, 0, 50);
@@ -197,8 +201,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void errorMessage() {
         LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_error_account_already_exists,
+        View layout = inflater.inflate(R.layout.toast_error,
                 (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        TextView text = layout.findViewById(R.id.toast_text);
+        text.setText(R.string.registerError);
 
         Toast toast = new Toast(getApplicationContext());
         toast.setGravity(Gravity.BOTTOM, 0, 50);

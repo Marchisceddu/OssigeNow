@@ -1,8 +1,12 @@
 package com.example.ossigenow;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
 public class Person implements Serializable {
     private String nomeUtente, nome, cognome, dataNascita, password;
+
+    private ArrayList<Commit> commits = new ArrayList<Commit>();
 
     public Person() {
         super();
@@ -53,5 +57,13 @@ public class Person implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ArrayList<Commit> getCommits() {
+        return commits;
+    }
+
+    public void addCommit(Commit commit) {
+        commits.add(commit);
     }
 }

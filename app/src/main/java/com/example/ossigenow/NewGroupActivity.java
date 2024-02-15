@@ -6,9 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Base64;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -83,7 +91,7 @@ public class NewGroupActivity extends AppCompatActivity {
             }
         }
 
-
+        ColorStateList colorStateList = new ColorStateList(new int[][]{new int[]{android.R.attr.state_enabled}}, new int[]{this.getColor(R.color.background)});
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -95,6 +103,14 @@ public class NewGroupActivity extends AppCompatActivity {
                 } else if (checkedId == R.id.radioButton14) {
                     numPartecipanti = 14;
                 }
+
+                for (int i = 0; i < 3; i++) {
+                    RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
+                    radioButton.setButtonTintList(colorStateList); // set the color tint list
+                    if (radioButton.getId() != checkedId) { // if the button is not the selected one
+                        radioButton.setButtonTintList(null); // reset the color to default
+                    }
+                }
             }
         });
 
@@ -102,10 +118,11 @@ public class NewGroupActivity extends AppCompatActivity {
         creaGruppo.setOnClickListener(v -> {
             if (!checkInput()) {
                 result = new Intent(NewGroupActivity.this, GroupActivity.class);
-                group = new Group(nomeGruppo.getText().toString(), frequenzaPartite.getSelectedItem().toString(), numPartecipanti, utenteLoggato);
+                group = new Group(nomeGruppo.getText().toString(), utenteLoggato, frequenzaPartite.getSelectedItem().toString(), numPartecipanti, utenteLoggato);
                 existing_group.add(group);
                 saveGroupsToSharedPreferences(existing_group);
                 result.putExtra(NEW_GROUP_PATH, group);
+                confirmMessage();
                 startActivity(result);
                 finish();
             }
@@ -113,6 +130,7 @@ public class NewGroupActivity extends AppCompatActivity {
 
         back.setOnClickListener(v -> {
             result = new Intent(NewGroupActivity.this, HomeActivity.class);
+            result.putExtra(HomeActivity.SCREEN_PATH, "home");
             startActivity(result);
             finish();
         });
@@ -121,6 +139,7 @@ public class NewGroupActivity extends AppCompatActivity {
             @Override
             public void handleOnBackPressed() {
                 result = new Intent(NewGroupActivity.this, HomeActivity.class);
+                result.putExtra(HomeActivity.SCREEN_PATH, "home");
                 startActivity(result);
                 finish();
             }
@@ -190,5 +209,19 @@ public class NewGroupActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void confirmMessage(){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_succes,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        TextView scritta = layout.findViewById(R.id.toast_text);
+        scritta.setText("Gruppo creato con successo");
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 50);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }

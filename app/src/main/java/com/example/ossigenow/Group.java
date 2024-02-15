@@ -5,16 +5,17 @@ import java.util.ArrayList;
 
 public class Group implements Serializable{
 
-    private String nomeGruppo, frequenzaPartite, prossima_partita;
+    private String nomeGruppo, frequenzaPartite;
+    private Partita prossima_partita;
     private int numPartecipanti;
-
+    private Person admin;
     private ArrayList<Person> partecipanti = new ArrayList<>();
 
-
-    public Group(String nomeGruppo, String frequenzaPartite, int numPartecipanti, Person p) {
+    public Group(String nomeGruppo, Person admin, String frequenzaPartite, int numPartecipanti, Person p) {
         this.nomeGruppo = nomeGruppo;
         this.frequenzaPartite = frequenzaPartite;
         this.numPartecipanti = numPartecipanti;
+        this.admin = admin;
         addPartecipante(p);
         prossima_partita = null;
     }
@@ -35,7 +36,7 @@ public class Group implements Serializable{
         this.frequenzaPartite = frequenzaPartite;
     }
 
-    public int getNumPartecipanti() {
+    public int getPartecipantiRichiesti() {
         return numPartecipanti;
     }
 
@@ -51,11 +52,11 @@ public class Group implements Serializable{
         this.partecipanti = partecipanti;
     }
 
-    public String getProssima_partita() {
+    public Partita getProssima_partita() {
         return prossima_partita;
     }
 
-    public void setProssima_partita(String prossima_partita) {
+    public void setProssima_partita(Partita prossima_partita) {
         this.prossima_partita = prossima_partita;
     }
 
@@ -68,7 +69,23 @@ public class Group implements Serializable{
         }
     }
 
-    public int numberParticipant(){
+    public int getNumberParticipanti(){
         return partecipanti.size();
+    }
+
+    public void removePartecipante(Person p){
+        this.partecipanti.remove(p);
+    }
+
+    public Person getAdmin() {
+        return admin;
+    }
+
+    public void removePartecipante_by_UsernName(String userName){
+        for (Person p : partecipanti){
+            if(p.getNomeUtente().equals(userName)){
+                this.removePartecipante(p);
+            }
+        }
     }
 }

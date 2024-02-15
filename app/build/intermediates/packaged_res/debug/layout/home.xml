@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:layout_marginRight="30dp"
     android:layout_marginLeft="30dp"
-    android:id="@+id/home"
-    >
+    android:id="@+id/home">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/titoloGruppi"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/titoloGruppi"
         android:textSize="28sp"
         android:textColor="@color/black"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <FrameLayout
+        android:id="@+id/View_conteiner_gruppi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/titoloGruppi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         >
 
         <!-- Contenitore gruppi -->
@@ -38,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 >
 
                 <TextView
@@ -53,7 +61,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="20dp"
             android:scaleType="centerCrop"
             android:layout_gravity="top"
             android:background="@drawable/shadow"
@@ -71,7 +79,6 @@
 
     </FrameLayout>
 
-    <!-- Bottone crea gruppo -->
     <LinearLayout
         android:id="@+id/creaGruppo"
         android:layout_width="wrap_content"
@@ -88,6 +95,10 @@
         android:elevation="4dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:stateListAnimator="@drawable/button_pressed_animation"
+        app:layout_constraintTop_toBottomOf="@+id/View_conteiner_gruppi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         >
 
         <TextView
@@ -108,4 +119,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

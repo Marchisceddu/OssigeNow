@@ -1449,6 +1449,7 @@ color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
 color gray
+color greenLight
 color green_trasparent
 color highlighted_text_material_dark
 color highlighted_text_material_light
@@ -3040,6 +3041,8 @@ drawable background_main_1bordo
 drawable background_main_2bordi
 drawable background_nav_left
 drawable background_nav_rigth
+drawable background_selected
+drawable background_spinner
 drawable background_transparent
 drawable booking
 drawable btn_checkbox_checked_mtrl
@@ -3063,6 +3066,7 @@ drawable circle_background
 drawable day_item_background
 drawable day_picker_item_background
 drawable decline
+drawable delete_user
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -3094,6 +3098,7 @@ drawable icon_success
 drawable icon_user
 drawable image_background
 drawable invite
+drawable letter_actual_user
 drawable login_background
 drawable logo
 drawable logout
@@ -3170,13 +3175,17 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable open
+drawable radio_btn_regular
+drawable radio_btn_selected
 drawable register_background
+drawable rounded_spinner_background
 drawable shadow
 drawable std_button
 drawable std_button_inverted
 drawable test_level_drawable
 drawable toast_error
 drawable toast_success
+drawable togglebtn
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable user
@@ -3201,6 +3210,9 @@ id SHOW_PROGRESS
 id SYM
 id TOP_END
 id TOP_START
+id View_conteiner_gruppi
+id View_conteiner_partecipanti
+id View_conteiner_prenotazioni
 id abbreviationsBar
 id accedi
 id accelerate
@@ -3261,6 +3273,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id admin
 id alertTitle
 id aligned
 id all
@@ -3286,7 +3299,6 @@ id bestChoice
 id block_user
 id blocking
 id booking
-id boooh
 id bottom
 id bottomLayout
 id bounce
@@ -3295,6 +3307,8 @@ id bounceEnd
 id bounceStart
 id buttonPanel
 id cache_measures
+id cadenza
+id cadenza_layout
 id calendar
 id calendarContainer
 id calendarGridView
@@ -3303,7 +3317,9 @@ id calendarView
 id calendarViewPager
 id callMeasure
 id campo
+id campo_layout
 id cancel_button
+id caratteristiche
 id cardView
 id carryVelocity
 id center
@@ -3354,7 +3370,9 @@ id customPanel
 id cut
 id daPrenotare
 id data
+id data_layout
 id data_nascita
+id data_ora_campo
 id date_picker_actions
 id dayIcon
 id dayLabel
@@ -3363,6 +3381,8 @@ id decelerateAndComplete
 id decline
 id decor_content_parent
 id default_activity_button
+id delete_group
+id delete_user
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -3402,6 +3422,7 @@ id enterAlways
 id enterAlwaysCollapsed
 id error
 id exitUntilCollapsed
+id exit_group
 id expand_activities_button
 id expanded_menu
 id fade
@@ -3421,6 +3442,7 @@ id forever
 id forwardButton
 id foto_campo
 id fragment_container_view_tag
+id frequenza
 id frequenzaPartite
 id frequenza_layout
 id friday
@@ -3438,6 +3460,7 @@ id group_name
 id grouping
 id groups
 id gruppo
+id header
 id header_title
 id hideable
 id home
@@ -3562,6 +3585,7 @@ id neverCompleteToStart
 id new_eventLayout
 id noScroll
 id noState
+id no_campi
 id no_gruppi
 id no_inviti
 id no_prenotazioni
@@ -3626,6 +3650,7 @@ id previousButton
 id profile
 id progress_circular
 id progress_horizontal
+id prossima_partita
 id radio
 id radioButton10
 id radioButton12
@@ -3651,12 +3676,16 @@ id sawtooth
 id scale
 id scegli_campo
 id screen
+id scrittaCaratteristiche
+id scrittaData
 id scroll
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollView_block_user
 id scrollView_conteiner_gruppi
+id scrollView_conteiner_inviti
+id scrollView_conteiner_prenotazioni
 id scrollable
 id search_badge
 id search_bar
@@ -3687,6 +3716,8 @@ id snackbar_text
 id snap
 id snapMargins
 id south
+id space
+id space0
 id space1
 id space2
 id spacer
@@ -3750,6 +3781,8 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
+id title_textview
+id titoloGruppi
 id toast_image
 id toast_layout_root
 id toast_text
@@ -3920,6 +3953,7 @@ layout calendar_view
 layout calendar_view_day
 layout calendar_view_grid
 layout calendar_view_picker_day
+layout campo
 layout custom_dialog
 layout date_picker_dialog
 layout design_bottom_navigation_item
@@ -3999,16 +4033,17 @@ layout notification_template_custom_big
 layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout prenotazione
 layout profile
 layout see_user
+layout see_user_admin
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout send_invite
 layout support_simple_spinner_dropdown_item
-layout toast_error_account_already_exists
-layout toast_error_credentials
-layout toast_register_confirmed
+layout toast_error
+layout toast_succes
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
