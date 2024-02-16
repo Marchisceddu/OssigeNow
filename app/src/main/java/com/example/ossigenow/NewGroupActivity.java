@@ -117,10 +117,11 @@ public class NewGroupActivity extends AppCompatActivity {
 
         creaGruppo.setOnClickListener(v -> {
             if (!checkInput()) {
-                result = new Intent(NewGroupActivity.this, GroupActivity.class);
                 group = new Group(nomeGruppo.getText().toString(), utenteLoggato, frequenzaPartite.getSelectedItem().toString(), numPartecipanti, utenteLoggato);
                 existing_group.add(group);
                 saveGroupsToSharedPreferences(existing_group);
+
+                result = new Intent(NewGroupActivity.this, GroupActivity.class);
                 result.putExtra(NEW_GROUP_PATH, group);
                 confirmMessage();
                 startActivity(result);

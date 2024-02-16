@@ -44,6 +44,7 @@ public class GroupCalendarActivity extends AppCompatActivity {
         componenti = (ArrayList<Person>) group.getPartecipanti();
         updatePartecipanti(realComponenti);
 
+
         for (Person p : componenti) {
             commits.addAll(p.getImpegni());
         }
@@ -120,8 +121,16 @@ public class GroupCalendarActivity extends AppCompatActivity {
                         real.getDataNascita().compareTo(actual.getDataNascita())==0 &&
                         real.getPassword().compareTo(actual.getPassword())==0)
                 {
-                    componenti.remove(actual);
-                    componenti.add(real);
+                    ArrayList<Commit> realImpegni = real.getImpegni();
+                    ArrayList<Commit> actualImpegni = actual.getImpegni();
+
+                    for (Commit c: realImpegni) {
+                        if(!actualImpegni.contains(c)){
+                            actualImpegni.add(c);
+                        }
+                    }
+
+                    actualImpegni.removeIf(commit -> !realImpegni.contains(commit));
                 }
             }
         }

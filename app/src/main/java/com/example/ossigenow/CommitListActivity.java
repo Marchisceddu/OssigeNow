@@ -83,6 +83,10 @@ public class CommitListActivity extends AppCompatActivity {
             orario = view.findViewById(R.id.orario);
             delete = view.findViewById(R.id.delete);
 
+            if (!impegno.getIsDeleteble()) {
+                delete.setVisibility(View.GONE);
+            }
+
             nome.setText(impegno.getNome());
             String inizio = impegno.getOraInizio();
             String fine = impegno.getOraFine();
@@ -211,18 +215,6 @@ public class CommitListActivity extends AppCompatActivity {
 
         saveUser(actualUser);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     //funzione che salva l'utente con l'impegno rimosso e lo sostituisce con quello attuale
     private void saveUser(Person user) {

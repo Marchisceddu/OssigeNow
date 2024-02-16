@@ -93,8 +93,4 @@ public class Calendario extends AppCompatActivity {
             calendarView.setEvents(eventDays);
         }
     }
-
-
-
-
 }

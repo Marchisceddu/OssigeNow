@@ -43,7 +43,7 @@ public class GroupActivity extends AppCompatActivity {
     private Group group;
     private ArrayList<Person> utentiRegistrati = new ArrayList<>();
     private Person utenteLoggato = new Person();
-    public ArrayList<Group> existing_group = new ArrayList<>();
+    //public ArrayList<Group> existing_group = new ArrayList<>();
     private ArrayList<Invito> inviti = new ArrayList<>();
 
     // Elementi UI
@@ -97,16 +97,16 @@ public class GroupActivity extends AppCompatActivity {
 
         utentiRegistrati = recuperaUtentiRegistrati();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
-        String datiArrayString = sharedPreferences.getString("chiave", "");
-        if (!datiArrayString.isEmpty()) {
-            byte[] datiArrayBytes = Base64.decode(datiArrayString, Base64.DEFAULT);
-            try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiArrayBytes))) {
-                existing_group = (ArrayList<Group>) objectInputStream.readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+//        SharedPreferences sharedPreferences = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
+//        String datiArrayString = sharedPreferences.getString("chiave", "");
+//        if (!datiArrayString.isEmpty()) {
+//            byte[] datiArrayBytes = Base64.decode(datiArrayString, Base64.DEFAULT);
+//            try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiArrayBytes))) {
+//                existing_group = (ArrayList<Group>) objectInputStream.readObject();
+//            } catch (IOException | ClassNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         group_name.setText(group.getNomeGruppo());
         number_user.setText(group.getNumberParticipanti()+" / "+group.getPartecipantiRichiesti());
@@ -268,7 +268,7 @@ public class GroupActivity extends AppCompatActivity {
             dialog.getWindow().setBackgroundDrawableResource(R.color.trasparent);
 
             conferma.setOnClickListener(v2 -> {
-                deleteGroups(group);
+                deleteGroup(group);
                 deleteInvite();
                 dialog.dismiss();
                 result = new Intent(GroupActivity.this, HomeActivity.class);
@@ -540,7 +540,7 @@ public class GroupActivity extends AppCompatActivity {
     }
 
 
-    private void deleteGroups(Group group) {
+    private void deleteGroup(Group group) {
         ArrayList<Group> existing_group = new ArrayList<>();
         SharedPreferences sharedPreferencesGruppi = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
 

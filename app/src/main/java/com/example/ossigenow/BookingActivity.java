@@ -93,6 +93,8 @@ public class BookingActivity extends AppCompatActivity {
             partitaScelta.getCampo().addPrenotazione(partitaScelta.getData());
             saveGroups(gruppo);
 
+            addCommit(partitaScelta, gruppo);
+
             confirmMessage("Prenotazione effettuata con successo");
 
             result = new Intent(BookingActivity.this, HomeActivity.class);
@@ -280,6 +282,31 @@ public class BookingActivity extends AppCompatActivity {
         }
     }
 
+    private ArrayList<Person> recuperaUtentiRegistrati() {
+        // Lista per memorizzare gli utenti registrati
+        ArrayList<Person> utentiRegistrati = null;
+
+        // Ottieni le SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("utentiRegistrati", Context.MODE_PRIVATE);
+
+        // Recupera la rappresentazione di byte come stringa dalle SharedPreferences
+        String datiArrayString = sharedPreferences.getString("arrayUtenti", "");
+
+        if (!datiArrayString.isEmpty()) {
+            // Decodifica la stringa Base64 e converte l'array di byte in oggetto
+            byte[] datiArrayBytes = Base64.decode(datiArrayString, Base64.DEFAULT);
+
+            try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiArrayBytes))) {
+                utentiRegistrati = (ArrayList<Person>) objectInputStream.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (utentiRegistrati == null) utentiRegistrati = new ArrayList<>();
+        return utentiRegistrati;
+    }
+
     private void saveGroups(Group group) {
         ArrayList<Group> existing_group = new ArrayList<>();
         SharedPreferences sharedPreferencesGruppi = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
@@ -320,6 +347,54 @@ public class BookingActivity extends AppCompatActivity {
         }
     }
 
+    private void addCommit(Partita partita, Group group) {
+        ArrayList<Person> utentiRegistrati = recuperaUtentiRegistrati();
+
+        for (Person p : utentiRegistrati) {
+            for (Person g : group.getPartecipanti()) {
+                if (p.getNomeUtente().equals(g.getNomeUtente()))
+                    p.addImpegno(new Commit(partita.getData(), "Partita con " + group.getNomeGruppo(), partita.getData().get(Calendar.HOUR_OF_DAY) + ":00", (partita.getData().get(Calendar.HOUR_OF_DAY) + 1) + ":00", false));
+            }
+        }
+
+        // Salva gli utenti registrati
+        SharedPreferences sharedPreferences = getSharedPreferences("utentiRegistrati", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Converti utentiRegistrati in un array di byte utilizzando la serializzazione
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
+            objectOutputStream.writeObject(utentiRegistrati);
+            String datiUtentiRegistrati = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+
+            // Salva la rappresentazione di byte come stringa nelle SharedPreferences
+            editor.putString("arrayUtenti", datiUtentiRegistrati);
+            editor.apply();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Salvo l'impegno anche dell'utente loggato
+        user.addImpegno(new Commit(partita.getData(), "Partita con " + group.getNomeGruppo(), partita.getData().get(Calendar.HOUR_OF_DAY) + ":00", (partita.getData().get(Calendar.HOUR_OF_DAY) + 1) + ":00", false));
+
+        // Salva l'utente loggato
+        SharedPreferences sharedPreferencesUtente = getSharedPreferences("User", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editorUtente = sharedPreferencesUtente.edit();
+
+        // Converti l'utente attuale in un array di byte utilizzando la serializzazione
+        ByteArrayOutputStream byteArrayOutputStreamUtente = new ByteArrayOutputStream();
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStreamUtente)) {
+            objectOutputStream.writeObject(user);
+            String datiUtente = Base64.encodeToString(byteArrayOutputStreamUtente.toByteArray(), Base64.DEFAULT);
+
+            // Salva la rappresentazione di byte come stringa nelle SharedPreferences
+            editorUtente.putString("User", datiUtente);
+            editorUtente.apply();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void confirmMessage(String messaggio){
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_succes,
@@ -341,7 +416,22 @@ public class BookingActivity extends AppCompatActivity {
         currentCalendar.set(Calendar.HOUR_OF_DAY, 0);
 
         // Cicla attraverso i prossimin giorni per trovare una data disponibile per la prossima partita
-        int giorniDisponibili = 7;
+        int giorniDisponibili;
+        switch (gruppo.getFrequenzaPartite()) {
+            case "Settimanale":
+                giorniDisponibili = 7;
+                break;
+            case "Mensile":
+                giorniDisponibili = 30;
+                break;
+            case "Bimestrale":
+                giorniDisponibili = 60;
+                break;
+            case "Trimestrale":
+                giorniDisponibili = 90;
+                break;
+        }
+
         for (int i = 0; i < giorniDisponibili; i++) {
             // Incrementa la data corrente di un giorno
 
@@ -365,8 +455,6 @@ public class BookingActivity extends AppCompatActivity {
                     boolean disponibileC = true;
                     for (Campo campo : campi) {
                         for (Calendar p : campo.getPrenotazioni()) {
-                            System.out.println(currentCalendar.get(Calendar.YEAR) + "-" + currentCalendar.get(Calendar.MONTH) + "-" + currentCalendar.get(Calendar.DAY_OF_MONTH) + " " + j + ":00");
-                            System.out.println(p.get(Calendar.YEAR) + "-" + p.get(Calendar.MONTH) + "-" + p.get(Calendar.DAY_OF_MONTH) + " " + p.get(Calendar.HOUR_OF_DAY));
                             if ( p.get(Calendar.YEAR) == currentCalendar.get(Calendar.YEAR) && p.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH) && p.get(Calendar.DAY_OF_MONTH) == currentCalendar.get(Calendar.DAY_OF_MONTH)
                                     && j >= p.get(Calendar.HOUR_OF_DAY)
                                     && j <= p.get(Calendar.HOUR_OF_DAY) + 1

@@ -58,7 +58,6 @@
 
     <string-array name="menu_tendina">
         <item>Settimanale</item>
-        <item>Bi-settimanale</item>
         <item>Mensile</item>
         <item>Bimestrale</item>
         <item>Trimestrale</item>
