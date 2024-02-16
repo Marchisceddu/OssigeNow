@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -161,6 +162,34 @@ public class HomeActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void checkPartite() {
+        // Controlla se ci sono partite da giocare
+        Calendar now = Calendar.getInstance();
+
+        for (Group g : groups) {
+            if (g.getProssima_partita() != null
+                && now.after(g.getProssima_partita().getData())) {
+                // Se la partita è in corso
+                g.setProssima_partita(null);
+            }
+        }
+
+        // Salva i gruppi
+        SharedPreferences sharedPreferencesGruppi = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editorGruppi = sharedPreferencesGruppi.edit();
+        ByteArrayOutputStream byteArrayOutputStreamGruppi = new ByteArrayOutputStream();
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStreamGruppi)) {
+            objectOutputStream.writeObject(groups);
+            String datiGruppiString = Base64.encodeToString(byteArrayOutputStreamGruppi.toByteArray(), Base64.DEFAULT);
+
+            // Salva la rappresentazione di byte come stringa nelle SharedPreferences
+            editorGruppi.putString("chiave", datiGruppiString);
+            editorGruppi.apply();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void ripristinaSessione() {
         // Recupera i dati dell'utente loggato
         user = (Person) getIntent().getSerializableExtra(MainActivity.PERSON_PATH);
@@ -224,6 +253,7 @@ public class HomeActivity extends AppCompatActivity {
                 return true; // Rimuovi il gruppo se l'utente non è presente
             });
         }
+        checkPartite();
 
         // Recupera gli inviti dell'utente loggato
         String path = "inviti" + user.getNomeUtente();

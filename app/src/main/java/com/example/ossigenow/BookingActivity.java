@@ -416,7 +416,7 @@ public class BookingActivity extends AppCompatActivity {
         currentCalendar.set(Calendar.HOUR_OF_DAY, 0);
 
         // Cicla attraverso i prossimin giorni per trovare una data disponibile per la prossima partita
-        int giorniDisponibili;
+        int giorniDisponibili = 0;
         switch (gruppo.getFrequenzaPartite()) {
             case "Settimanale":
                 giorniDisponibili = 7;
