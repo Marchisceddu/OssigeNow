@@ -51,7 +51,7 @@ public class GroupActivity extends AppCompatActivity {
     private TextView group_name, number_user, cadenza, prossima_partita, campo;
     private ImageButton back;
     private Button exit_group, delete_group;
-    private LinearLayout invito;
+    private LinearLayout invito, impegni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class GroupActivity extends AppCompatActivity {
         campo = findViewById(R.id.campo);
         prossima_partita = findViewById(R.id.prossima_partita);
         invito = findViewById(R.id. invite);
+        impegni = findViewById(R.id.controlloImpegni);
         back = findViewById(R.id.indietro);
         exit_group = findViewById(R.id.exit_group);
         delete_group = findViewById(R.id.delete_group);
@@ -353,6 +354,13 @@ public class GroupActivity extends AppCompatActivity {
 
                 dialog.show();
             }
+        });
+
+        impegni.setOnClickListener(v -> {
+            result = new Intent(GroupActivity.this, GroupCalendarActivity.class);
+            result.putExtra(GROUP_PATH, group);
+            startActivity(result);
+            finish();
         });
 
         back.setOnClickListener(v -> {

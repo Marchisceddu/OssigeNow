@@ -3033,6 +3033,7 @@ drawable add_icon
 drawable avd_hide_password
 drawable avd_show_password
 drawable back
+drawable back_calendar
 drawable background_bottom_page
 drawable background_color_circle_selector
 drawable background_gruppo
@@ -3063,6 +3064,7 @@ drawable campo2
 drawable campo3
 drawable campo4
 drawable circle_background
+drawable commit
 drawable day_item_background
 drawable day_picker_item_background
 drawable decline
@@ -3075,6 +3077,8 @@ drawable design_snackbar_background
 drawable edittext_border_color_selector
 drawable edittext_box_background
 drawable eye
+drawable forward_calendar
+drawable group_commit
 drawable home
 drawable ic_arrow_back_black_24
 drawable ic_arrow_left
@@ -3188,6 +3192,8 @@ drawable toast_success
 drawable togglebtn
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable trashbin_background
+drawable trashbin_foreground
 drawable user
 font capriola
 font nunito
@@ -3286,6 +3292,7 @@ id antiClockwise
 id anticipate
 id arc
 id asConfigured
+id assenza_commit
 id async
 id auto
 id autoComplete
@@ -3310,6 +3317,7 @@ id cache_measures
 id cadenza
 id cadenza_layout
 id calendar
+id calendar1
 id calendarContainer
 id calendarGridView
 id calendarHeader
@@ -3343,6 +3351,8 @@ id clockwise
 id closest
 id cognome
 id collapseActionView
+id commit
+id commit_container
 id completa_avviso
 id compress
 id conferma
@@ -3363,6 +3373,7 @@ id cos
 id counterclockwise
 id cradle
 id creaGruppo
+id creaImpegno
 id currentDateLabel
 id currentState
 id custom
@@ -3373,14 +3384,18 @@ id data
 id data_layout
 id data_nascita
 id data_ora_campo
+id datePicker
 id date_picker_actions
+id day
 id dayIcon
 id dayLabel
+id day_container
 id decelerate
 id decelerateAndComplete
 id decline
 id decor_content_parent
 id default_activity_button
+id delete
 id delete_group
 id delete_user
 id deltaRelative
@@ -3430,6 +3445,7 @@ id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id fine
 id fitCenter
 id fitEnd
 id fitStart
@@ -3454,6 +3470,7 @@ id ghost_view_holder
 id gone
 id graph
 id graph_wrap
+id groupCommit
 id groupLayout
 id group_divider
 id group_name
@@ -3479,6 +3496,7 @@ id included
 id indeterminate
 id indietro
 id info
+id inizio
 id invia
 id invisible
 id invite
@@ -3591,10 +3609,12 @@ id no_inviti
 id no_prenotazioni
 id nome
 id nomeGruppo
+id nomeImpegno
 id nomeUtente
 id nome_campo
 id nome_gruppo
 id nome_gruppodaPrenotare
+id nome_impegno
 id nome_inviante
 id nome_utente
 id none
@@ -3622,6 +3642,9 @@ id open_search_view_search_prefix
 id open_search_view_status_bar_spacer
 id open_search_view_toolbar
 id open_search_view_toolbar_container
+id oraFine
+id oraInizio
+id orario
 id outline
 id outward
 id overshoot
@@ -3701,6 +3724,7 @@ id see_user
 id select_dialog_listview
 id selected
 id selection_type
+id selezionaorari
 id sharedValueSet
 id sharedValueUnset
 id shortcut
@@ -3941,8 +3965,11 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_add_commit
 layout activity_booking
+layout activity_commit_list
 layout activity_group
+layout activity_group_calendar
 layout activity_home
 layout activity_main
 layout activity_new_group
@@ -3972,8 +3999,10 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialogo_conferma
+layout dialogo_impegni
 layout gruppo
 layout home
+layout impegno
 layout invite
 layout invito
 layout m3_alert_dialog
@@ -4042,10 +4071,10 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout send_invite
 layout support_simple_spinner_dropdown_item
+layout timepicker_title
 layout toast_error
 layout toast_succes
 mipmap ic_launcher
-mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
 string ATTENZIONE
@@ -4554,6 +4583,7 @@ style CardView
 style CardView_Dark
 style CardView_Light
 style CustomDatePickerDialogTheme
+style DatePickerAddCommit
 style DatePickerButtonStyleNegative
 style DatePickerButtonStylePositive
 style MaterialAlertDialog_Material3

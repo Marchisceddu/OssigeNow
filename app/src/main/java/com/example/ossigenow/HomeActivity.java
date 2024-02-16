@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     private int home, invite, calendar, booking, profile;
     private LinearLayout containerLayout;
     private LayoutInflater layoutInflater;
-    private LinearLayout creaGruppo, logout;
+    private LinearLayout creaGruppo, creaImpegno, logout;
     private ImageView view;
     private TextView nomeUtente, nome, cognome, dataNascita;
     private CalendarView calendarView;
@@ -179,6 +179,24 @@ public class HomeActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        } else {
+            // Salva l'utente nelle SharedPreferences
+            SharedPreferences sharedPreferencesUtente = getSharedPreferences("User", Context.MODE_PRIVATE);
+
+            SharedPreferences.Editor editorUtente = sharedPreferencesUtente.edit();
+
+            // Converti l'utente attuale in un array di byte utilizzando la serializzazione
+            ByteArrayOutputStream byteArrayOutputStreamUtente = new ByteArrayOutputStream();
+            try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStreamUtente)) {
+                objectOutputStream.writeObject(user);
+                String datiUtente = Base64.encodeToString(byteArrayOutputStreamUtente.toByteArray(), Base64.DEFAULT);
+
+                // Salva la rappresentazione di byte come stringa nelle SharedPreferences
+                editorUtente.putString("User", datiUtente);
+                editorUtente.apply();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         // Recupera i gruppi dell'utente loggato
@@ -251,7 +269,15 @@ public class HomeActivity extends AppCompatActivity {
             printInviti();
         } else if (layout == R.layout.calendar) {
             calendarView = findViewById(R.id.calendarView);
-            Calendario.createCalendar(this, calendarView);
+
+            Calendario.createCalendar(this, calendarView, user.getImpegni(), false, new Person());
+
+            creaImpegno = findViewById(R.id.creaImpegno);
+
+            creaImpegno.setOnClickListener(v -> {
+                result = new Intent(HomeActivity.this, AddCommitActivity.class);
+                startActivity(result);
+            });
         } else if (layout == R.layout.booking) {
             printPrenotazioni();
         } else if (layout == R.layout.profile) {

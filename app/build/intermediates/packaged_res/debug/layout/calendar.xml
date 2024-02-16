@@ -32,7 +32,7 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
-        android:id="@+id/creaGruppo"
+        android:id="@+id/creaImpegno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

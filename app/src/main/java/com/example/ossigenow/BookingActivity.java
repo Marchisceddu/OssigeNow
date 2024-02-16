@@ -66,31 +66,31 @@ public class BookingActivity extends AppCompatActivity {
         back = findViewById(R.id.indietro);
         prenota = findViewById(R.id.prenota);
 
-        // Inizializza l'elenco di campi disponibili
-        campi.add(new Campo("Campo 1", "sintetico", R.drawable.campo1));
-        campi.add(new Campo("Campo 2", "naturale", R.drawable.campo2));
-        campi.add(new Campo("Campo 3", "sintetico", R.drawable.campo3));
-        campi.add(new Campo("Campo 4", "naturale", R.drawable.campo4));
+        // Recupera i campi
+        recuperaCampi();
 
         // inserisco impegni finti
         for (Person p : gruppo.getPartecipanti()) {
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.DAY_OF_MONTH, 17);
 
-            Commit commit = new Commit(calendar, "nome", "descrizione", "14:00", "16:00");
-            p.addCommit(commit);
+            Commit commit = new Commit(calendar, "nome", "14:00", "16:00");
+            p.addImpegno(commit);
         }
 
         // Inizializza l'elenco di impegni dei partecipanti
         for (Person p : gruppo.getPartecipanti()) {
-            impegni.addAll(p.getCommits());
+            impegni.addAll(p.getImpegni());
         }
+
+        System.out.println(impegni.get(0).getData());
 
         trovaDisponibilita();
         printDisponibilita();
 
         prenota.setOnClickListener(v -> {
             gruppo.setProssima_partita(partitaScelta);
+            partitaScelta.getCampo().addPrenotazione(partitaScelta.getData());
             saveGroups(gruppo);
 
             confirmMessage("Prenotazione effettuata con successo");
@@ -118,6 +118,76 @@ public class BookingActivity extends AppCompatActivity {
             }
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
+    }
+
+    @Override
+    public void onDestroy() {
+        // Salvo i campi
+        SharedPreferences sharedPreferences = getSharedPreferences("Campi", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Converti l'utente attuale in un array di byte utilizzando la serializzazione
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
+            objectOutputStream.writeObject(campi);
+            String dati = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+
+            // Salva la rappresentazione di byte come stringa nelle SharedPreferences
+            editor.putString("chiave", dati);
+            editor.apply();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        super.onDestroy();
+    }
+
+    @Override
+    public void onStop() {
+        // Salvo i campi
+        SharedPreferences sharedPreferences = getSharedPreferences("Campi", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Converti l'utente attuale in un array di byte utilizzando la serializzazione
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
+            objectOutputStream.writeObject(campi);
+            String dati = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+
+            // Salva la rappresentazione di byte come stringa nelle SharedPreferences
+            editor.putString("chiave", dati);
+            editor.apply();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        super.onStop();
+    }
+
+    private void recuperaCampi() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Campi", Context.MODE_PRIVATE);
+
+        // Recupera tutti i campi
+        String dati = sharedPreferences.getString("chiave", "");
+
+        if (!dati.isEmpty()) {
+            byte[] datiBytes = Base64.decode(dati, Base64.DEFAULT);
+            try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiBytes))) {
+                campi = (ArrayList<Campo>) objectInputStream.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (campi.isEmpty()) {
+            // Inizializza l'elenco di campi disponibili
+            campi.add(new Campo("Campo 1", "sintetico", R.drawable.campo1));
+            campi.add(new Campo("Campo 2", "naturale", R.drawable.campo2));
+            campi.add(new Campo("Campo 3", "sintetico", R.drawable.campo3));
+            campi.add(new Campo("Campo 4", "naturale", R.drawable.campo4));
+        }
     }
 
     private void printFakeCampi(ArrayList<String> fakeDate) {
@@ -295,16 +365,19 @@ public class BookingActivity extends AppCompatActivity {
                     boolean disponibileC = true;
                     for (Campo campo : campi) {
                         for (Calendar p : campo.getPrenotazioni()) {
+                            System.out.println(currentCalendar.get(Calendar.YEAR) + "-" + currentCalendar.get(Calendar.MONTH) + "-" + currentCalendar.get(Calendar.DAY_OF_MONTH) + " " + j + ":00");
+                            System.out.println(p.get(Calendar.YEAR) + "-" + p.get(Calendar.MONTH) + "-" + p.get(Calendar.DAY_OF_MONTH) + " " + p.get(Calendar.HOUR_OF_DAY));
                             if ( p.get(Calendar.YEAR) == currentCalendar.get(Calendar.YEAR) && p.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH) && p.get(Calendar.DAY_OF_MONTH) == currentCalendar.get(Calendar.DAY_OF_MONTH)
                                     && j >= p.get(Calendar.HOUR_OF_DAY)
                                     && j <= p.get(Calendar.HOUR_OF_DAY) + 1
                             ) {
                                 disponibileC = false;
+                                System.out.println("sono qui");
                                 break;
                             }
                         }
                         if (disponibileC) {
-                            disponibilitaData.add(currentCalendar.get(Calendar.YEAR) + "-" + (currentCalendar.get(Calendar.MONTH) + 1 < 10 ? "0" + (currentCalendar.get(Calendar.MONTH) + 1) : (currentCalendar.get(Calendar.MONTH) + 1)) + "-" + currentCalendar.get(Calendar.DAY_OF_MONTH) + " " + (j < 10 ? "0" + j : j) + ":00");
+                            disponibilitaData.add(currentCalendar.get(Calendar.YEAR) + "-" + (currentCalendar.get(Calendar.MONTH) < 10 ? "0" + currentCalendar.get(Calendar.MONTH) : currentCalendar.get(Calendar.MONTH)) + "-" + currentCalendar.get(Calendar.DAY_OF_MONTH) + " " + (j < 10 ? "0" + j : j) + ":00");
                             disponibilitaCampo.add(campi.indexOf(campo));
                         }
                     }
@@ -344,8 +417,13 @@ public class BookingActivity extends AppCompatActivity {
 
             foto.setImageDrawable(ContextCompat.getDrawable(this, campi.get(disponibilitaCampo.get(rand)).getImg()));
             nome.setText(campi.get(disponibilitaCampo.get(rand)).getNomeCampo());
-            data_ora_campo.setText(disponibilitaData.get(rand));
             caratteristiche.setText(campi.get(disponibilitaCampo.get(rand)).getCaratteristiche());
+
+            // Siccome i mesi vanno da 0 a 11 e non da 1 a 12, bisogna aggiungere 1 al mese
+            int meseInt = Integer.parseInt(disponibilitaData.get(rand).substring(5, 7)) + 1;
+            String mese = meseInt < 10 ? "0" + meseInt : String.valueOf(meseInt);
+            String data = disponibilitaData.get(rand).substring(0, 5) + mese + disponibilitaData.get(rand).substring(7);
+            data_ora_campo.setText(data);
 
             int marginInDp = 20; // Puoi specificare il valore direttamente
             int marginInPixels = (int) (marginInDp * getResources().getDisplayMetrics().density);
@@ -399,8 +477,7 @@ public class BookingActivity extends AppCompatActivity {
                 dataSelezionata.set(Calendar.HOUR_OF_DAY, Integer.parseInt(disponibilitaData.get(rand).substring(11, 13)));
                 dataSelezionata.set(Calendar.MINUTE, Integer.parseInt(disponibilitaData.get(rand).substring(14, 16)));
                 partitaScelta = new Partita(dataSelezionata, campi.get(disponibilitaCampo.get(rand)));
-
-                System.out.println("Partita scelta: " + partitaScelta.getCampo().getNomeCampo() + " " + partitaScelta.getData().get(Calendar.YEAR) + "-" + partitaScelta.getData().get(Calendar.MONTH) + "-" + partitaScelta.getData().get(Calendar.DAY_OF_MONTH) + " " + partitaScelta.getData().get(Calendar.HOUR_OF_DAY) + ":" + partitaScelta.getData().get(Calendar.MINUTE));
+                System.out.println(partitaScelta.getData().getTime());
             });
         }
     }

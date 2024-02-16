@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+	android:width="30dp"
+	android:height="30dp"
+	android:viewportWidth="306"
+	android:viewportHeight="306">
+
+	<group
+		android:id="@+id/chevron_left"
+		android:rotation="180"
+		android:translateX="310"
+		android:translateY="306">
+
+		<path
+			android:fillColor="@color/white"
+			android:pathData="M247.35,35.7 211.65,0 58.65,153 211.65,306 247.35,270.3 130.05,153" />
+
+	</group>
+
+</vector>
