@@ -2,6 +2,7 @@ package com.example.ossigenow;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -36,6 +37,7 @@ public class CommitListActivity extends AppCompatActivity {
     protected LayoutInflater inflater;
     protected Person actualUser;
 
+    private boolean isGroup;
     private ArrayList<Commit> commits = new ArrayList<>();
     private ArrayList<Commit> all_commits = new ArrayList<>();
     private Calendar actualDate;
@@ -53,82 +55,176 @@ public class CommitListActivity extends AppCompatActivity {
         day = findViewById(R.id.day);
         assenza = findViewById(R.id.assenza_commit);
 
+        //recupero la data selezionata e la setto per il dialog
         actualDate = (Calendar) getIntent().getSerializableExtra("data");
         setDay();
 
+        //recupero l'utente loggato
         actualUser = recuperaUtenteLoggato();
+        //recupero il gruppo
+        isGroup = getIntent().getBooleanExtra("isGroup", false);
 
-        all_commits = actualUser.getImpegni();
+        //se non è un gruppo recupero gli impegni dell'utente
+        if(!isGroup) {
+            all_commits = actualUser.getImpegni();
 
-        //prendo solo gli impegni del giorno
-        for (Commit commit : all_commits) {
-            if (commit.getData().get(Calendar.DAY_OF_MONTH) == actualDate.get(Calendar.DAY_OF_MONTH) &&
-                    commit.getData().get(Calendar.MONTH) == actualDate.get(Calendar.MONTH) &&
-                    commit.getData().get(Calendar.YEAR) == actualDate.get(Calendar.YEAR)) {
-                commits.add(commit);
+            //prendo solo gli impegni del giorno
+            for (Commit commit : all_commits) {
+                if (commit.getData().get(Calendar.DAY_OF_MONTH) == actualDate.get(Calendar.DAY_OF_MONTH) &&
+                        commit.getData().get(Calendar.MONTH) == actualDate.get(Calendar.MONTH) &&
+                        commit.getData().get(Calendar.YEAR) == actualDate.get(Calendar.YEAR)) {
+                    commits.add(commit);
+                }
             }
-        }
+            //se non ci sono impegni mostro un messaggio
+            if (commits.isEmpty()) {
+                assenza.setVisibility(View.VISIBLE);
+            }else{
+                //prendo ogni impegno e lo mostro
+                for (Commit impegno : commits) {
 
-        if (commits.isEmpty()) {
-            assenza.setVisibility(View.VISIBLE);
-        }
+                    View view = inflater.inflate(R.layout.impegno, null);
+                    TextView nome, orario;
+                    ImageButton delete;
 
-        for (Commit impegno : commits) {
+                    nome = view.findViewById(R.id.nome_impegno);
+                    orario = view.findViewById(R.id.orario);
+                    delete = view.findViewById(R.id.delete);
 
-            View view = inflater.inflate(R.layout.impegno, null);
-            TextView nome, orario;
-            ImageButton delete;
+                    //se l'impegno non è cancellabile non mostro il tasto
+                    if (!impegno.getIsDeleteble()) {
+                        delete.setVisibility(View.GONE);
+                    }
 
-            nome = view.findViewById(R.id.nome_impegno);
-            orario = view.findViewById(R.id.orario);
-            delete = view.findViewById(R.id.delete);
+                    //setto il nome e l'orario dell'impegno
+                    nome.setText(impegno.getNome());
+                    String inizio = impegno.getOraInizio();
+                    String fine = impegno.getOraFine();
 
-            if (!impegno.getIsDeleteble()) {
-                delete.setVisibility(View.GONE);
+                    orario.setText("Dalle: " + inizio + " alle: " + fine);
+
+                    int marginInDp = 20; // Puoi specificare il valore direttamente
+                    int marginInPixels = (int) (marginInDp * getResources().getDisplayMetrics().density);
+
+                    // Impostare i margini per creare uno spazio tra le viste
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    layoutParams.setMargins(0, 0, 0, marginInPixels);
+                    view.setLayoutParams(layoutParams);
+
+                    thisView.addView(view);
+
+                    delete.setOnClickListener(v -> {
+                        chiediConfermaCancellazione(impegno.getNome(), thisView, view, inflater, impegno);
+                    });
+                }
             }
 
-            nome.setText(impegno.getNome());
-            String inizio = impegno.getOraInizio();
-            String fine = impegno.getOraFine();
-
-            orario.setText("Dalle: " + inizio + " alle: " + fine);
-
-            int marginInDp = 20; // Puoi specificare il valore direttamente
-            int marginInPixels = (int) (marginInDp * getResources().getDisplayMetrics().density);
-
-            // Impostare i margini per creare uno spazio tra le viste
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            layoutParams.setMargins(0, 0, 0, marginInPixels);
-            view.setLayoutParams(layoutParams);
-
-            thisView.addView(view);
-
-            delete.setOnClickListener(v -> {
-                chiediConfermaCancellazione(impegno.getNome(),thisView,view,inflater,impegno);
-            });
-
-        }
-
-        back.setOnClickListener(v -> {
-            result = new Intent(CommitListActivity.this, HomeActivity.class);
-            result.putExtra(HomeActivity.SCREEN_PATH, "calendar");
-            startActivity(result);
-            finish();
-        });
-
-        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
+            //il pulsante indietro mi riporta alla schermata del calendario dell'utente
+            back.setOnClickListener(v -> {
                 result = new Intent(CommitListActivity.this, HomeActivity.class);
                 result.putExtra(HomeActivity.SCREEN_PATH, "calendar");
                 startActivity(result);
                 finish();
+            });
+
+            OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    result = new Intent(CommitListActivity.this, HomeActivity.class);
+                    result.putExtra(HomeActivity.SCREEN_PATH, "calendar");
+                    startActivity(result);
+                    finish();
+                }
+            };
+            getOnBackPressedDispatcher().addCallback(this, callback);
+
+            //Se è un gruppo recupero gli impegni del gruppo
+        }else {
+            all_commits = (ArrayList<Commit>) getIntent().getSerializableExtra("impegni");
+
+            //prendo gli impegni dell'utente
+            ArrayList<Commit> loggedUserCommits = actualUser.getImpegni();
+
+            //prendo solo gli impegni del giorno
+            for (Commit commit : all_commits) {
+                if (commit.getData().get(Calendar.DAY_OF_MONTH) == actualDate.get(Calendar.DAY_OF_MONTH) &&
+                        commit.getData().get(Calendar.MONTH) == actualDate.get(Calendar.MONTH) &&
+                        commit.getData().get(Calendar.YEAR) == actualDate.get(Calendar.YEAR)) {
+                    commits.add(commit);
+                }
             }
-        };
-        getOnBackPressedDispatcher().addCallback(this, callback);
+            //se non ci sono impegni mostro un messaggio
+            if (commits.isEmpty()) {
+                assenza.setVisibility(View.VISIBLE);
+            }else {
+                //prendo ogni impegno e lo mostro
+                for (Commit impegno : commits) {
+
+                    //creo la vista per ogni impegno
+                    View view = inflater.inflate(R.layout.impegno, null);
+                    TextView nome, orario;
+                    ImageView delete;
+                    CardView bottomLine;
+                    boolean isLoggedUser = false;
+
+                    nome = view.findViewById(R.id.nome_impegno);
+                    orario = view.findViewById(R.id.orario);
+                    delete = view.findViewById(R.id.delete);
+                    bottomLine = view.findViewById(R.id.bottom_line);
+
+                    delete.setVisibility(View.GONE);
+
+                    //controllo se l'impegno è dell'utente loggato
+                    for (Commit commit : loggedUserCommits) {
+                        if (commit.getData().equals(impegno.getData()) && commit.getNome().equals(impegno.getNome()) && commit.getOraInizio().equals(impegno.getOraInizio()) && commit.getOraFine().equals(impegno.getOraFine())) {
+                            nome.setText(impegno.getNome());
+                            isLoggedUser = true;
+                        }
+                    }
+
+                    //se l'impegno non è dell'utente loggato non mostro il tasto per cancellare
+                    if (!isLoggedUser) {
+                        //cambio il colore della linea mettendo il colore del gruppo
+                        bottomLine.setCardBackgroundColor(getColor(R.color.group_commit));
+                        //cambio il nome dell'impegno generalizzandolo per privacy
+                        nome.setText("Impegno di un altro utente");
+                    }
+
+                    //se l'impegno non è cancellabile non mostro il tasto
+                    if (!impegno.getIsDeleteble()) {
+                        delete.setVisibility(View.GONE);
+                    }
+
+                    //setto l'orario dell'impegno
+                    String inizio = impegno.getOraInizio();
+                    String fine = impegno.getOraFine();
+
+                    orario.setText("Dalle: " + inizio + " alle: " + fine);
+
+                    int marginInDp = 20; // Puoi specificare il valore direttamente
+                    int marginInPixels = (int) (marginInDp * getResources().getDisplayMetrics().density);
+
+                    // Impostare i margini per creare uno spazio tra le viste
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    layoutParams.setMargins(0, 0, 0, marginInPixels);
+                    view.setLayoutParams(layoutParams);
+
+                    thisView.addView(view);
+
+                }
+
+            }
+            // il pulsante indietro mi riporta alla schermata del calendario di prima
+            back.setOnClickListener(v -> {
+                finish();
+            });
+        }
     }
 
 
@@ -166,7 +262,7 @@ public class CommitListActivity extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(alert_view);
 
-        String messaggio = "Stai per cancellare:\n\n"+"'"+name+"'"+"\n\nSei sicuro?\n";
+        String messaggio = "Stai per cancellare l'impegno:\n\n"+"'"+name+"'"+"\n\nSei sicuro?\n";
         TextView alert_dialog = alert_view.findViewById(R.id.completa_avviso);
         alert_dialog.setText(messaggio);
 

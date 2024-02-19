@@ -3,7 +3,7 @@
 
     <item android:state_pressed="false">
         <shape android:shape="rectangle">
-            <corners android:radius="500dp" /> <!-- Regola questo valore per cambiare la curvatura -->
+            <corners android:radius="70dp" /> <!-- Regola questo valore per cambiare la curvatura -->
 
             <solid android:color="@color/trasparent"/> <!-- Imposta il colore del bottone -->
         </shape>
@@ -11,10 +11,10 @@
 
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <corners android:radius="500dp" /> <!-- Regola questo valore per cambiare la curvatura -->
+            <corners android:radius="70dp" /> <!-- Regola questo valore per cambiare la curvatura -->
 
 
-            <solid android:color="#E87870" /> <!-- Imposta il colore del bottone -->
+            <solid android:color="#D37F7A" /> <!-- Imposta il colore del bottone -->
         </shape>
     </item>
 

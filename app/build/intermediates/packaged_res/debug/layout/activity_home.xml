@@ -76,18 +76,42 @@
             android:tint="@drawable/navbar_icon_selector"
             tools:ignore="UseAppTint" />
 
-        <ImageView
-            android:id="@+id/navInvite"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@color/background"
-            android:clickable="true"
-            android:padding="10dp"
-            android:src="@drawable/invite"
-            android:tint="@drawable/navbar_icon_selector"
-            tools:ignore="UseAppTint" />
+            >
+
+            <ImageView
+                android:id="@+id/navInvite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/background"
+                android:clickable="true"
+                android:padding="10dp"
+                android:src="@drawable/invite"
+                android:tint="@drawable/navbar_icon_selector"
+                tools:ignore="UseAppTint"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/notifica"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/circle_background"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/navCalendar"

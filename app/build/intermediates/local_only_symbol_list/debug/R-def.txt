@@ -8,6 +8,7 @@ color edittext_border_color_selector
 color gray
 color greenLight
 color green_trasparent
+color group_commit
 color ic_launcher_background
 color logo_color
 color logout_button_not_pressed
@@ -91,6 +92,7 @@ font tekolight
 font tekomedium
 font tekoregular
 font tekosemibold
+id View_block_user
 id View_conteiner_gruppi
 id View_conteiner_partecipanti
 id View_conteiner_prenotazioni
@@ -102,6 +104,7 @@ id assenza_commit
 id block_user
 id booking
 id bottomLayout
+id bottom_line
 id cadenza
 id cadenza_layout
 id calendar
@@ -152,6 +155,8 @@ id gruppo
 id header
 id home
 id icon_user
+id impegno_container
+id impegno_layout
 id indietro
 id inizio
 id invia
@@ -182,6 +187,7 @@ id nome_gruppodaPrenotare
 id nome_impegno
 id nome_inviante
 id nome_utente
+id notifica
 id number_user
 id oraFine
 id oraInizio
@@ -231,7 +237,6 @@ layout booking
 layout calendar
 layout campo
 layout dialogo_conferma
-layout dialogo_impegni
 layout gruppo
 layout home
 layout impegno

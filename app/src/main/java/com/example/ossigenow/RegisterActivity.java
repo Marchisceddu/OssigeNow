@@ -127,8 +127,6 @@ public class RegisterActivity extends AppCompatActivity {
             data.setText("");
             data.setError("Inserire la data, devi avere almeno 12 anni");
         }
-
-        data.setText(simpleDateFormat.format(calendar.getTime()));
     }
 
     // Questa funzione viene eseguita in caso venga premuto il tasto per annullare

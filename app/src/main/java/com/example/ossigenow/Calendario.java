@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.util.Base64;
 import android.widget.Toast;
 import android.content.Context;
-
+import androidx.lifecycle.Lifecycle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -28,20 +28,33 @@ public class Calendario extends AppCompatActivity {
     private static CalendarView calendarView;
     private static Calendar calendar;
 
-    public static void createCalendar(Context context, CalendarView c, ArrayList<Commit> commits, boolean isGroup, Person loggedUser) {
+    private static ArrayList<Commit>commits = new ArrayList<>();
+
+    private static ArrayList<Commit> loggedUserCommits = new ArrayList<>();
+
+    // Aggiunge gli impegni al calendario
+    private static List<EventDay> eventDays = new ArrayList<>();
+
+    private static Person user = null;
+
+    public static void createCalendar(Context context, CalendarView c, ArrayList<Commit> impegni, boolean isGroup, Person loggedUser) {
         calendarView = c;
         calendar = Calendar.getInstance();
 
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         calendar.add(Calendar.YEAR, 1);
 
+        user = loggedUser;
+        commits = impegni;
+
+        // Pulisce gli impegni quando si crea la funzione
+        eventDays. clear();
+
         if(!isGroup){
 
             // Imposta l'icona degli impegni
             VectorDrawableCompat drawable = VectorDrawableCompat.create(context.getResources(), R.drawable.commit, null);
 
-            // Aggiunge gli impegni al calendario
-            List<EventDay> eventDays = new ArrayList<>();
             for (int i = commits.size(); i > 0; i--) {
                 Calendar calendar1 = Calendar.getInstance();
                 calendar1.set(commits.get(i-1).getData().get(Calendar.YEAR), commits.get(i-1).getData().get(Calendar.MONTH), commits.get(i-1).getData().get(Calendar.DAY_OF_MONTH));
@@ -50,7 +63,7 @@ public class Calendario extends AppCompatActivity {
             }
             calendarView.setEvents(eventDays);
 
-            // Listener per aggiungere un impegno
+            // Listener per i giorni con impegni
             calendarView.setOnDayClickListener(eventDay -> {
                 //se clicco su un giorno con impegni mi apre la lista degli impegni
                 Intent result;
@@ -62,16 +75,12 @@ public class Calendario extends AppCompatActivity {
         }else {
 
             //recupero l'utente loggato attualmente
-            Person user = loggedUser;
-            ArrayList<Commit> loggedUserCommits = user.getImpegni();
+            loggedUserCommits = user.getImpegni();
 
             // Imposta le icone degli impegni dell'utente loggato e degli altri utenti del gruppo
             VectorDrawableCompat userCommit = VectorDrawableCompat.create(context.getResources(), R.drawable.commit, null);
             VectorDrawableCompat groupCommit = VectorDrawableCompat.create(context.getResources(), R.drawable.group_commit, null);
 
-
-            // Aggiunge gli impegni al calendario
-            List<EventDay> eventDays = new ArrayList<>();
             for (int i = commits.size(); i > 0; i--) {
 
                 boolean flag = false;
@@ -91,6 +100,59 @@ public class Calendario extends AppCompatActivity {
                 }
             }
             calendarView.setEvents(eventDays);
+
+            // Listener per i giorni con impegni
+            calendarView.setOnDayClickListener(eventDay -> {
+                //se clicco su un giorno con impegni mi apre la lista degli impegni
+                Intent result;
+                result = new Intent(context, CommitListActivity.class);
+                result.putExtra("data", eventDay.getCalendar());
+                result.putExtra("isGroup", true);
+                result.putExtra("impegni",commits);
+                context.startActivity(result);
+            });
         }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        System.out.println("Impegno già presente");
+        user = recuperaUtenteLoggato();
+        ArrayList<Commit> newUserCommits = user.getImpegni();
+
+
+
+        for(Commit commit: loggedUserCommits) {
+            for (Commit newCommit : newUserCommits) {
+                if (commit.getData().equals(newCommit.getData()) && commit.getNome().equals(newCommit.getNome()) && commit.getOraInizio().equals(newCommit.getOraInizio()) && commit.getOraFine().equals(newCommit.getOraFine())) {
+                    System.out.println("Impegno già presente");
+                    eventDays.remove(commit);
+                }
+            }
+        }
+    }
+
+
+    private Person recuperaUtenteLoggato() {
+        Person utenteLoggato = null;
+
+        // Recupera l'utente dalle SharedPreferences
+        SharedPreferences sharedPreferencesUtente = getSharedPreferences("User", Context.MODE_PRIVATE);
+
+        // Recupera la rappresentazione di byte come stringa dalle SharedPreferences
+        String datiUtente = sharedPreferencesUtente.getString("User", "");
+
+        // Converte la stringa in un array di byte
+        byte[] utenteBytes = Base64.decode(datiUtente, Base64.DEFAULT);
+
+        // Converte l'array di byte in un oggetto Persona
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(utenteBytes))) {
+            utenteLoggato = (Person) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return utenteLoggato;
     }
 }

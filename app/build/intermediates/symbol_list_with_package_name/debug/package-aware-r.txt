@@ -1451,6 +1451,7 @@ color foreground_material_light
 color gray
 color greenLight
 color green_trasparent
+color group_commit
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color ic_launcher_background
@@ -3216,6 +3217,7 @@ id SHOW_PROGRESS
 id SYM
 id TOP_END
 id TOP_START
+id View_block_user
 id View_conteiner_gruppi
 id View_conteiner_partecipanti
 id View_conteiner_prenotazioni
@@ -3308,6 +3310,7 @@ id blocking
 id booking
 id bottom
 id bottomLayout
+id bottom_line
 id bounce
 id bounceBoth
 id bounceEnd
@@ -3492,6 +3495,8 @@ id ignore
 id ignoreRequest
 id image
 id immediateStop
+id impegno_container
+id impegno_layout
 id included
 id indeterminate
 id indietro
@@ -3620,6 +3625,7 @@ id nome_utente
 id none
 id normal
 id north
+id notifica
 id notification_background
 id notification_main_column
 id notification_main_column_container
@@ -3999,7 +4005,6 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialogo_conferma
-layout dialogo_impegni
 layout gruppo
 layout home
 layout impegno

@@ -97,17 +97,6 @@ public class GroupActivity extends AppCompatActivity {
 
         utentiRegistrati = recuperaUtentiRegistrati();
 
-//        SharedPreferences sharedPreferences = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
-//        String datiArrayString = sharedPreferences.getString("chiave", "");
-//        if (!datiArrayString.isEmpty()) {
-//            byte[] datiArrayBytes = Base64.decode(datiArrayString, Base64.DEFAULT);
-//            try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiArrayBytes))) {
-//                existing_group = (ArrayList<Group>) objectInputStream.readObject();
-//            } catch (IOException | ClassNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
         group_name.setText(group.getNomeGruppo());
         number_user.setText(group.getNumberParticipanti()+" / "+group.getPartecipantiRichiesti());
         cadenza.setText(group.getFrequenzaPartite());

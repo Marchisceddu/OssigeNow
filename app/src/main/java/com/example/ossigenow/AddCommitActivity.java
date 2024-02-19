@@ -75,6 +75,7 @@ public class AddCommitActivity extends AppCompatActivity {
                 Commit commit = new Commit(calendar, nomeImpegno.getText().toString(), oraInizio.getText().toString(), oraFine.getText().toString());
                 updateUser(commit);
                 result = new Intent(AddCommitActivity.this, HomeActivity.class);
+                result.putExtra(HomeActivity.SCREEN_PATH, "calendar");
                 startActivity(result);
             }
 

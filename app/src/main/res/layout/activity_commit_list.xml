@@ -126,8 +126,8 @@
 
         </LinearLayout>
 
-        <ScrollView
-            android:id="@+id/scrollView_block_user"
+        <FrameLayout
+            android:id="@+id/View_block_user"
             android:layout_width="0dp"
             android:layout_height="420dp"
             android:layout_marginRight="30dp"
@@ -139,25 +139,51 @@
             android:orientation="vertical"
             >
 
-            <LinearLayout
-                android:id="@+id/commit_container"
+            <ScrollView
+                android:id="@+id/scrollView_block_user"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingTop="30dp">
+                >
 
-                <TextView
-                    android:id="@+id/assenza_commit"
+                <LinearLayout
+                    android:id="@+id/commit_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nessun impegno presente per questo girno"
-                    android:textSize="16sp"
-                    android:visibility="gone"/>
+                    android:orientation="vertical"
+                    android:paddingTop="20dp">
 
+                    <TextView
+                        android:id="@+id/assenza_commit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nessun impegno presente per questo giorno"
+                        android:textSize="16sp"
+                        android:visibility="gone"/>
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </ScrollView>
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                android:layout_gravity="top"
+                android:background="@drawable/shadow"
+                android:rotation="180"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/shadow"
+                />
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

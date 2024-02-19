@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginRight="30dp"
-    android:layout_marginLeft="30dp"
+    android:layout_marginRight="0dp"
+    android:layout_marginLeft="0dp"
     android:id="@+id/calendar"
     >
 
@@ -14,10 +14,11 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginLeft="36dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/creaGruppo"
+        app:layout_constraintBottom_toTopOf="@+id/creaImpegno"
         >
 
         <com.applandeo.materialcalendarview.CalendarView

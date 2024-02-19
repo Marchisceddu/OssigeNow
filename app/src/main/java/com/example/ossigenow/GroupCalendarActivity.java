@@ -1,5 +1,6 @@
 package com.example.ossigenow;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -52,14 +53,24 @@ public class GroupCalendarActivity extends AppCompatActivity {
         Calendario.createCalendar(this, calendarView, commits, true, loggedUser);
 
 
-        //AGGIUNGERE LO SHORTCUT PER TORNARE AI GRUPPI
         back.setOnClickListener(v -> {
-            result = new Intent(GroupCalendarActivity.this,HomeActivity.class);
+            result = new Intent(GroupCalendarActivity.this, GroupActivity.class);
+            result.putExtra(HomeActivity.GROUP_PATH, group);
+            result.putExtra(HomeActivity.PERSON_PATH, loggedUser);
             startActivity(result);
             finish();
         });
-
-
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                result = new Intent(GroupCalendarActivity.this, GroupActivity.class);
+                result.putExtra(HomeActivity.GROUP_PATH, group);
+                result.putExtra(HomeActivity.PERSON_PATH, loggedUser);
+                startActivity(result);
+                finish();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
     }
 

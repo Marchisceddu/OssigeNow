@@ -13,6 +13,7 @@
     <color name="gray">#858585</color>
     <color name="greenLight">#D3FFCB</color>
     <color name="green_trasparent">#E64CAF50</color>
+    <color name="group_commit">#38A7D3</color>
     <color name="ic_launcher_background">#197542</color>
     <color name="logo_color">#FFFFFF</color>
     <color name="logout_button_not_pressed">#BD261B</color>

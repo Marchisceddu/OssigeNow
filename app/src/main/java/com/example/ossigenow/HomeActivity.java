@@ -17,7 +17,6 @@ import com.applandeo.materialcalendarview.CalendarView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
@@ -42,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     private boolean isLogout = false;
 
     // Elementi UI
-    private ImageView navHome, navInvite, navCalendar, navBooking, navProfile;
+    private ImageView navHome, navInvite, navCalendar, navBooking, navProfile, notifica;
     private int home, invite, calendar, booking, profile;
     private LinearLayout containerLayout;
     private LayoutInflater layoutInflater;
@@ -162,6 +159,42 @@ public class HomeActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void chiediConfermaEliminaInvito(String nomeGruppo, Invito i, LinearLayout thisView, View view) {
+        LayoutInflater inflater =  (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View alert_view = inflater.inflate(R.layout.dialogo_conferma, null);
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(alert_view);
+
+        String messaggio = "Sei sicuro di voler rifiutare l'invito del gruppo " + nomeGruppo + "?\n\n";
+        TextView alert_dialog = alert_view.findViewById(R.id.completa_avviso);
+        alert_dialog.setText(messaggio);
+
+        Button conferma = alert_view.findViewById(R.id.conferma);
+        Button annulla = alert_view.findViewById(R.id.annulla);
+
+        dialog.getWindow().setBackgroundDrawableResource(R.color.trasparent);
+
+        conferma.setOnClickListener(v -> {
+            dialog.dismiss();
+            inviti.remove(i);
+            saveInviti(inviti);
+            thisView.removeView(view);
+
+            if (!inviti.isEmpty())
+                notifica.setVisibility(View.VISIBLE);
+            else
+                notifica.setVisibility(View.GONE);
+        });
+
+        annulla.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
+
     private void checkPartite() {
         // Controlla se ci sono partite da giocare
         Calendar now = Calendar.getInstance();
@@ -241,6 +274,7 @@ public class HomeActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        checkPartite();
 
         // Controlla se l'utente è presente nel gruppo altrimenti lo elimina
         if (!groups.isEmpty()) {
@@ -253,7 +287,6 @@ public class HomeActivity extends AppCompatActivity {
                 return true; // Rimuovi il gruppo se l'utente non è presente
             });
         }
-        checkPartite();
 
         // Recupera gli inviti dell'utente loggato
         String path = "inviti" + user.getNomeUtente();
@@ -277,6 +310,7 @@ public class HomeActivity extends AppCompatActivity {
         navCalendar = findViewById(R.id.navCalendar);
         navBooking = findViewById(R.id.navBooking);
         navProfile = findViewById(R.id.navProfile);
+        notifica = findViewById(R.id.notifica);
         home = R.layout.home;
         invite = R.layout.invite;
         calendar = R.layout.calendar;
@@ -380,6 +414,8 @@ public class HomeActivity extends AppCompatActivity {
         setNavItem(navItems, pos, true);
         containerLayout.addView(layoutInflater.inflate(view, containerLayout, false));
         confListener(view);
+
+        if (!inviti.isEmpty()) notifica.setVisibility(View.VISIBLE);
 
         // Imposta il listener per ogni elemento di navigazione
         for (int i = 0; i < layouts.length; i++) {
@@ -548,26 +584,49 @@ public class HomeActivity extends AppCompatActivity {
             thisView.addView(view);
 
             accetta.setOnClickListener(v -> {
-                if (i.getGroup().getNumberParticipanti() < i.getGroup().getPartecipantiRichiesti()) {
+                // Recupera tutti i gruppi aggiornati
+                ArrayList<Group> existing_group = new ArrayList<>();
+                SharedPreferences sharedPreferencesGruppi = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
+                String datiGruppi = sharedPreferencesGruppi.getString("chiave", "");
+
+                if (!datiGruppi.isEmpty()) {
+                    byte[] datiGruppiBytes = Base64.decode(datiGruppi, Base64.DEFAULT);
+                    try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiGruppiBytes))) {
+                        existing_group = (ArrayList<Group>) objectInputStream.readObject();
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Group gruppoAttuale = null;
+                for (Group g : existing_group) {
+                    if (g.getNomeGruppo().equals(i.getGroup().getNomeGruppo())) {
+                        gruppoAttuale = g;
+                        break;
+                    }
+                }
+
+                if (gruppoAttuale.getNumberParticipanti() < gruppoAttuale.getPartecipantiRichiesti()) {
                     // Aggiungi l'utente al gruppo
                     i.getGroup().addPartecipante(user);
                     groups.add(i.getGroup());
                     saveGroups(i.getGroup());
                     confirmMsg("Invito accettato con successo");
-                }
-                else {
+                } else {
                     failMsg("Il gruppo è già al completo, non è possibile accettare l'invito");
                 }
 
                 inviti.remove(i);
                 saveInviti(inviti);
                 thisView.removeView(view);
+
+                if (!inviti.isEmpty())
+                    notifica.setVisibility(View.VISIBLE);
+                else
+                    notifica.setVisibility(View.GONE);
             });
 
             rifiuta.setOnClickListener(v -> {
-                inviti.remove(i);
-                saveInviti(inviti);
-                thisView.removeView(view);
+                chiediConfermaEliminaInvito(i.getGroup().getNomeGruppo(), i, thisView, view);
             });
         }
     }

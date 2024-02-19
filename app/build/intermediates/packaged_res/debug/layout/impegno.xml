@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/gruppo"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/impegno_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="30dp"
     android:background="@drawable/background_gruppo"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:paddingLeft="20dp"
-    android:paddingTop="10dp"
     android:paddingRight="20dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="5dp">
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/impegno_container">
 
         <TextView
             android:id="@+id/nome_impegno"
@@ -24,11 +27,15 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="5dp" />
+            android:layout_height="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/nome_impegno"
+            android:id="@+id/space"/>
 
         <TextView
             android:id="@+id/orario"
@@ -36,19 +43,45 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/space"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
+        android:contentDescription="trashbin"
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:background="@drawable/trashbin_background"
+        android:src="@drawable/trashbin_foreground"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/space2"/>
 
-        android:background="@color/trasparent"
-        android:src="@drawable/trashbin_foreground" />
+
+    <Space
+        android:id="@id/space2"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        app:layout_constraintTop_toBottomOf="@id/impegno_container"/>
 
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        app:cardBackgroundColor="@color/red"
+        app:layout_constraintTop_toBottomOf="@id/space2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:cardCornerRadius="10dp"
+        />
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
