@@ -30,7 +30,7 @@
     </style>
 
     <style name="SpinnerTextStyle">
-        <item name="android:textSize">23sp</item>
+        <item name="android:textSize">25sp</item>
     </style>
 
     <!--    Calendrio-->
@@ -52,5 +52,12 @@
 
     <style name="CalendarTextAppearance">
         <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="DatePickerAddCommit" parent="android:Widget.Material.DatePicker">
+
+        <item name="android:textColor">@color/background</item>
+
+        <item name="android:colorControlActivated">@color/background</item>
     </style>
 </resources>

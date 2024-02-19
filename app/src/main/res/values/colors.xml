@@ -30,4 +30,6 @@
 
     <color name="navbar_icon">#FFFFFF</color>
     <color name="navbar_icon_selected">#197542</color>
+
+    <color name="group_commit">#38A7D3</color>
 </resources>

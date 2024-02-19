@@ -6,6 +6,60 @@
                 {
                     "source": "/Users/marcopilia/.gradle/caches/transforms-3/af575453595166fed38ef613cf3573b3/transformed/appcompat-1.6.1/res/values-night-v8/values-night-v8.xml",
                     "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "6,7,8,9,10,11,12,38",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "222,292,376,460,556,658,760,3615",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "287,371,455,551,653,755,849,3699"
+                    }
+                },
+                {
+                    "source": "/Users/marcopilia/Desktop/OssigeNow/app/src/main/res/values-night/themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "100",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "302"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "217"
+                    }
+                },
+                {
+                    "source": "/Users/marcopilia/.gradle/caches/transforms-3/da4a177b0a7812530ab961a7a7967b71/transformed/material-1.11.0/res/values-night-v8/values-night-v8.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,45,46",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "854,929,1040,1129,1230,1337,1444,1543,1650,1753,1841,1965,2067,2169,2285,2387,2501,2629,2745,2867,3003,3123,3257,3377,3489,3704,3821,3945,4075,4197,4335,4469,4585",
+                        "endColumns": "74,110,88,100,106,106,98,106,102,87,123,101,101,115,101,113,127,115,121,135,119,133,119,111,125,116,123,129,121,137,133,115,119",
+                        "endOffsets": "924,1035,1124,1225,1332,1439,1538,1645,1748,1836,1960,2062,2164,2280,2382,2496,2624,2740,2862,2998,3118,3252,3372,3484,3610,3816,3940,4070,4192,4330,4464,4580,4700"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/marcopilia/.gradle/daemon/8.0/com.example.ossigenow.app-mergeDebugResources-30:/values-night-v8/values-night-v8.xml",
+            "map": [
+                {
+                    "source": "/Users/marcopilia/.gradle/caches/transforms-3/af575453595166fed38ef613cf3573b3/transformed/appcompat-1.6.1/res/values-night-v8/values-night-v8.xml",
+                    "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
                         "startOffsets": "55,125,209,293,389,491,593,687",

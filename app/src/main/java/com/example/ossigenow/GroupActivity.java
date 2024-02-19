@@ -43,7 +43,7 @@ public class GroupActivity extends AppCompatActivity {
     private Group group;
     private ArrayList<Person> utentiRegistrati = new ArrayList<>();
     private Person utenteLoggato = new Person();
-    public ArrayList<Group> existing_group = new ArrayList<>();
+    //public ArrayList<Group> existing_group = new ArrayList<>();
     private ArrayList<Invito> inviti = new ArrayList<>();
 
     // Elementi UI
@@ -51,7 +51,7 @@ public class GroupActivity extends AppCompatActivity {
     private TextView group_name, number_user, cadenza, prossima_partita, campo;
     private ImageButton back;
     private Button exit_group, delete_group;
-    private LinearLayout invito;
+    private LinearLayout invito, impegni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class GroupActivity extends AppCompatActivity {
         campo = findViewById(R.id.campo);
         prossima_partita = findViewById(R.id.prossima_partita);
         invito = findViewById(R.id. invite);
+        impegni = findViewById(R.id.controlloImpegni);
         back = findViewById(R.id.indietro);
         exit_group = findViewById(R.id.exit_group);
         delete_group = findViewById(R.id.delete_group);
@@ -95,17 +96,6 @@ public class GroupActivity extends AppCompatActivity {
         }
 
         utentiRegistrati = recuperaUtentiRegistrati();
-
-        SharedPreferences sharedPreferences = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
-        String datiArrayString = sharedPreferences.getString("chiave", "");
-        if (!datiArrayString.isEmpty()) {
-            byte[] datiArrayBytes = Base64.decode(datiArrayString, Base64.DEFAULT);
-            try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(datiArrayBytes))) {
-                existing_group = (ArrayList<Group>) objectInputStream.readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
 
         group_name.setText(group.getNomeGruppo());
         number_user.setText(group.getNumberParticipanti()+" / "+group.getPartecipantiRichiesti());
@@ -267,7 +257,7 @@ public class GroupActivity extends AppCompatActivity {
             dialog.getWindow().setBackgroundDrawableResource(R.color.trasparent);
 
             conferma.setOnClickListener(v2 -> {
-                deleteGroups(group);
+                deleteGroup(group);
                 deleteInvite();
                 dialog.dismiss();
                 result = new Intent(GroupActivity.this, HomeActivity.class);
@@ -353,6 +343,13 @@ public class GroupActivity extends AppCompatActivity {
 
                 dialog.show();
             }
+        });
+
+        impegni.setOnClickListener(v -> {
+            result = new Intent(GroupActivity.this, GroupCalendarActivity.class);
+            result.putExtra(GROUP_PATH, group);
+            startActivity(result);
+            finish();
         });
 
         back.setOnClickListener(v -> {
@@ -532,7 +529,7 @@ public class GroupActivity extends AppCompatActivity {
     }
 
 
-    private void deleteGroups(Group group) {
+    private void deleteGroup(Group group) {
         ArrayList<Group> existing_group = new ArrayList<>();
         SharedPreferences sharedPreferencesGruppi = getSharedPreferences("gruppi", Context.MODE_PRIVATE);
 

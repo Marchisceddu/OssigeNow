@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Person implements Serializable {
     private String nomeUtente, nome, cognome, dataNascita, password;
 
-    private ArrayList<Commit> commits = new ArrayList<Commit>();
+    private ArrayList<Commit> impegni = new ArrayList<Commit>();
 
     public Person() {
         super();
@@ -39,6 +39,10 @@ public class Person implements Serializable {
         return password;
     }
 
+    public ArrayList<Commit> getImpegni() {
+        return impegni;
+    }
+
     public void setNomeUtente(String nomeUtente) {
         this.nomeUtente = nomeUtente;
     }
@@ -59,11 +63,11 @@ public class Person implements Serializable {
         this.password = password;
     }
 
-    public ArrayList<Commit> getCommits() {
-        return commits;
+    public void addImpegno(Commit commit) {
+        impegni.add(commit);
     }
 
-    public void addCommit(Commit commit) {
-        commits.add(commit);
+    public void removeImpegno(Commit commit) {
+        impegni.remove(commit);
     }
 }

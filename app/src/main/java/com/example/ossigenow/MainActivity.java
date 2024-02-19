@@ -184,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
         } else
             password.setError(null);
 
+
+
         return errors == 0;
     }
 

@@ -28,6 +28,15 @@
         android:testOnly="true"
         android:theme="@style/Theme.OssigeNow" >
         <activity
+            android:name="com.example.ossigenow.GroupCalendarActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.ossigenow.CommitListActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.ossigenow.AddCommitActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.ossigenow.BookingActivity"
             android:exported="false" />
         <activity
