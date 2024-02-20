@@ -9,7 +9,7 @@ Progetto di Iterazione Uomo Macchina anno 2024
 * [Ahmed Bensaid](https://github.com/ahmedbensaid080308)
 
 ### Funzionalità: 
-spiegate nel powerpoint al seguente [link]()
+spiegate nel powerpoint al seguente [link](https://github.com/Marchisceddu/OssigeNow/blob/main/Ossigenow.pptx)
 
 ### Realizzazione:
 #### Android studio con l'utilizzo di java
