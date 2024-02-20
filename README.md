@@ -9,8 +9,8 @@ Progetto di Iterazione Uomo Macchina anno 2024
 * [Ahmed Bensaid](https://github.com/ahmedbensaid080308)
 
 ### Funzionalità
-* Spiegato nel powerpoint al seguente [link]()
+Spiegato nel powerpoint al seguente [link]()
 
 ### Realizzazione
 #### Android studio con l'utilizzo di java
-* per il salvataggio dei dati non è stato creato un db ma sono state utilizzate le [SharedPreferences](https://developer.android.com/training/data-storage/shared-preferences)
+Per il salvataggio dei dati non è stato creato un db ma sono state utilizzate le [SharedPreferences](https://developer.android.com/training/data-storage/shared-preferences)
